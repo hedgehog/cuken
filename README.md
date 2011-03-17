@@ -1,6 +1,18 @@
-= cuken
+= Cuken
 
-Description goes here.
+Reusable Cucumber steps and API for Nagios systems testing.
+Pronounced: Cookin'
+
+== Usage
+
+Typically you will require this library in Cucumber's support folder:
+    features/support/env.rb
+
+For example usage see the [Cucumber-Nagios][0] gem.
+[0]: https://github.com/auxesis/cucumber-nagios
+
+This library structure is modeled on Aruba, and infact
+largely uses Aruba's steps.
 
 == Contributing to cuken
  

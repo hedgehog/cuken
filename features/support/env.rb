@@ -8,6 +8,8 @@ rescue Bundler::BundlerError => e
 end
 
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../lib')
-require 'cuken'
+require 'cuken/ssh'
+require 'cuken/cmd'
+require 'cuken/file'
 
 require 'rspec/expectations'

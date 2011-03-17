@@ -1,0 +1,75 @@
+GIT
+  remote: git://github.com/hedgehog/ssh-forever.git
+  revision: c0c71bf01707a6de0bcbc775f891c9e5db0417d6
+  branch: master
+  specs:
+    ssh-forever (0.4.0)
+      open4 (>= 1.0.1)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    aruba (0.3.3)
+      childprocess (~> 0.1.7)
+      cucumber (~> 0.10)
+      rspec (~> 2.5)
+    builder (3.0.0)
+    childprocess (0.1.7)
+      ffi (~> 0.6.3)
+    cucumber (0.10.0)
+      builder (>= 2.1.2)
+      diff-lcs (~> 1.1.2)
+      gherkin (~> 2.3.2)
+      json (~> 1.4.6)
+      term-ansicolor (~> 1.0.5)
+    diff-lcs (1.1.2)
+    ffi (0.6.3)
+      rake (>= 0.8.7)
+    gherkin (2.3.4)
+      json (~> 1.4.6)
+    git (1.2.5)
+    jeweler (1.5.2)
+      bundler (~> 1.0.0)
+      git (>= 1.2.5)
+      rake
+    json (1.4.6)
+    open4 (1.0.1)
+    rake (0.8.7)
+    rcov (0.9.9)
+    reek (1.2.8)
+      ruby2ruby (~> 1.2)
+      ruby_parser (~> 2.0)
+      sexp_processor (~> 3.0)
+    roodi (2.1.0)
+      ruby_parser
+    rspec (2.5.0)
+      rspec-core (~> 2.5.0)
+      rspec-expectations (~> 2.5.0)
+      rspec-mocks (~> 2.5.0)
+    rspec-core (2.5.1)
+    rspec-expectations (2.5.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.5.0)
+    ruby2ruby (1.2.5)
+      ruby_parser (~> 2.0)
+      sexp_processor (~> 3.0)
+    ruby_parser (2.0.6)
+      sexp_processor (~> 3.0)
+    sexp_processor (3.0.5)
+    term-ansicolor (1.0.5)
+    yard (0.6.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  aruba (~> 0.3.3)
+  bundler (~> 1.0.10)
+  cucumber
+  jeweler (~> 1.5.2)
+  rcov
+  reek (~> 1.2.8)
+  roodi (~> 2.1.0)
+  rspec (~> 2.5.0)
+  ssh-forever!
+  yard (~> 0.6.0)
