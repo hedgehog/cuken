@@ -6,10 +6,6 @@ Given /^that "([^\"]*)" has been required$/ do |lib|
   require(lib).should be_false
 end
 
-Given /^that "([^\"]*)" is required$/ do |lib|
-  require(lib).should be_false
-end
-
 When /^I do aruba (.*)$/ do |aruba_step|
   begin
     When(aruba_step)
