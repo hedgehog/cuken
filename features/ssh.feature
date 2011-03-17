@@ -7,8 +7,7 @@ Feature: SSH steps
   I want to use Aruba and custom steps to describe SSH sessions
 
   Background:
-    Given that "cuken/ssh" is required
-    And the Gem "ssh-forever" has been required
+    Given that "cuken/ssh" has been required
     And default ssh-forever options
     And I initialize password-less SSH access
 

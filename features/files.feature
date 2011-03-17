@@ -6,6 +6,9 @@ Feature: Examining files
   As an administrator
   I want to examine files
 
+  Background
+    Given that "cuken/file" has been required
+
   @steps
   Scenario: File exists
     Given the empty file "foo.file"

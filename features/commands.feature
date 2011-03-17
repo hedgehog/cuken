@@ -7,16 +7,15 @@ Feature: Executing commands
   I want to use Aruba steps to run commands and test output
 
   Background:
-    Given that "cuken/cmd" is required
-#    Given the Gem "aruba" has been required
+    Given that "cuken/cmd" has been required
 
   Scenario: Check Stdout
-    When I do aruba I run "echo 'i like cheese'"
-    Then I see aruba the stdout from "echo 'i like cheese'" should contain "i like cheese"
+    When I run "echo 'i like cheese'"
+    Then the stdout from "echo 'i like cheese'" should contain "i like cheese"
 
   Scenario: Check Stderr
-    When I do aruba I run "echo 'i like cheese' 1>&2"
-    Then I see aruba the stderr from "echo 'i like cheese' 1>&2" should contain "i like cheese"
+    When I run "some_error"
+    Then the stderr from "some_error" should contain "No such file or directory - some_error"
 
   Scenario: Check Stdout for multiple lines
     When I run "echo 'one\none\none\n'"

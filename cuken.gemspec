@@ -41,6 +41,7 @@ Gem::Specification.new do |s|
     "lib/cuken/cmd.rb",
     "lib/cuken/common.rb",
     "lib/cuken/cucumber/cmd.rb",
+    "lib/cuken/cucumber/common.rb",
     "lib/cuken/cucumber/file.rb",
     "lib/cuken/cucumber/ssh.rb",
     "lib/cuken/file.rb",
