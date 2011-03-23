@@ -1,0 +1,29 @@
+{
+  "name": "version_updated",
+  "description": "Description #2",
+  "long_description": "Long description #2",
+  "maintainer": "Opscode",
+  "maintainer_email": "do_not_reply@opscode.com",
+  "license": "Apache 2.0",
+  "platforms": {
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "2.0.0"
+}
