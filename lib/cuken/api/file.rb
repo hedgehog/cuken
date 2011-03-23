@@ -6,7 +6,27 @@ module Cuken
     module File
       include Etc
 
-      def parse_mode(mode)
+      def check_file_content(file, partial_content, expect_match, times = 1)
+        regexp = regexp(partial_content)
+        seen_count = 0
+        prep_for_fs_check do
+          content = IO.read(file)
+          while (seen_count < times.to_i || content =~ regexp)do
+            if content =~ regexp
+              content = content.sub(regexp,'')
+              seen_count+=1
+            end
+          end
+          if expect_match
+            seen_count.should == times.to_i
+          else
+            seen_count.should_not == times.to_i
+          end
+        end
+      end
+
+      def parse_mode(mode, octal=false)
+        return mode.to_s if octal
         if mode.respond_to?(:oct)
           mode.oct.to_s(8)
         else
@@ -21,10 +41,10 @@ module Cuken
         end
       end
 
-      def check_octalmodes(expected_mode, filename)
+      def check_modes(expected_mode, filename, octal = false)
         in_current_dir do
           cstats = ::File.stat(filename)
-          parse_mode(cstats.mode)[/#{parse_mode(expected_mode)}\Z/].should_not be_nil
+          parse_mode(cstats.mode, octal).should match /#{expected_mode}\Z/# ].should_not be_nil
         end
       end
 

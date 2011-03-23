@@ -44,7 +44,7 @@ Feature: Examining files
     Then the file "monkeytest.file" contains "monkeypants"
 
   @steps
-  Scenario: File contents multiple times
+  Scenario: File contents exact match
     When I write to "monkeytest.file" with:
     """
     monkeypants
@@ -57,12 +57,26 @@ Feature: Examining files
     monkeyshorts
 
     """
+  Scenario: File contents multiple matches
+    When I write to "monkeytest.file" with:
+    """
+    monkeypants
+    monkeyshorts
+    monkeypants
+    monkeyshorts
+
+    """
+    Then the file "monkeytest.file" contains "monkeyp" exactly "2" times
+    Then the file "monkeytest.file" does not contain "monkey" exactly "2" times
+
   @steps
   Scenario: File modes
-    When I run "touch filemode.file"
-     And I run "chmod 644 filemode.file"
-    Then the file "filemode.file" has mode "644"
-     And the file "filemode.file" has mode "0644"
+    When I run `touch filemode.file`
+     And I run `chmod 644 filemode.file`
+    Then the file "filemode.file" has octal mode "188"
+    And the file "filemode.file" has octal mode "33188"
+    And the file "filemode.file" has decimal mode "644"
+    And the file "filemode.file" has decimal mode "0644"
 
   @steps
   Scenario: Directory exists
@@ -74,10 +88,10 @@ Feature: Examining files
     Then the directory "dirtest-m000" does not exist
 
   @steps
-  Scenario: Directory mode
-    When I run "mkdir -p dirtest"
-     And I run "chmod 755 dirtest"
-     Then the directory "dirtest" has mode "755"
-     And the directory "dirtest" has mode "0755"
-
-
+  Scenario: Directory modes
+    When I run `mkdir -p dirtest`
+     And I run `chmod 755 dirtest`
+     Then the directory "dirtest" has decimal mode "755"
+     And the directory "dirtest" has decimal mode "2755"
+    Then the directory "dirtest" has octal mode "901"
+    And the directory "dirtest" has octal mode "17901"
