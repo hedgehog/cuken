@@ -1,22 +1,5 @@
-require 'aruba/cucumber' unless defined? Aruba
-
+load 'aruba/cucumber.rb' unless defined? ::Aruba
 World(::Cuken::Api::File)
-
-#
-# These have been submitted to Aruba - awaiting release...
-#
-Then /^the output from "(.*)" contains exactly:$/ do |cmd, exact_output|
-  output_from(unescape(cmd)).should == exact_output
-end
-Then /^the output from "([^"]*)" does not contain exactly:$/ do |cmd, exact_output|
-  output_from(unescape(cmd)).should_not == exact_output
-end
-Then /^the output from "([^"]*)" contains:$/ do |cmd, partial_output|
-  output_from(unescape(cmd)).should =~ regexp(partial_output)
-end
-Then /^the output from "([^"]*)" does not contain:$/ do |cmd, partial_output|
-  output_from(unescape(cmd)).should_not =~ regexp(partial_output)
-end
 
 #
 # Refactorings, yet to be submitted to Aruba:

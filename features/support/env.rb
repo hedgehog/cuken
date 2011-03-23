@@ -11,5 +11,6 @@ $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../lib')
 require 'cuken/ssh'
 require 'cuken/cmd'
 require 'cuken/file'
+require 'cuken/chef'
 
 require 'rspec/expectations'

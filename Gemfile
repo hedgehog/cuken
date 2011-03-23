@@ -3,10 +3,11 @@ source "http://rubygems.org"
 # Example:
 #   gem "activesupport", ">= 2.3.5"
 group :default do
-  gem 'aruba', "~> 0.3.3"
-  gem 'ssh-forever',
+  gem 'aruba', "~> 0.3.5"
+  gem 'ssh-forever', "~> 0.4.0",
       :git => "git://github.com/hedgehog/ssh-forever.git",
-      :branch => 'master'
+      :branch => 'v0.4.0'
+  gem 'chef', "~>0.9.12"
 end
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

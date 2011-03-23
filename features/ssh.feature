@@ -1,6 +1,7 @@
 # For complete Aruba step listing see:
 # lib/aruba/cucumber.rb
 # or https://github.com/aslakhellesoy/aruba/blob/master/lib/aruba/cucumber.rb
+@announce
 Feature: SSH steps
   In order to specify remote command execution
   As a developer using Cucumber
@@ -21,5 +22,5 @@ Feature: SSH steps
       | `whoami`  | `hostname` | `echo cuken` | `echo 22`   |
       | :default  | localhost  | `echo cuken` | 22          |
       | :default  | :default   | :default     | :default    |
-    And I successfully run "ssh cuken 'echo Supercalifragilisticexpialidocious;'"
+    And I successfully run `ssh cuken 'echo Supercalifragilisticexpialidocious;'`
     Then the output should contain "Supercalifragilisticexpialidocious"
