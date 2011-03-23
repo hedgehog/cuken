@@ -1,0 +1,8 @@
+<% common = "--exclude data/ --strict -r features --tags ~@wip" %>
+default: --format progress <%= common %>
+ok: --format pretty <%= common %>
+usage: --format usage <%= common %>
+wip: --format pretty --tags @wip --strict -r features
+
+html_report: --format html --out=features_report.html <%= common %>
+pdf_report: --format pdf --out=features_report.pdf <%= common %>
