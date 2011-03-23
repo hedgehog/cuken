@@ -44,27 +44,27 @@ Feature: Listing file steps
       |the directory "(.+)" is owned by "(.+)"                 |
       |the file "([^"]*)" has decimal mode "(\d+)"             |
       |the file "([^"]*)" has octal mode "(\d+)"               |
-      |the file named "(.+)" should be owned by "(.+)"         |
+      |the file "(.+)" is owned by "(.+)"                      |
       |the (.)time of "(.+)" changes                           |
       |we record the a-mtime of "(.+)"                         |
 
   Scenario: File and directory content
     Then these steps are defined for "cuken/cucumber/file.rb":
-      | step                                                   |
-      |a file named "([^"]*)" with:                            |
-      |an empty file named "([^"]*)"                           |
-      |the file "([^"]*)" with:                                |
-      |the empty file "([^"]*)"                                |
-      |the file "([^"]*)" contains "([^"]*)"                   |
-      |the file "([^"]*)" contains "([^"]*)" exactly (\d+) times         |
-      |the file "([^"]*)" contains exactly:                    |
+      | step                                                               |
+      |a file named "([^"]*)" with:                                        |
+      |an empty file named "([^"]*)"                                       |
+      |the file "([^"]*)" with:                                            |
+      |the empty file "([^"]*)"                                            |
+      |the file "([^"]*)" contains "([^"]*)"                               |
+      |the file "([^"]*)" contains "([^"]*)" exactly (\d+) times           |
+      |the file "([^"]*)" contains exactly:                                |
       |the file "([^"]*)" does not contain "([^"]*)" exactly "(\d+)" times |
-      |the file "([^"]*)" should contain "([^"]*)"             |
-      |the file "([^"]*)" should not contain "([^"]*)"         |
-      |the file "([^"]*)" should contain exactly:              |
-      |the file "([^"]*)" should match \/([^\/]*)\/            |
-      |the file "([^"]*)" should not match \/([^\/]*)\/        |
-      |I write to "([^"]*)" with:                              |
-      |I overwrite "([^"]*)" with:                             |
-      |I append to "([^"]*)" with:                             |
+      |the file "([^"]*)" should contain "([^"]*)"                         |
+      |the file "([^"]*)" should not contain "([^"]*)"                     |
+      |the file "([^"]*)" should contain exactly:                          |
+      |the file "([^"]*)" should match \/([^\/]*)\/                        |
+      |the file "([^"]*)" should not match \/([^\/]*)\/                    |
+      |I write to "([^"]*)" with:                                          |
+      |I overwrite "([^"]*)" with:                                         |
+      |I append to "([^"]*)" with:                                         |
 

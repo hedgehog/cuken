@@ -71,7 +71,7 @@ Then /^the directory "([^"]*)" is owned by "([^"]*)"$/ do |dirname, owner|
   check_uid(dirname, owner)
 end
 
-Then /^the file named "([^"]*)" should be owned by "([^"]*)"$/ do |filename, owner|
+Then /^the file "([^"]*)" is owned by "([^"]*)"$/ do |filename, owner|
   check_uid(filename, owner)
 end
 
@@ -94,4 +94,3 @@ end
 Then /^the file "([^"]*)" has decimal mode "(\d+)"$/ do |filename, expected_mode|
   check_modes(expected_mode, filename)
 end
-
