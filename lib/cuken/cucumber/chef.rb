@@ -1,4 +1,5 @@
 load 'aruba/cucumber.rb' unless defined? ::Aruba
+require 'grit'
 
 World(::Cuken::Api::Chef)
 

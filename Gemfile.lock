@@ -16,7 +16,7 @@ GEM
       rspec (>= 2.5.0)
     builder (3.0.0)
     bunny (0.6.0)
-    chef (0.9.12)
+    chef (0.9.14)
       bunny (>= 0.6.0)
       erubis
       extlib
@@ -47,6 +47,9 @@ GEM
     gherkin (2.3.5)
       json (>= 1.4.6)
     git (1.2.5)
+    grit (2.4.1)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
     highline (1.6.1)
     jeweler (1.5.2)
       bundler (~> 1.0.0)
@@ -58,7 +61,7 @@ GEM
       mixlib-log
     mixlib-cli (1.2.0)
     mixlib-config (1.1.2)
-    mixlib-log (1.2.0)
+    mixlib-log (1.3.0)
     moneta (0.6.0)
     ohai (0.5.8)
       extlib
@@ -105,6 +108,7 @@ DEPENDENCIES
   bundler (~> 1.0.10)
   chef (~> 0.9.12)
   cucumber
+  grit (~> 2.4.1)
   jeweler (~> 1.5.2)
   rcov
   reek (~> 1.2.8)

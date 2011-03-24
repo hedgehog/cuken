@@ -8,6 +8,7 @@ group :default do
       :git => "git://github.com/hedgehog/ssh-forever.git",
       :branch => 'v0.4.0'
   gem 'chef', "~>0.9.12"
+  gem 'grit', "~>2.4.1"
 end
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

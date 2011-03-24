@@ -2,12 +2,16 @@ module ::Cuken
   module Api
     module Chef
       module Common
+
+        include Grit
+
         attr_accessor :recipe, :cookbook, :api_response, :inflated_response, :log_level,
                       :chef_args, :config_file, :stdout, :stderr, :status, :exception,
                       :gemserver_thread, :sandbox_url,
                       :uri, :client_private_key_path, :admin_client_name,
-                      :client_name, :client_knife_path, :cookbook_paths,
-                      :knife_debug
+                      :client_name, :client_knife_path, :cookbook_paths, :cookbooks_paths,
+                      :knife_debug, :local_cookbook_repo, :remote_cookbook_repo,
+                      :local_chef_repo, :remote_chef_repo
 
         def self.ohai
           # ohai takes a while, so only ever run it once.
@@ -23,9 +27,15 @@ module ::Cuken
         end
 
         def chef
+          @remote_chef_repo ||= "git://github.com/opscode/chef-repo.git"
           @knife_debug = true if @knife_debug.nil?
+          @cookbooks_paths ||= []
           @cookbook_paths ||= []
           @chef ||= self
+        end
+
+        def knife
+          'knife '
         end
 
         def client

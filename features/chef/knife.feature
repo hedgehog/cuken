@@ -54,7 +54,7 @@ Feature: Reusable Chef Knife steps
     node_name "bobo"
     client_key "#{File.dirname(current_dir)}/bobo.pem"
     chef_server_url "http://localhost:4000"
-    cache_type 'BasicFile'
+    cache_type 'Memory'
     cache_options( :path => "#{ENV['HOME']}/.chef/checksums" )
     cookbook_path ["#{current_dir}/../cookbooks","#{current_dir}/../site-cookbooks"]
 
