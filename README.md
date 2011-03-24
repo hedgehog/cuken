@@ -26,6 +26,6 @@ largely uses Aruba's steps.
 
 == Copyright
 
-Copyright (c) 2011 Hedgehog. See LICENSE.txt for
+Copyright (c) 2011 Hedgehog. See LICENSE and NOTICE for
 further details.
 

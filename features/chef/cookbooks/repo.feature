@@ -5,7 +5,7 @@ Feature: Base Chef repository for cookbooks
   I want to automatically clone a generic base Chef repository
 
   Background:
-    Given a directory named "ckbk/scratch"
+      Given a directory named "ckbk/scratch"
 
   Scenario: Clone a Chef skeleton repository
       And the remote chef repository "features/data/repositories/chef-repo/.git"
