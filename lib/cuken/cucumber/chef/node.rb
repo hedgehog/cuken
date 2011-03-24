@@ -25,3 +25,11 @@ Given /^a validated node$/ do
   client.build_node
   client.node.run_list << "integration_setup"
 end
+
+###
+# Then
+###
+Then /^the nodes are:$/ do |partial_output|
+  run_knife_command('node list')
+  all_stdout.should include(partial_output)
+end

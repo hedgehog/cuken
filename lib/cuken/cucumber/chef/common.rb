@@ -40,7 +40,11 @@ end
 
 Given /^the remote chef repository "([^"]*)"$/ do |chf_pth|
   in_current_dir do
-    chef.remote_chef_repo = Pathname(chf_pth).expand_path.realdirpath
+    if Pathname(chf_pth).exist?
+      chef.remote_chef_repo = Pathname(chf_pth).expand_path.realdirpath
+    else
+      chef.remote_chef_repo = chf_pth
+    end
   end
 end
 
@@ -55,8 +59,11 @@ Then /^the local chef repository exists$/ do
   #TODO: check_file_presence([file], true), etc.
 end
 
+Given /^the local chef repository is "([^"]*)"$/ do |repo|
+  chef.local_chef_repo.to_s.should == repo
+end
+
 Given /^I clone the remote chef repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, path|
-  @chef_repo_path = "We are here..."
   chef.local_chef_repo = chef_clone_repo(path, false, chef.remote_chef_repo, brnch)
 end
 

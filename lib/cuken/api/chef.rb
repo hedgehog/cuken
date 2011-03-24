@@ -21,6 +21,9 @@ module ::Cuken
       def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, brnch = 'master')
         in_current_dir do
           if Dir.exists?(ckbk_path)
+            clone_opts = {:quiet => false, :verbose => true, :progress => true, :branch => brnch}
+            gritty = ::Grit::Git.new(current_dir)
+            gritty.pull(clone_opts, repo, ckbk_path)
             update_cookbook_paths(ckbk_path, cookbook)
           else
             clone_opts = {:quiet => false, :verbose => true, :progress => true, :branch => brnch}

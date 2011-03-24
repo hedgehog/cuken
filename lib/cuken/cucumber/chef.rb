@@ -14,3 +14,5 @@ end
 require 'cuken/cucumber/chef/common'
 require 'cuken/cucumber/chef/knife'
 require 'cuken/cucumber/chef/cookbook'
+require 'cuken/cucumber/chef/node'
+require 'cuken/cucumber/chef/role'

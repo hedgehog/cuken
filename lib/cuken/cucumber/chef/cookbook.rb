@@ -40,6 +40,11 @@ Then /^the local cookbook repository exists$/ do
   #TODO: check_file_presence([file], true), etc.
 end
 
+Then /^the local cookbook repository is "([^"]*)"$/ do |repo|
+  chef.local_cookbook_repo.to_s.should == repo
+  #TODO: check_file_presence([file], true), etc.
+end
+
 Given /^a cookbook path "([^"]*)"$/ do |path|
   in_current_dir do
     chef.cookbook_paths << Pathname(path).expand_path.realdirpath

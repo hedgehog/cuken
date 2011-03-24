@@ -26,7 +26,7 @@ Given /^the Knife file "([^"]*)"$/ do |path|
 end
 
 When /^I successfully run Knife's "([^"]*)"$/ do |cmd|
-  run_knife_command(cmd, true)
+  run_knife_command(cmd, false)
 end
 
 When /^I interactively run Knife's "([^"]*)"$/ do |cmd|
