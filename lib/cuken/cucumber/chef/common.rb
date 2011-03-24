@@ -22,10 +22,29 @@ Given /^the Chef client private key path "([^"]*)"$/ do |path|
   end
 end
 
-Given /^a cookbook path "([^"]*)"$/ do |path|
+Given /^the remote chef repository "([^"]*)"$/ do |chf_pth|
   in_current_dir do
-    chef.cookbook_paths << Pathname(path).expand_path.realdirpath
+    chef.remote_chef_repo = Pathname(chf_pth).expand_path.realdirpath
   end
+end
+
+Given /^the local chef repository "([^"]*)"$/ do |chf_pth|
+  in_current_dir do
+    chef.local_chef_repo = Pathname(chf_pth).expand_path.realdirpath
+  end
+end
+
+Then /^the local chef repository exists$/ do
+  chef.local_chef_repo.exist?.should be_true
+  #TODO: check_file_presence([file], true), etc.
+end
+
+Given /^I clone the remote chef repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, path|
+  chef.local_chef_repo = chef_clone_repo(path, false, chef.remote_chef_repo, brnch)
+end
+
+Given /^a default base chef repository in "([^"]*)"$/ do |path|
+  chef.local_chef_repo = chef_clone_repo(path)
 end
 
 

@@ -9,3 +9,4 @@ end
 
 require 'cuken/cucumber/chef/common'
 require 'cuken/cucumber/chef/knife'
+require 'cuken/cucumber/chef/cookbook'
