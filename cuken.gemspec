@@ -412,6 +412,7 @@ Gem::Specification.new do |s|
     "lib/cuken/cucumber/chef/request_steps.rb",
     "lib/cuken/cucumber/chef/response_steps.rb",
     "lib/cuken/cucumber/chef/result_steps.rb",
+    "lib/cuken/cucumber/chef/role.rb",
     "lib/cuken/cucumber/chef/run_client_steps.rb",
     "lib/cuken/cucumber/chef/run_solo.rb",
     "lib/cuken/cucumber/chef/sandbox_steps.rb",
