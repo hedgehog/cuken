@@ -1,3 +1,19 @@
+#
+# Author:: Hedgehog (<hedgehogshiatus@gmail.com>)
+# Copyright:: Copyright (c) 2011 Hedgehog.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 World(::Cuken::Api::Chef)
 
 Before do
@@ -40,11 +56,13 @@ Then /^the local chef repository exists$/ do
 end
 
 Given /^I clone the remote chef repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, path|
+  @chef_repo_path = "We are here..."
   chef.local_chef_repo = chef_clone_repo(path, false, chef.remote_chef_repo, brnch)
 end
 
 Given /^a default base chef repository in "([^"]*)"$/ do |path|
   chef.local_chef_repo = chef_clone_repo(path)
+  chef.local_chef_repo.exist?.should be_true
 end
 
 

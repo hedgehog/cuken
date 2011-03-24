@@ -1,4 +1,4 @@
-@announce @cookbooks @cookbook_metadata
+@announce @work_in_cwd @cookbooks @cookbook_metadata
 Feature: Cookbook Metadata
   In order to understand cookbooks without evaluating them
   As an Administrator
@@ -6,6 +6,7 @@ Feature: Cookbook Metadata
 
   Background:
     Given a default base chef repository in "ckbk/scratch/myapp"
+      And the local chef repository exists
       And a file named "ckbk/scratch/myapp/.chef/knife.rb" with:
       """
       current_dir = File.dirname(__FILE__)
@@ -19,22 +20,21 @@ Feature: Cookbook Metadata
       cookbook_path ["#{current_dir}/../cookbooks","#{current_dir}/../site-cookbooks"]
 
       """
-      And I cd to "./../../"
       And the remote cookbook repository "features/data/repositories/cookbooks/hosts/.git"
-      And I clone the remote cookbook repository branch "master" to "tmp/aruba/ckbk/scratch/myapp/cookbooks/hosts"
+      And I clone the remote cookbook repository branch "master" to "ckbk/scratch/myapp/cookbooks/hosts"
       And the local cookbook repository exists
 
   Scenario: Generate metadata for all cookbooks
      When I successfully generate all cookbook metadata
-     Then the file "tmp/aruba/ckbk/scratch/myapp/cookbooks/hosts/metadata.json" exists
-      And the output should not contain "DEBUG: No "
       And the output should contain "DEBUG: Generated "
+      And the output should not contain "DEBUG: No "
+    Then the file "ckbk/scratch/myapp/cookbooks/hosts/metadata.json" exists
 
   Scenario: Generate metadata for a specific cookbook
-     When we record the a-mtime of "tmp/aruba/ckbk/scratch/myapp/cookbooks/hosts/metadata.json"
-     When I successfully generate cookbook "hosts" metadata
-     Then the file "tmp/aruba/ckbk/scratch/myapp/cookbooks/hosts/metadata.json" exists
-      And the output should not contain "DEBUG: No "
+     When we record the a-mtime of "ckbk/scratch/myapp/cookbooks/hosts/metadata.json"
+      And I successfully generate cookbook "hosts" metadata
       And the output should contain "DEBUG: Generated "
-      And the mtime of "tmp/aruba/ckbk/scratch/myapp/cookbooks/hosts/metadata.json" changes
+      And the output should not contain "DEBUG: No "
+    Then the file "ckbk/scratch/myapp/cookbooks/hosts/metadata.json" exists
+      And the mtime of "ckbk/scratch/myapp/cookbooks/hosts/metadata.json" changes
 

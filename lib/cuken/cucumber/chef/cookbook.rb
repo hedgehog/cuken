@@ -1,9 +1,13 @@
 #
+# Author:: Hedgehog (<hedgehogshiatus@gmail.com>)
+# Copyright:: Copyright (c) 2011 Hedgehog.
+# Portions of this work are derived from the Chef project
+# The original license header follows:
+#
 # Author:: Adam Jacob (<adam@opscode.com>)
 # Author:: Christopher Walters (<cw@opscode.com>)
 # Author:: Tim Hinderliter (<tim@opscode.com>)
-# Author:: Hedgehog (<hedgehogshiatus@gmail.com>)
-# Portions Copyright:: Copyright (c) 2008, 2010 Opscode, Inc.
+# Copyright:: Copyright (c) 2008, 2010 Opscode, Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,7 +59,10 @@ Given /^I clone the remote cookbook repository branch "([^"]*)" to "([^"]*)"$/ d
 end
 
 When /^I successfully generate all cookbook metadata$/ do
-  chef.cookbook_paths.each{|pn| run_knife_command("cookbook metadata #{pn.basename}")}
+  chef.cookbook_paths.each do |pn|
+    curr_ckbk = pn.basename.to_s
+    run_knife_command("cookbook metadata #{curr_ckbk}")
+  end
 end
 
 When /^I successfully generate cookbook "([^"]*)" metadata$/ do |ckbk|

@@ -8,19 +8,25 @@ module ::Cuken
 
       include ::Cuken::Api::Chef::Common
 
+      def update_cookbook_paths(ckbk_path, cookbook)
+        lp = Pathname(ckbk_path).expand_path.realdirpath
+        lrp = lp + '.git'
+        if lrp.exist?
+          chef.cookbook_paths << lp if cookbook
+          chef.cookbooks_paths << lp.parent if cookbook
+          lrp
+        end
+      end
+
       def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, brnch = 'master')
         in_current_dir do
-          unless Dir.exists?(ckbk_path)
+          if Dir.exists?(ckbk_path)
+            update_cookbook_paths(ckbk_path, cookbook)
+          else
             clone_opts = {:quiet => false, :verbose => true, :progress => true, :branch => brnch}
             gritty = ::Grit::Git.new(current_dir)
             gritty.clone(clone_opts, repo, ckbk_path)
-            lp = Pathname(ckbk_path).expand_path.realdirpath
-            lrp = lp + '.git'
-            if lrp.exist?
-              chef.cookbook_paths << lp if cookbook
-              chef.cookbooks_paths << lp.parent if cookbook
-              lrp
-            end
+            update_cookbook_paths(ckbk_path, cookbook)
           end
         end
       end
