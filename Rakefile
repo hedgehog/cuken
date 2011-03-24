@@ -14,9 +14,9 @@ Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "cuken"
   gem.homepage = "http://github.com/hedgehog/cuken"
-  gem.license = "MIT"
-  gem.summary = %Q{Reusable Cucumber steps and API for Nagios systems testing}
-  gem.description = %Q{Reusable Cucumber steps and API for Nagios systems testing}
+  gem.license = "Apache 2.0"
+  gem.summary = %Q{Reusable Cucumber steps and API for post-convergence system integration descriptions}
+  gem.description = %Q{Reusable Cucumber steps and API for post-convergence system integration descriptions}
   gem.email = "hedgehogshiatus@gmail.com"
   gem.authors = ["Hedgehog"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
