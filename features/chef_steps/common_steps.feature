@@ -1,8 +1,8 @@
 @chef @common @step_features
-Feature: Listing common Chef steps
-  In order to test automated Chef deployments
-  As an administrator
-  I want to know what generic steps are available
+Feature: Listing common steps
+  In order to test automated Chef deployments.
+  As an administrator.
+  I want to know what generic steps are available.
 
   Background:
     Given that "cuken/chef" has been required

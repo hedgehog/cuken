@@ -13,12 +13,9 @@ The example features are executable documentation for usage of Cuken.
 The SSH steps assume passwordless logins are accepted on `localhost:22`.
 The Chef steps assume you have Chef server accessible on `localhost:4040`.
 
-Many of the examples use one (or both) of these helper functions
-provided by `vcr_cucumber_helpers.rb`:
-
 If you have ideas to clarify or improve any of these cucumber features,
 please submit an [issue](https://github.com/hedgehog/cuken/issues) or
-pull request.
+[pull request][8].
 
 ## Step contributions:
 - Ideally the API methods should be covered by RSpec (I've been slack
@@ -33,8 +30,6 @@ steps to port).
 - [Virtualbox][6] steps are planned to be ported.
 - [SSH-Forever][7] served as API-base for passwordless SSH steps.
 
-## Examples:
-
 [0]: https://github.com/aslakhellesoy/cucumber
 [1]: https://github.com/hedgehog/cuken
 [2]: https://github.com/aslakhellesoy/aruba
@@ -43,3 +38,4 @@ steps to port).
 [5]: https://github.com/opscode/chef
 [6]: https://github.com/mitchellh/virtualbox
 [7]: https://github.com/mattwynne/ssh-forever
+[8]: http://help.github.com/pull-requests

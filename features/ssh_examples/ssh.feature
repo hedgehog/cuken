@@ -2,7 +2,7 @@
 # lib/aruba/cucumber.rb
 # or https://github.com/aslakhellesoy/aruba/blob/master/lib/aruba/cucumber.rb
 @announce
-Feature: SSH steps
+Feature: Password-less SSH
   In order to specify remote command execution
   As a developer using Cucumber
   I want to use Aruba and custom steps to describe SSH sessions

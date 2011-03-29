@@ -32,8 +32,24 @@ Then /^the file "([^"]*)" contains "([^"]*)"$/ do |file, content|
   Then %Q{the file "#{file}" should contain "#{content}"}
 end
 
+Then /^the file "([^"]*)" does not contain "([^"]*)"$/ do |file, content|
+  Then %Q{the file "#{file}" should not contain "#{content}"}
+end
+
+Then /^the file "([^"]*)" contains \/([^\/]*)\/$/ do |file, re|
+  Then %Q{the file "#{file}" should match /#{re}/}
+end
+
+Then /^the file "([^"]*)" does not contain \/([^\/]*)\/$/ do |file, re|
+  Then %Q{the file "#{file}" should not match /#{re}/}
+end
+
 Then /^the file "([^"]*)" contains exactly:$/ do |file, content|
   Then %Q{the file "#{file}" should contain exactly:}, content
+end
+
+Then /^the file "([^"]*)" does not contain exactly:$/ do |file, content|
+  Then %Q{the file "#{file}" should not contain exactly:}, content
 end
 
 Then /^these directories exist:$/ do |table|

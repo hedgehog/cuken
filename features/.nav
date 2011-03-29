@@ -15,5 +15,14 @@
   - knife_steps.feature
   - cookbook_steps.feature
   - node_steps.feature
-- examples
+- file_examples:
+  - files.feature
+- command_examples:
+  - commands.feature
+- ssh_examples:
+  - ssh.feature
+- chef_examples:
+  - cookbooks_metadata.feature
+  - cookbooks_repo.feature
+  - cookbooks_cookbook.feature
 
