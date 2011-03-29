@@ -14,8 +14,7 @@ The SSH steps assume passwordless logins are accepted on `localhost:22`.
 The Chef steps assume you have Chef server accessible on `localhost:4040`.
 
 If you have ideas to clarify or improve any of these cucumber features,
-please submit an [issue](https://github.com/hedgehog/cuken/issues) or
-[pull request][8].
+please submit an [issue][9] or [pull request][8].
 
 ## Step contributions:
 - Ideally the API methods should be covered by RSpec (I've been slack
@@ -39,3 +38,4 @@ steps to port).
 [6]: https://github.com/mitchellh/virtualbox
 [7]: https://github.com/mattwynne/ssh-forever
 [8]: http://help.github.com/pull-requests
+[9]: https://github.com/hedgehog/cuken/issues
