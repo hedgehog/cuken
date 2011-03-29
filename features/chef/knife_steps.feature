@@ -1,19 +1,19 @@
-@knife @cookbook_upload @knife_cookbook_upload
-Feature: Upload Cookbooks with Knife
-  In order to use cookbooks I have written
-  As a knife user
-  I want to upload my cookbooks
+@chef @knife @step_features
+Feature: Listing knife steps
+  In order to test automated Chef deployments
+  As an administrator
+  I want to know what Knife steps are available
 
-  Scenario: Uploading a new cookbook updates the metadata on the server
-    Given I am an administrator
-     When I upload the 'version' cookbook with knife
-     When I 'GET' to the path '/cookbooks/version_updated'
-     Then the inflated response should equal '{"version_updated"=>{"url"=>"http://127.0.0.1:4000/cookbooks/version_updated", "versions"=>[{"url"=>"http://127.0.0.1:4000/cookbooks/version_updated/2.0.0", "version"=>"2.0.0"}]}}'
+  Background:
+    Given that "cuken/chef" has been required
 
-  @regression
-  Scenario: Uploading a new version updates the metadata on the server
-    Given I am an administrator
-     When I upload the 'version_updated' cookbook with knife
-     When I 'GET' to the path '/cookbooks/version_updated'
-     Then the inflated response should equal '{"version_updated"=>{"url"=>"http://127.0.0.1:4000/cookbooks/version_updated", "versions"=>[{"url"=>"http://127.0.0.1:4000/cookbooks/version_updated/2.0.0", "version"=>"2.0.0"}]}}'
+  Scenario: Knife file
+    Then these steps are defined for "cuken/cucumber/chef/knife.rb":
+      | step                                                   |
+      |the Knife file "([^"]*)"                                |
 
+  Scenario: Knife commands
+    Then these steps are defined for "cuken/cucumber/chef/knife.rb":
+      | step                                                   |
+      |I successfully run Knife's "([^"]*)"                    |
+      |I interactively run Knife's "([^"]*)"                   |

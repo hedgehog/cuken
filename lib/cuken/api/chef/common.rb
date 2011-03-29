@@ -38,6 +38,10 @@ module ::Cuken
           'knife '
         end
 
+        def knife_debug
+          @knife_debug ||= true
+        end
+
         def client
           @client ||= begin
             c = ::Chef::Client.new

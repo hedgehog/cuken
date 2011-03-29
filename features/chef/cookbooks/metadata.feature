@@ -5,8 +5,8 @@ Feature: Cookbook Metadata
   I want to automatically generate metadata about cookbooks
 
   Background:
-    Given a default base chef repository in "ckbk/scratch/myapp"
-      And the local chef repository exists
+    Given a default base Chef repository in "ckbk/scratch/myapp"
+      And the local Chef repository exists
       And a file named "ckbk/scratch/myapp/.chef/knife.rb" with:
       """
       current_dir = File.dirname(__FILE__)
@@ -20,9 +20,9 @@ Feature: Cookbook Metadata
       cookbook_path ["#{current_dir}/../cookbooks","#{current_dir}/../site-cookbooks"]
 
       """
-      And the remote cookbook repository "features/data/repositories/cookbooks/hosts/.git"
-      And I clone the remote cookbook repository branch "master" to "ckbk/scratch/myapp/cookbooks/hosts"
-      And the local cookbook repository exists
+      And the remote Cookbook repository "features/data/repositories/cookbooks/hosts/.git"
+      And I clone the remote Cookbook repository branch "master" to "ckbk/scratch/myapp/cookbooks/hosts"
+      And the local Cookbook repository exists
 
   Scenario: Generate metadata for all cookbooks
      When I successfully generate all cookbook metadata

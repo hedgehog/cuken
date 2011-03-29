@@ -21,7 +21,7 @@ Feature: Examining files
   @steps
   Scenario: Atime
     Given the empty file "foo.file"
-      And we record the a/mtime of "foo.file"
+      And we record the a-mtime of "foo.file"
       And I run `sleep 1`
       And I run `touch -a foo.file`
      Then the atime of "foo.file" changes
@@ -29,7 +29,7 @@ Feature: Examining files
   @steps
   Scenario: Mtime
     Given an empty file named "foo.file"
-      And we record the a/mtime of "foo.file"
+      And we record the a-mtime of "foo.file"
       And I run `sleep 1`
       And I run `touch -m foo.file`
      Then the mtime of "foo.file" changes

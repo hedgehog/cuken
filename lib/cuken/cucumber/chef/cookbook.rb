@@ -23,31 +23,32 @@
 # limitations under the License.
 #
 
-Given /^the remote cookbook repository "([^"]*)"$/ do |ckbk_repo|
+Given /^the remote Cookbook repository "([^"]*)"$/ do |ckbk_repo|
   in_current_dir do
     chef.remote_cookbook_repo = Pathname(ckbk_repo).expand_path.realdirpath
   end
 end
 
-Given /^the local cookbook repository "([^"]*)"$/ do |ckbk_repo|
+Given /^the local Cookbook repository "([^"]*)"$/ do |ckbk_repo|
   in_current_dir do
     chef.local_cookbook_repo = Pathname(ckbk_repo).expand_path.realdirpath
   end
 end
 
-Then /^the local cookbook repository exists$/ do
+Then /^the local Cookbook repository exists$/ do
   chef.local_cookbook_repo.exist?.should be_true
-  #TODO: check_file_presence([file], true), etc.
-end
-
-Then /^the local cookbook repository is "([^"]*)"$/ do |repo|
-  chef.local_cookbook_repo.to_s.should == repo
   #TODO: check_file_presence([file], true), etc.
 end
 
 Given /^a cookbook path "([^"]*)"$/ do |path|
   in_current_dir do
-    chef.cookbook_paths << Pathname(path).expand_path.realdirpath
+    update_cookbook_paths(path, true)
+  end
+end
+
+Given /^a cookbooks path "([^"]*)"$/ do |path|
+  in_current_dir do
+    update_cookbook_paths(path, false)
   end
 end
 
@@ -59,7 +60,7 @@ Then /^the local cookbook "([^"]*)" exists$/ do |ckbk|
   #TODO: check_file_presence([file], true), etc.
 end
 
-Given /^I clone the remote cookbook repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, ckbk_path|
+Given /^I clone the remote Cookbook repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, ckbk_path|
   chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.remote_cookbook_repo, brnch)
 end
 

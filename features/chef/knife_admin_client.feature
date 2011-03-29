@@ -6,7 +6,7 @@
 # If you wish to mock a Chef server, see the Chef project's
 # features setup.
 #
-@announce @knife @steps
+@announce @knife @cookbook_upload
 Feature: Reusable Chef Knife steps
   In order to write Chef features describing post-convergence system integration
   As a Chef user
@@ -14,36 +14,36 @@ Feature: Reusable Chef Knife steps
 
   Background:
     Given the Chef server URI "http://localhost:4000"
-    And the Chef admin client "bobo"
+    And the Chef admin client "bobo-admin"
     Given a directory named "foo/bar"
-    And a file named "foo/bar/bobo.pem" with:
+    And a file named "foo/bar/bobo-admin.pem" with:
     """
     -----BEGIN RSA PRIVATE KEY-----
-    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
+    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
     -----END RSA PRIVATE KEY-----
     """
     And a file named "foo/bar/.chef/knife.rb" with:
@@ -51,8 +51,8 @@ Feature: Reusable Chef Knife steps
     current_dir = File.dirname(__FILE__)
     log_level :debug
     log_location $stdout
-    node_name "bobo"
-    client_key "#{File.dirname(current_dir)}/bobo.pem"
+    node_name "bobo-admin"
+    client_key "#{File.dirname(current_dir)}/bobo-admin.pem"
     chef_server_url "http://localhost:4000"
     cache_type 'Memory'
     cache_options( :path => "#{ENV['HOME']}/.chef/checksums" )
@@ -65,8 +65,7 @@ Feature: Reusable Chef Knife steps
       When I successfully run `knife node list`
       When the output should contain:
      """
-     DEBUG: Using configuration from /usr/src/cuken/tmp/aruba/foo/bar/.chef/knife.rb
-     DEBUG: Signing the request as bobo
+     DEBUG: Signing the request as bobo-admin
      DEBUG: Sending HTTP Request via GET to localhost:4000/nodes
      [
      """
@@ -76,31 +75,37 @@ Feature: Reusable Chef Knife steps
       When I successfully run Knife's "node list"
       When the output should contain:
      """
-     DEBUG: Using configuration from /usr/src/cuken/tmp/aruba/foo/bar/.chef/knife.rb
-     DEBUG: Signing the request as bobo
+     DEBUG: Signing the request as bobo-admin
      DEBUG: Sending HTTP Request via GET to localhost:4000/nodes
      [
      """
 
-  Scenario: Upload a cookbook with path to knife.rb created earlier
+  Scenario: Upload a non-Git managed cookbook with path to knife.rb created earlier
     Given the Knife file "foo/bar/.chef/knife.rb"
       And I cd to "./../../"
       And a cookbook path "features/data/cookbooks_not_uploaded_at_feature_start"
      When I successfully run Knife's "cookbook upload version_updated"
      Then the output should contain:
     """
-    DEBUG: Signing the request as bobo
-    DEBUG: Sending HTTP Request via PUT to localhost:4000/cookbooks/version_updated/2.0.0
-    INFO: Upload complete!
+    ERROR: Could not find cookbook version_updated in your cookbook path, skipping it
 
     """
+
+  Scenario: Upload a Git managed cookbook with path to knife.rb created earlier
+    Given the Knife file "foo/bar/.chef/knife.rb"
+      And I cd to "./../../"
+      And a cookbook path "features/data/repositories/cookbooks_not_uploaded_at_feature_start/version_updated"
+     When I successfully run Knife's "cookbook upload version_updated"
+     Then the output should contain "INFO: Uploading files"
+      And the output should contain "DEBUG: Committing sandbox"
+      And the output should contain "INFO: Upload complete!"
 
   Scenario: Verify a cookbook with path to knife.rb created earlier
     Given the Knife file "foo/bar/.chef/knife.rb"
     And I successfully run Knife's "cookbook show version_updated"
     And the output should contain:
     """
-    DEBUG: Signing the request as bobo
+    DEBUG: Signing the request as bobo-admin
     DEBUG: Sending HTTP Request via GET to localhost:4000/cookbooks/version_updated
     {
       "version_updated": [
@@ -117,9 +122,9 @@ Feature: Reusable Chef Knife steps
       And wait "5" seconds
      Then the output should contain:
       """
-      DEBUG: Signing the request as bobo
+      DEBUG: Signing the request as bobo-admin
       DEBUG: Sending HTTP Request via GET to localhost:4000/cookbooks/version_updated
-      Do you really want to delete version_updated version 2.0.0? (Y/N) DEBUG: Signing the request as bobo
+      Do you really want to delete version_updated version 2.0.0? (Y/N) DEBUG: Signing the request as bobo-admin
       DEBUG: Sending HTTP Request via DELETE to localhost:4000/cookbooks/version_updated/2.0.0
       Deleted cookbook[version_updated version 2.0.0]!
       """
@@ -127,14 +132,14 @@ Feature: Reusable Chef Knife steps
   Scenario: Auto upload and Delete a cookbook with path to knife.rb created earlier
     Given the Knife file "foo/bar/.chef/knife.rb"
       And I cd to "./../../"
-      And a cookbook path "features/data/cookbooks_not_uploaded_at_feature_start"
+      And a cookbooks path "features/data/repositories/cookbooks_not_uploaded_at_feature_start"
      When I successfully run Knife's "cookbook upload version_updated"
-     When I successfully run Knife's "cookbook delete version_updated 2.0.0"
+      And I interactively run Knife's "cookbook delete version_updated 2.0.0"
+      And I type "Y"
+      And wait "5" seconds
      Then the output should contain:
       """
-      DEBUG: Signing the request as bobo
-      DEBUG: Sending HTTP Request via GET to localhost:4000/cookbooks/version_updated
-      Do you really want to delete version_updated version 2.0.0? (Y/N) DEBUG: Signing the request as bobo
+      Do you really want to delete version_updated version 2.0.0? (Y/N) DEBUG: Signing the request as bobo-admin
       DEBUG: Sending HTTP Request via DELETE to localhost:4000/cookbooks/version_updated/2.0.0
       Deleted cookbook[version_updated version 2.0.0]!
       """

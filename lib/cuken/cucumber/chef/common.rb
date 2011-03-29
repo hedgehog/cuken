@@ -38,7 +38,7 @@ Given /^the Chef client private key path "([^"]*)"$/ do |path|
   end
 end
 
-Given /^the remote chef repository "([^"]*)"$/ do |chf_pth|
+Given /^the remote Chef repository "([^"]*)"$/ do |chf_pth|
   in_current_dir do
     if Pathname(chf_pth).exist?
       chef.remote_chef_repo = Pathname(chf_pth).expand_path.realdirpath
@@ -48,26 +48,22 @@ Given /^the remote chef repository "([^"]*)"$/ do |chf_pth|
   end
 end
 
-Given /^the local chef repository "([^"]*)"$/ do |chf_pth|
+Given /^the local Chef repository "([^"]*)"$/ do |chf_pth|
   in_current_dir do
     chef.local_chef_repo = Pathname(chf_pth).expand_path.realdirpath
   end
 end
 
-Then /^the local chef repository exists$/ do
+Then /^the local Chef repository exists$/ do
   chef.local_chef_repo.exist?.should be_true
   #TODO: check_file_presence([file], true), etc.
 end
 
-Given /^the local chef repository is "([^"]*)"$/ do |repo|
-  chef.local_chef_repo.to_s.should == repo
-end
-
-Given /^I clone the remote chef repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, path|
+Given /^I clone the remote Chef repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, path|
   chef.local_chef_repo = chef_clone_repo(path, false, chef.remote_chef_repo, brnch)
 end
 
-Given /^a default base chef repository in "([^"]*)"$/ do |path|
+Given /^a default base Chef repository in "([^"]*)"$/ do |path|
   chef.local_chef_repo = chef_clone_repo(path)
   chef.local_chef_repo.exist?.should be_true
 end

@@ -8,6 +8,6 @@ Feature: Base Chef repository for cookbooks
       Given a directory named "ckbk/scratch"
 
   Scenario: Clone a Chef skeleton repository
-      And the remote chef repository "features/data/repositories/chef-repo/.git"
-     When I clone the remote chef repository branch "master" to "tmp/aruba/ckbk/scratch/myapp"
-     Then the local chef repository exists
+      And the remote Chef repository "features/data/repositories/chef-repo/.git"
+     When I clone the remote Chef repository branch "master" to "tmp/aruba/ckbk/scratch/myapp"
+     Then the local Chef repository exists
