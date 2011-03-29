@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cuken}
-  s.version = "0.1.2"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hedgehog"]
-  s.date = %q{2011-03-25}
+  s.date = %q{2011-03-29}
   s.description = %q{Reusable Cucumber steps and API for post-convergence system integration descriptions}
   s.email = %q{hedgehogshiatus@gmail.com}
   s.extra_rdoc_files = [
@@ -29,14 +29,18 @@ Gem::Specification.new do |s|
     "cucumber.yml",
     "cuken.gemspec",
     "examples/chef/features/support/env.rb",
-    "features/chef/cookbooks/cookbook.feature",
-    "features/chef/cookbooks/metadata.feature",
-    "features/chef/cookbooks/repo.feature",
-    "features/chef/knife.feature",
-    "features/chef/knife_steps.feature",
-    "features/command_steps.feature",
-    "features/commands.feature",
-    "features/common_steps.feature",
+    "features/.nav",
+    "features/about.md",
+    "features/chef_examples/cookbooks_cookbook.feature",
+    "features/chef_examples/cookbooks_metadata.feature",
+    "features/chef_examples/cookbooks_repo.feature",
+    "features/chef_steps/common_steps.feature",
+    "features/chef_steps/cookbook_steps.feature",
+    "features/chef_steps/knife_admin_client.feature",
+    "features/chef_steps/knife_steps.feature",
+    "features/chef_steps/node_steps.feature",
+    "features/command_examples/commands.feature",
+    "features/command_steps/command_steps.feature",
     "features/cuken.feature",
     "features/data/Rakefile",
     "features/data/apt/chef-integration-test-1.0/debian/changelog",
@@ -368,6 +372,11 @@ Gem::Specification.new do |s|
     "features/data/repositories/chef-repo/cookbooks/README.md",
     "features/data/repositories/chef-repo/data_bags/README.md",
     "features/data/repositories/chef-repo/roles/README.md",
+    "features/data/repositories/cookbooks/attribute_include/README.rdoc",
+    "features/data/repositories/cookbooks/attribute_include/attributes/a.rb",
+    "features/data/repositories/cookbooks/attribute_include/attributes/b.rb",
+    "features/data/repositories/cookbooks/attribute_include/metadata.rb",
+    "features/data/repositories/cookbooks/attribute_include/recipes/default.rb",
     "features/data/repositories/cookbooks/hosts/attributes/hosts.rb",
     "features/data/repositories/cookbooks/hosts/cc.gemspec",
     "features/data/repositories/cookbooks/hosts/metadata.json",
@@ -377,10 +386,11 @@ Gem::Specification.new do |s|
     "features/data/search-tests/do_knife_search_test.rb",
     "features/data/search-tests/search-test-nodes.rb",
     "features/data/test_git_repo.tar.gz",
-    "features/file_steps.feature",
-    "features/files.feature",
-    "features/ssh.feature",
-    "features/ssh_steps.feature",
+    "features/file_examples/files.feature",
+    "features/file_steps/file_steps.feature",
+    "features/generic_steps/generic_steps.feature",
+    "features/ssh_examples/ssh.feature",
+    "features/ssh_steps/ssh_steps.feature",
     "features/step_definitions/cuken_steps.rb",
     "features/support/env.rb",
     "lib/cuken.rb",
