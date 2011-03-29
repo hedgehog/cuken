@@ -1,5 +1,5 @@
-@announce @work_in_cwd @cookbooks @chef_repo
-Feature: Base Chef repository for cookbooks
+@announce @cookbooks @chef_repo
+Feature: Clone local Chef repository for cookbooks
   In order to have a Chef skeleton to build a custom deployment
   As an Administrator
   I want to automatically clone a generic base Chef repository
@@ -7,7 +7,7 @@ Feature: Base Chef repository for cookbooks
   Background:
       Given a directory named "ckbk/scratch"
 
-  Scenario: Clone a Chef skeleton repository
-      And the remote Chef repository "features/data/repositories/chef-repo/.git"
-     When I clone the remote Chef repository branch "master" to "tmp/aruba/ckbk/scratch/myapp"
+  Scenario: Clone a local Chef skeleton repository
+      And the remote Chef repository "./../../features/data/repositories/chef-repo/.git"
+     When I clone the remote Chef repository branch "master" to "ckbk/scratch/myapp"
      Then the local Chef repository exists

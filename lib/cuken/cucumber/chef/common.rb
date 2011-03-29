@@ -61,6 +61,7 @@ end
 
 Given /^I clone the remote Chef repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, path|
   chef.local_chef_repo = chef_clone_repo(path, false, chef.remote_chef_repo, brnch)
+  chef.local_chef_repo.exist?.should be_true
 end
 
 Given /^a default base Chef repository in "([^"]*)"$/ do |path|

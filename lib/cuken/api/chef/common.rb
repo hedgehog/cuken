@@ -3,7 +3,8 @@ module ::Cuken
     module Chef
       module Common
 
-        include Grit
+        include ::Grit
+        ::Grit.debug = true
 
         attr_accessor :recipe, :cookbook, :api_response, :inflated_response, :log_level,
                       :chef_args, :config_file, :stdout, :stderr, :status, :exception,

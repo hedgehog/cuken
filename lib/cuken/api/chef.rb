@@ -39,17 +39,19 @@ module ::Cuken
 
       def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, brnch = 'master')
         in_current_dir do
+          pth = Pathname(ckbk_path).expand_path
           gritty = ::Grit::Git.new(current_dir)
+          $stdout.puts gritty.inspect
           clone_opts = {:quiet => false, :verbose => true, :progress => true, :branch => brnch}
-          if Dir.exists?(ckbk_path)
-            $stdout.puts "Pulling: #{repo} into #{ckbk_path}"
-            gritty.pull(clone_opts, repo, ckbk_path)
+          if pth.directory?
+            $stdout.puts "Pulling: #{repo} into #{pth}"
+            gritty.pull(clone_opts, repo, pth.to_s)
           else
-            $stdout.puts "Cloning: #{repo} into #{ckbk_path}"
-            gritty.clone(clone_opts, repo, ckbk_path)
+            $stdout.puts "Cloning: #{repo} into #{pth}"
+            res = gritty.clone(clone_opts, repo, pth.to_s)
           end
-          update_cookbook_paths(ckbk_path, cookbook)
-          Pathname(ckbk_path)
+          update_cookbook_paths(pth, cookbook)
+          pth
         end
       end
 

@@ -3,7 +3,7 @@ load 'aruba/cucumber.rb' unless defined? ::Aruba
 World(::Cuken::Api::Cmd)
 
 #
-# These have been submitted to Aruba - awaiting release...
+# These ought be submitted to Aruba...
 #
 Then /^the output from "(.*)" contains exactly:$/ do |cmd, exact_output|
   output_from(unescape(cmd)).should == exact_output
