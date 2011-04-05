@@ -4,12 +4,28 @@ World(::Cuken::Api::File)
 #
 # Refactorings, yet to be submitted to Aruba:
 #
-Given /^the empty file "([^"]*)"$/ do |file_name|
+Given /^the directory "([^"]*)"$/ do |arg1|
+  Then %Q{a directory named \"#{arg1}\"}
+end
+
+Given /^the file "([^"]*)" contains nothing$/ do |file_name|
   Given %Q{an empty file named "#{file_name}"}
 end
 
-Given /^the file "([^"]*)" with:$/ do |file_name, file_content|
+Given /^the file "([^"]*)" contains:$/ do |file_name, file_content|
   Given %Q{a file named "#{file_name}" with:}, file_content
+end
+
+When /^I write to "([^"]*)":$/ do  |file_name, file_content|
+  When %Q{I write to "#{file_name}" with:}, file_content
+end
+
+When /^I overwrite "([^"]*)":$/ do  |file_name, file_content|
+  When %Q{I overwrite "#{file_name}" with:}, file_content
+end
+
+When /^I append to "([^"]*)":$/ do  |file_name, file_content|
+  When %Q{I append to "#{file_name}" with:}, file_content
 end
 
 Then /^the file "([^"]*)" exists$/ do |arg1|
