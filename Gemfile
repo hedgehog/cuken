@@ -9,10 +9,12 @@ group :default do
       :branch => 'v0.4.0'
   gem 'chef', "~>0.9.12"
   gem 'grit', "~>2.4.1"
+  gem 'rvm', "~>1.5.2"
 end
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 group :development do
+  gem "rr", "~> 1.0.2"
   gem "rspec", "~> 2.5.0"
   gem "yard", "~> 0.6.0"
   gem "cucumber", ">= 0"
@@ -21,4 +23,5 @@ group :development do
   gem "rcov", ">= 0"
   gem "reek", "~> 1.2.8"
   gem "roodi", "~> 2.1.0"
+  gem "fakefs", '~>0.3.1'
 end

@@ -42,6 +42,7 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     extlib (0.9.15)
+    fakefs (0.3.1)
     ffi (1.0.7)
       rake (>= 0.8.7)
     gherkin (2.3.5)
@@ -81,6 +82,7 @@ GEM
       mime-types (>= 1.16)
     roodi (2.1.0)
       ruby_parser
+    rr (1.0.2)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)
@@ -94,6 +96,7 @@ GEM
       sexp_processor (~> 3.0)
     ruby_parser (2.0.6)
       sexp_processor (~> 3.0)
+    rvm (1.5.2)
     sexp_processor (3.0.5)
     systemu (1.2.0)
     term-ansicolor (1.0.5)
@@ -108,11 +111,14 @@ DEPENDENCIES
   bundler (~> 1.0.10)
   chef (~> 0.9.12)
   cucumber
+  fakefs (~> 0.3.1)
   grit (~> 2.4.1)
   jeweler (~> 1.5.2)
   rcov
   reek (~> 1.2.8)
   roodi (~> 2.1.0)
+  rr (~> 1.0.2)
   rspec (~> 2.5.0)
+  rvm (~> 1.5.2)
   ssh-forever (~> 0.4.0)!
   yard (~> 0.6.0)
