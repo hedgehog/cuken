@@ -12,7 +12,7 @@ module ::Cuken
                       :uri, :client_private_key_path, :admin_client_name,
                       :client_name, :client_knife_path, :cookbook_paths, :cookbooks_paths,
                       :knife_debug, :local_cookbook_repo, :remote_cookbook_repo,
-                      :local_chef_repo, :remote_chef_repo
+                      :local_chef_repo, :remote_chef_repo, :cookbooks_uri
 
         def self.ohai
           # ohai takes a while, so only ever run it once.

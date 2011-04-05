@@ -25,13 +25,22 @@
 
 Given /^the remote Cookbook repository "([^"]*)"$/ do |ckbk_repo|
   in_current_dir do
-    chef.remote_cookbook_repo = Pathname(ckbk_repo).expand_path.realdirpath
+    repo = Dir.exist?(ckbk_repo) ? Pathname(ckbk_repo).expand_path.realdirpath : ckbk_repo
+    chef.remote_cookbook_repo = repo
+  end
+end
+
+Given /^the remote Cookbooks URI "([^"]*)"$/ do |ckbk_uri|
+  in_current_dir do
+    repo = Dir.exist?(ckbk_uri) ? Pathname(ckbk_uri).expand_path.realdirpath : ckbk_uri
+    chef.cookbooks_uri = repo
   end
 end
 
 Given /^the local Cookbook repository "([^"]*)"$/ do |ckbk_repo|
   in_current_dir do
-    chef.local_cookbook_repo = Pathname(ckbk_repo).expand_path.realdirpath
+    repo = Dir.exist?(ckbk_repo) ? Pathname(ckbk_repo).expand_path.realdirpath : ckbk_repo
+    chef.local_cookbook_repo = repo
   end
 end
 
@@ -40,38 +49,67 @@ Then /^the local Cookbook repository exists$/ do
   #TODO: check_file_presence([file], true), etc.
 end
 
-Given /^a cookbook path "([^"]*)"$/ do |path|
+Given /^a Cookbook path "([^"]*)"$/ do |dir_name|
+  create_dir(dir_name)
   in_current_dir do
-    update_cookbook_paths(path, true)
+    update_cookbook_paths(dir_name, true)
   end
 end
 
-Given /^a cookbooks path "([^"]*)"$/ do |path|
+Given /^a Cookbooks path "([^"]*)"$/ do |dir_name|
+  create_dir(dir_name)
   in_current_dir do
-    update_cookbook_paths(path, false)
+    update_cookbook_paths(dir_name, false)
   end
 end
 
-Then /^the local cookbook "([^"]*)" exists$/ do |ckbk|
+Then /^the local Cookbook "([^"]*)" exists$/ do |ckbk|
   chef.cookbook_paths.each do |pn|
     curr_ckbk = pn.basename.to_s
-    curr_ckbk.should == ckbk if curr_ckbk == ckbk
+    if curr_ckbk == ckbk
+      break true if curr_ckbk.should == ckbk
+    end
   end
   #TODO: check_file_presence([file], true), etc.
+end
+
+And /^these local Cookbooks exist:$/ do |table|
+  # table is a Cucumber::Ast::Table
+  table.hashes.each do |hsh|
+    chef.cookbook_paths.each do |pn|
+      curr_ckbk = pn.basename.to_s
+      if curr_ckbk == hsh['cookbook']
+        break true if curr_ckbk.should == hsh['cookbook']
+      end
+    end
+  end
 end
 
 Given /^I clone the remote Cookbook repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, ckbk_path|
   chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.remote_cookbook_repo, brnch)
 end
 
-When /^I successfully generate all cookbook metadata$/ do
+Given /^I clone the Cookbook "([^"]*)" branch "([^"]*)" to "([^"]*)"$/ do |ckbk, brnch, ckbk_path|
+  chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.cookbooks_uri + ckbk + '.git', brnch)
+end
+
+When /^I clone the Cookbooks:$/ do |table|
+  # table is a Cucumber::Ast::Table
+  table.hashes.each do |hsh|
+    #TODO: Accept cloning from tag and reference
+    local_repo = chef_clone_repo(hsh['destination'], true, chef.cookbooks_uri + hsh['cookbook'] + '.git', hsh['branch'])
+    Pathname(local_repo).exist?.should be_true
+  end
+end
+
+When /^I successfully generate all Cookbook metadata$/ do
   chef.cookbook_paths.each do |pn|
     curr_ckbk = pn.basename.to_s
     run_knife_command("cookbook metadata #{curr_ckbk}")
   end
 end
 
-When /^I successfully generate cookbook "([^"]*)" metadata$/ do |ckbk|
+When /^I successfully generate Cookbook "([^"]*)" metadata$/ do |ckbk|
   chef.cookbook_paths.each do |pn|
     curr_ckbk = pn.basename.to_s
     if curr_ckbk == ckbk
