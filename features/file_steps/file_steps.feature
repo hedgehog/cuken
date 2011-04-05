@@ -15,13 +15,12 @@ Feature: Listing file steps
   Scenario: File and directory existence
     Then these steps are defined for "cuken/cucumber/file.rb":
       | step                                                   |
-      |a directory named "([^"]*)"                             |
       |I remove the file "([^"]*)"                             |
+      |the directory "([^"]*)"                                 |
       |the directory "([^"]*)" exists                          |
       |the directory "([^"]*)" does not exist                  |
       |the file "([^"]*)" exists                               |
       |the file "([^"]*)" does not exist                       |
-      |the file "([^"]*)" should not exist                     |
       |these files exist:                                      |
       |these files do not exist:                               |
       |these directories exist:                                |
@@ -42,17 +41,18 @@ Feature: Listing file steps
   Scenario: File and directory content
     Then these steps are defined for "cuken/cucumber/file.rb":
       | step                                                               |
-      |the file "([^"]*)" with:                                            |
-      |the empty file "([^"]*)"                                            |
+      |the file "([^"]*)" contains:                                            |
       |the file "([^"]*)" contains "([^"]*)"                               |
+      |the file "([^"]*)" contains "([^"]*)" exactly "(\d+)" times         |
       |the file "([^"]*)" contains \/([^\/]*)\/                             |
       |the file "([^"]*)" contains exactly:                                |
-      |the file "([^"]*)" contains "([^"]*)" exactly "(\d+)" times         |
+      |the file "([^"]*)" contains nothing                                           |
       |the file "([^"]*)" does not contain "([^"]*)"                       |
+      |the file "([^"]*)" does not contain "([^"]*)" exactly "(\d+)" times |
       |the file "([^"]*)" does not contain \/([^\/]*)\/                      |
       |the file "([^"]*)" does not contain exactly:                        |
-      |the file "([^"]*)" does not contain "([^"]*)" exactly "(\d+)" times |
-      |I write to "([^"]*)" with:                                          |
-      |I overwrite "([^"]*)" with:                                         |
-      |I append to "([^"]*)" with:                                         |
+      |the file "([^"]*)" does not contain nothing                                |
+      |I write to "([^"]*)":                                          |
+      |I overwrite "([^"]*)":                                         |
+      |I append to "([^"]*)":                                         |
 

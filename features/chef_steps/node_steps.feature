@@ -11,4 +11,4 @@ Feature: Listing Node steps
     Then these steps are defined for "cuken/cucumber/chef/node.rb":
       | step                                                                |
       |a validated node  |
-      |the nodes are:    |
+      |the Chef nodes are:    |
