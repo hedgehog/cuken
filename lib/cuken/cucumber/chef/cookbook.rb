@@ -49,6 +49,11 @@ Then /^the local Cookbook repository exists$/ do
   #TODO: check_file_presence([file], true), etc.
 end
 
+Then /^the local Site\-Cookbook repository exists$/ do
+  chef.local_site_cookbook_repo.exist?.should be_true
+  #TODO: check_file_presence([file], true), etc.
+end
+
 Given /^a Cookbook path "([^"]*)"$/ do |dir_name|
   create_dir(dir_name)
   in_current_dir do
@@ -73,6 +78,17 @@ Then /^the local Cookbook "([^"]*)" exists$/ do |ckbk|
   #TODO: check_file_presence([file], true), etc.
 end
 
+Then /^the local Site\-Cookbook "([^"]*)" exists$/ do |ckbk|
+  ckbk_path = 'site-cookbook'
+  chef.cookbook_paths.each do |pn|
+    curr_ckbk = pn.basename.to_s
+    if pn.to_s[/#{ckbk_path}}/] && curr_ckbk == ckbk
+      break true if curr_ckbk.should == ckbk
+    end
+  end
+  #TODO: check_file_presence([file], true), etc.
+end
+
 And /^these local Cookbooks exist:$/ do |table|
   # table is a Cucumber::Ast::Table
   table.hashes.each do |hsh|
@@ -85,12 +101,33 @@ And /^these local Cookbooks exist:$/ do |table|
   end
 end
 
+And /^these local Site\-Cookbooks exist:$/ do |table|
+  # table is a Cucumber::Ast::Table
+  ckbk_path = 'site-cookbook'
+  table.hashes.each do |hsh|
+    chef.cookbook_paths.each do |pn|
+      curr_ckbk = pn.basename.to_s
+      if pn.to_s[/#{ckbk_path}}/] && curr_ckbk == hsh['cookbook']
+        break true if curr_ckbk.should == hsh['cookbook']
+      end
+    end
+  end
+end
+
 Given /^I clone the remote Cookbook repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, ckbk_path|
-  chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.remote_cookbook_repo, brnch)
+  if ckbk_path[/\/cookbooks\//]
+    chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.remote_cookbook_repo, brnch)
+  elsif ckbk_path[/\/site-cookbooks\//]
+    chef.local_site_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.remote_cookbook_repo, brnch)
+  end
 end
 
 Given /^I clone the Cookbook "([^"]*)" branch "([^"]*)" to "([^"]*)"$/ do |ckbk, brnch, ckbk_path|
-  chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.cookbooks_uri + ckbk + '.git', brnch)
+  if ckbk_path[/\/cookbooks\//]
+    chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.cookbooks_uri + ckbk + '.git', brnch)
+  elsif ckbk_path[/\/site-cookbooks\//]
+    chef.local_site_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.cookbooks_uri + ckbk + '.git', brnch)
+  end
 end
 
 When /^I clone the Cookbooks:$/ do |table|

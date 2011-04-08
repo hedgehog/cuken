@@ -13,8 +13,8 @@ Feature: Listing common steps
       |a default base Chef repository in "([^"]*)"                      |
       |I clone the remote Chef repository branch "([^"]*)" to "([^"]*)" |
       |the Chef server URI "([^"]*)"                                    |
-      |the Chef client "([^"]*)"                                        |
-      |the Chef admin client "([^"]*)"                                  |
+      |the Chef client "([^"]*)" exists                                 |
+      |the Chef admin client "([^"]*)" exists                           |
       |the Chef client private key path "([^"]*)"                       |
 
   Scenario: Local and remote Chef repository commands

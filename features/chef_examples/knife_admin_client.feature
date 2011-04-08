@@ -14,7 +14,7 @@ Feature: Reusable Chef Knife steps
 
   Background:
     Given the Chef server URI "http://localhost:4000"
-    And the Chef admin client "bobo-admin"
+    And the Chef admin client "bobo-admin" exists
     Given a directory named "foo/bar"
     And a file named "foo/bar/bobo-admin.pem" with:
     """
@@ -63,7 +63,7 @@ Feature: Reusable Chef Knife steps
   Scenario: Knife steps default knife.rb path
      Given I cd to "foo/bar"
       When I successfully run `knife node list`
-      When the output should contain:
+      Then the output should contain:
      """
      DEBUG: Signing the request as bobo-admin
      DEBUG: Sending HTTP Request via GET to localhost:4000/nodes

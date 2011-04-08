@@ -27,4 +27,5 @@ Feature: Listing Cookbook steps
       |the remote Cookbook repository "([^"]*)"                             |
       |the remote Cookbooks URI "([^"]*)"                                   |
       |these local Cookbooks exist:                                         |
+      |these local Site-Cookbooks exist:                                         |
 

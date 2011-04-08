@@ -1,6 +1,8 @@
 require 'aruba/api' unless defined? Aruba::Api
 require 'chef'  unless defined? Chef
+require 'grit' unless defined? Grit
 require 'cuken/api/chef/common'
+require 'cuken/api/chef/knife'
 
 module ::Cuken
   module Api
@@ -56,7 +58,7 @@ module ::Cuken
       end
 
       def run_knife_command(cmd, interactive=false)
-        no_ckbk_pth_opt = ['cookbook delete'].each{|str| break true if cmd[/#{str}/]}
+        no_ckbk_pth_opt = ['cookbook delete', 'role from file'].each{|str| break true if cmd[/#{str}/]}
         no_ckbk_pth = chef.cookbooks_paths.empty?
         if no_ckbk_pth
           ckbk_pth_opt = false
@@ -70,13 +72,16 @@ module ::Cuken
             chef.client_knife_path = Pathname(chef.local_chef_repo).ascend { |d| h=d+'.chef'+'knife.rb'; break h if h.file? }
           end
           raise(RuntimeError, "chef.client_knife_path is required", caller) unless chef.client_knife_path
-          cmd += " -c #{chef.client_knife_path.expand_path.to_s}" if chef.client_knife_path.expand_path.exist?
-          cmd += " -o #{ckbk_pth}" if ckbk_pth_opt
-          cmd += " --log_level debug" if chef.knife_debug
+        end
+        cmd += " -c #{chef.client_knife_path.expand_path.to_s}" if chef.client_knife_path.expand_path.exist?
+        cmd += " -o #{ckbk_pth}" if ckbk_pth_opt
+        cmd += " --log_level debug" if chef.knife_debug
+        chef.root_dir ||= current_dir
+        in_chef_root do
           if interactive
-            run_interactive(unescape("#{chef.knife}" + cmd))
+            run_interactive(unescape("#{chef.knife_command}" + cmd))
           else
-            run_simple(unescape("#{chef.knife}" + cmd))
+            run_simple(unescape("#{chef.knife_command}" + cmd))
           end
         end
       end

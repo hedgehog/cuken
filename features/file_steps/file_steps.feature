@@ -41,18 +41,18 @@ Feature: Listing file steps
   Scenario: File and directory content
     Then these steps are defined for "cuken/cucumber/file.rb":
       | step                                                               |
-      |the file "([^"]*)" contains:                                            |
+      |the file "([^"]*)" contains:                                        |
       |the file "([^"]*)" contains "([^"]*)"                               |
       |the file "([^"]*)" contains "([^"]*)" exactly "(\d+)" times         |
-      |the file "([^"]*)" contains \/([^\/]*)\/                             |
+      |the file "([^"]*)" contains \/([^\/]*)\/                            |
       |the file "([^"]*)" contains exactly:                                |
-      |the file "([^"]*)" contains nothing                                           |
+      |the file "([^"]*)" contains nothing                                 |
       |the file "([^"]*)" does not contain "([^"]*)"                       |
       |the file "([^"]*)" does not contain "([^"]*)" exactly "(\d+)" times |
-      |the file "([^"]*)" does not contain \/([^\/]*)\/                      |
+      |the file "([^"]*)" does not contain \/([^\/]*)\/                    |
       |the file "([^"]*)" does not contain exactly:                        |
-      |the file "([^"]*)" does not contain nothing                                |
-      |I write to "([^"]*)":                                          |
-      |I overwrite "([^"]*)":                                         |
-      |I append to "([^"]*)":                                         |
+      |the file "([^"]*)" does not contain nothing                         |
+      |I write to "([^"]*)":                                               |
+      |I overwrite "([^"]*)":                                              |
+      |I append to "([^"]*)":                                              |
 

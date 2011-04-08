@@ -24,11 +24,11 @@ Given /^the Chef server URI "([^"]*)"$/ do |uri|
   chef.uri = uri
 end
 
-Given /^the Chef client "([^"]*)"$/ do |name|
+Given /^the Chef client "([^"]*)" exists$/ do |name|
   chef.client_name =  name
 end
 
-Given /^the Chef admin client "([^"]*)"$/ do |name|
+Given /^the Chef admin client "([^"]*) exists"$/ do |name|
   chef.admin_client_name =  name
 end
 

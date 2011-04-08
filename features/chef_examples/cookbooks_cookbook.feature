@@ -19,6 +19,12 @@ Feature: Cookbook Validity
      Then the local Cookbook repository exists
       And the local Cookbook "hosts" exists
 
+  Scenario: Clone a single Site-Cookbook from a Cookbooks URI
+    Given the remote Cookbooks URI "git://github.com/cookbooks/"
+     When I clone the Cookbook "hosts" branch "master" to "ckbk/scratch/myapp/site-cookbooks/hosts2"
+     Then the local Site-Cookbook repository exists
+      And the local Site-Cookbook "hosts" exists
+
   Scenario: Clone multiple Cookbooks from a Cookbooks URI
     Given the remote Cookbooks URI "git://github.com/cookbooks/"
      When I clone the Cookbooks:
@@ -29,4 +35,15 @@ Feature: Cookbook Validity
      |cookbook |
      | hosts3  |
      | users   |
+
+  Scenario: Clone multiple Site-Cookbooks from a Cookbooks URI
+    Given the remote Cookbooks URI "git://github.com/cookbooks/"
+     When I clone the Cookbooks:
+     |cookbook | branch | destination                         |
+     | hosts   | master | ckbk/scratch/myapp/site-cookbooks/hosts4 |
+     | users   | master | ckbk/scratch/myapp/site-cookbooks/users2 |
+      And these local Site-Cookbooks exist:
+     |cookbook |
+     | hosts4  |
+     | users2  |
 

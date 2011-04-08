@@ -6,7 +6,7 @@ require Pathname(__FILE__).ascend { |d| h=d+'spec_helper.rb'; break h if h.file?
 module ::Cuken::Api
   describe Rvm do
     before(:all) do
-      include ::::Cuken::Api::Rvm
+      include ::Cuken::Api::Rvm
 #      ::FakeFS.activate!
 #      ::FakeFS::FileSystem.clear
       @rvmrc_root = setup_rvmrc_gems_files(1)
@@ -17,7 +17,7 @@ module ::Cuken::Api
       @rvmrc_processor= ::Cuken::Api::Rvm::RvmrcProcessor.new(@rvmrc_file)
     end
     after(:all) do
-      ::FakeFS.deactivate!
+#      ::FakeFS.deactivate!
     end
 #    context ".b3_setup" do
 #      it "should set the path to BigBlueButton's sources root" do

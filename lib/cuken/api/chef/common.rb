@@ -11,8 +11,9 @@ module ::Cuken
                       :gemserver_thread, :sandbox_url,
                       :uri, :client_private_key_path, :admin_client_name,
                       :client_name, :client_knife_path, :cookbook_paths, :cookbooks_paths,
-                      :knife_debug, :local_cookbook_repo, :remote_cookbook_repo,
-                      :local_chef_repo, :remote_chef_repo, :cookbooks_uri
+                      :knife_debug, :local_cookbook_repo, :local_site_cookbook_repo, :remote_cookbook_repo,
+                      :local_chef_repo, :remote_chef_repo, :cookbooks_uri,
+                      :root_dir
 
         def self.ohai
           # ohai takes a while, so only ever run it once.
@@ -35,7 +36,15 @@ module ::Cuken
           @chef ||= self
         end
 
+        def in_chef_root(&block)
+          ::Dir.chdir(chef.root_dir, &block)
+        end
+
         def knife
+          ::Cuken::Api::Chef::Knife.new
+        end
+
+        def knife_command
           'knife '
         end
 
