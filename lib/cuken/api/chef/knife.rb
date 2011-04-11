@@ -4,6 +4,9 @@ module ::Cuken
     module Chef
       class Knife
 
+        class CliTemplate
+          include Mixlib::CLI
+        end
 
         # Ripped from Grit: https://github.com/mojombo/grit
 
@@ -42,46 +45,13 @@ module ::Cuken
           end
         end
 
-          # Methods not defined by a library implementation execute the git command
-          # using #native, passing the method name as the git command name.
-          #
-          # Examples:
-          #   git.rev_list({:max_count => 10, :header => true}, "master")
-#          def method_missing(cmd, options={}, *args, &block)
-#            native(cmd, options, *args, &block)
-#          end
-        class RakeCLI
-          include Mixlib::CLI
-        end
 
         def create_client(data)
-          ::Chef::Config[:node_name]  = data[:node_name]
-          @knife = ::Chef::Knife::Configure.new
-          #@knife = ::Chef::Knife::ClientCreate.new
-          @knife.config[:no_editor]=data[:no_editor]
-          @knife.config[:file]=data[:file]
-          @knife.config[:admin]=data[:admin]
-          @knife.name_args << data[:name]
-          @knife.config[:config_file]='/etc/chef/knife.rb'
-          @cli = RakeCLI.new
-          #parsed_data = @knife.parse_options ['-f', data[:file], '-a' ]
-          #parsed_data2 = @knife.opt_parser
-          data = {:name => 'Im_new_here',
-                :admin => 'true',
-                :node_name => 'chef.kitchen.org',
-                :file => '/some/sekret.pem',
-                :no_editor => 'true'}
-#          opts=RakeCLI.option(:config_file,'/etc/chef/knife.rb')
-#          RakeCLI.option(:admin, data[:admin] )
-#          RakeCLI.option(:file, data[:file])
-#          RakeCLI.option(:no_editor, data[:admin])
-#          RakeCLI.option(:node_name, data[:node_name])
-          #RakeCLI.options
-          ::Chef::Knife.run(['client', 'create'],@knife.options)
-        end
-
-        def delete_client(data)
-
+          CliTemplate.option(:config_file, :long => '--file FILE', :default => '/etc/chef/knife.rb')
+          CliTemplate.option(:no_editor, :long => "--no-editor", :boolean => true)
+          args = ['client', 'create', data[:name], '--file', data[:file], '--no-editor' ]
+          args << '--admin' if data[:admin]
+          ::Chef::Knife.run(args, CliTemplate.options)
         end
 
       end # class knife

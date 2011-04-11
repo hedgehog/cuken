@@ -14,10 +14,10 @@ module ::Cuken::Api::Chef
     describe "#create_client(data)" do
       it "should create a new named admin Client" do
         data = {:name => 'Im_new_here',
-                :admin => 'true',
+                :admin => true,
                 :node_name => 'chef.kitchen.org',
                 :file => '/some/sekret.pem',
-                :no_editor => 'true'}
+                :no_editor => true}
          any_instance_of(::Chef::ApiClient) do |u|
            stub(u).name.with(data[:name]).times(1)
            stub(u).name.with("").times(1) # some json creation routine
@@ -25,6 +25,7 @@ module ::Cuken::Api::Chef
            stub(u).admin.with(false).times(1) # some json creation routine
            stub(u).save{ { 'private_key' => 'sekret' } }
          end
+         stub(Chef::Config).from_file.with(is_a(String))
         FakeFS do
           chef.knife.create_client(data)
           File.read(data[:file]).should == 'sekret'
@@ -39,10 +40,11 @@ module ::Cuken::Api::Chef
          any_instance_of(::Chef::ApiClient) do |u|
            stub(u).name.with(data[:name]).times(1)
            stub(u).name.with("").times(1) # some json creation routine
-           stub(u).admin.with(data[:admin]).times(1)
+           stub(u).admin.with(nil).times(1)
            stub(u).admin.with(false).times(1) # some json creation routine
            stub(u).save{ { 'private_key' => 'sekret2' } }
          end
+        stub(Chef::Config).from_file.with(is_a(String))
         FakeFS do
           chef.knife.create_client(data)
           File.read(data[:file]).should == 'sekret2'
