@@ -46,11 +46,29 @@ module ::Cuken
         end
 
 
+        def set_cli_options_template(data)
+          conf = data[:config_file]||'/etc/chef/knife.rb'
+          CliTemplate.option(:config_file, :long => '--config FILE', :default => conf)
+          CliTemplate.option(:no_editor, :long => "--no-editor", :boolean => true, :default => true)
+          CliTemplate.option(:yes, :long => "--yes", :boolean => true, :default => true)
+        end
+
         def create_client(data)
-          CliTemplate.option(:config_file, :long => '--file FILE', :default => '/etc/chef/knife.rb')
-          CliTemplate.option(:no_editor, :long => "--no-editor", :boolean => true)
+          set_cli_options_template(data)
           args = ['client', 'create', data[:name], '--file', data[:file], '--no-editor' ]
           args << '--admin' if data[:admin]
+          ::Chef::Knife.run(args, CliTemplate.options)
+        end
+
+        def show_client(data)
+          set_cli_options_template(data)
+          args = ['client', 'show', data[:name], '--no-editor' ]
+          ::Chef::Knife.run(args, CliTemplate.options)
+        end
+
+        def delete_client(data)
+          set_cli_options_template(data)
+          args = ['client', 'delete', data[:name], '--no-editor', '--yes' ]
           ::Chef::Knife.run(args, CliTemplate.options)
         end
 
@@ -58,5 +76,5 @@ module ::Cuken
 
     end # module Chef
   end # module Api
-end #module Cuken
+end # module Cuken
 

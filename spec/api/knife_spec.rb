@@ -15,7 +15,6 @@ module ::Cuken::Api::Chef
       it "should create a new named admin Client" do
         data = {:name => 'Im_new_here',
                 :admin => true,
-                :node_name => 'chef.kitchen.org',
                 :file => '/some/sekret.pem',
                 :no_editor => true}
          any_instance_of(::Chef::ApiClient) do |u|
@@ -34,7 +33,6 @@ module ::Cuken::Api::Chef
       it "should create a new named non-admin Client" do
         data = {:name => 'Im_new_here',
                 :admin => false,
-                :node_name => 'chef.kitchen.org',
                 :file => '/some/sekret2.pem',
                 :no_editor => true}
          any_instance_of(::Chef::ApiClient) do |u|
@@ -50,9 +48,29 @@ module ::Cuken::Api::Chef
           File.read(data[:file]).should == 'sekret2'
         end
       end
-
-    it "return the command sting" do
-        @knife.version.should =~ /knife version [\w\.]/
+    end
+    describe "#show_client(data)" do
+      it "should show a named Client" do
+        data = {:name => 'Im_new_here',
+                :file => '/some/sekret.pem',
+                :no_editor => true}
+        stub(Chef::Config).from_file.with(is_a(String))
+        stub(Chef::ApiClient).load.with(data[:name]){['somthing: displayed']}
+        FakeFS do
+          chef.knife.show_client(data).should be_nil
+        end
+      end
+    end
+    describe "#delete_client(data)" do
+      it "should delete a named Client" do
+        data = {:name => 'Im_new_here',
+                :file => '/some/sekret.pem',
+                :no_editor => true}
+        stub(Chef::Config).from_file.with(is_a(String))
+        stub(Chef::ApiClient).load.with(data[:name]){stub!.destroy{true}}
+        FakeFS do
+          chef.knife.delete_client(data).should be_nil
+        end
       end
     end
   end

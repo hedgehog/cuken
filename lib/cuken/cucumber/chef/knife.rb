@@ -25,6 +25,15 @@ Given /^the Knife file "([^"]*)"$/ do |path|
   end
 end
 
+When /^I create the Chef admin client "([^"]*)"$/ do |client_name|
+  cmd = "client create monitor --no-editor --admin --file #{chef.root_dir}/.chef/#{client_name}.pem --config #{chef.root_dir}/.chef/knife.rb"
+  check = run_knife_command("client show #{client_name} --attribute admin")
+  client_name.should == '' if check['admin']
+  unless File.exist?("#{chef.root_dir}/.chef/#{client_name}.pem")
+    # run_knife_command(cmd)
+  end
+end
+
 When /^I successfully run Knife's "([^"]*)"$/ do |cmd|
   run_knife_command(cmd, false)
 end
