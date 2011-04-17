@@ -1,8 +1,11 @@
+require 'chef/application/knife'
 
 module ::Cuken
   module Api
     module Chef
-      class Knife
+      module Knife
+
+        include ::Cuken::Api::Common
 
         class CliTemplate
           include Mixlib::CLI
@@ -47,29 +50,53 @@ module ::Cuken
 
 
         def set_cli_options_template(data)
-          conf = data[:config_file]||'/etc/chef/knife.rb'
-          CliTemplate.option(:config_file, :long => '--config FILE', :default => conf)
+          conf = data[:config]||'/etc/chef/knife.rb'
+          CliTemplate.option(:config_file, :long => '--config CONFIG', :default => conf)
           CliTemplate.option(:no_editor, :long => "--no-editor", :boolean => true, :default => true)
           CliTemplate.option(:yes, :long => "--yes", :boolean => true, :default => true)
         end
 
-        def create_client(data)
-          set_cli_options_template(data)
-          args = ['client', 'create', data[:name], '--file', data[:file], '--no-editor' ]
-          args << '--admin' if data[:admin]
-          ::Chef::Knife.run(args, CliTemplate.options)
+        def create_client(client_name)
+          chef.client_private_key_path = chef.root_dir + "/.chef/#{client_name}.pem"
+          data = {:name => client_name,
+                  :admin => true,
+                  :file => chef.client_private_key_path,
+                  :no_editor => true,
+                  :config_file => chef.config_file}
+          argv = ['client', 'create', data[:name], '--file', data[:file], '--config', data[:config_file],'--no-editor']
+          argv << '--admin' if data[:admin]
+          unless Pathname(chef.client_private_key_path).exist?
+            with_args *argv do
+              ::Chef::Application::Knife.new.run # (args, CliTemplate.options)
+            end
+          else
+            #TODO: Verify client exists on the Chef server, and has matching public key.
+          end
         end
 
-        def show_client(data)
-          set_cli_options_template(data)
-          args = ['client', 'show', data[:name], '--no-editor' ]
-          ::Chef::Knife.run(args, CliTemplate.options)
+        def show_client(client_name)
+          chef.client_private_key_path = chef.root_dir + "/.chef/#{client_name}.pem"
+          data = {:name => client_name,
+                  :config_file => chef.config_file}
+          argv = ['client', 'show', data[:name], '--config', data[:config_file],'--no-editor']
+          argv << '--admin' if data[:admin]
+          with_args *argv do
+            ::Chef::Application::Knife.new.run # (args, CliTemplate.options)
+          end
         end
 
-        def delete_client(data)
-          set_cli_options_template(data)
-          args = ['client', 'delete', data[:name], '--no-editor', '--yes' ]
-          ::Chef::Knife.run(args, CliTemplate.options)
+        def delete_client(client_name)
+          chef.client_private_key_path = chef.root_dir + "/.chef/#{client_name}.pem"
+          data = {:name => client_name,
+                  :file => chef.client_private_key_path,
+                  :no_editor => true,
+                  :yes => true,
+                  :print_after => true,
+                  :config_file => chef.config_file}
+          argv = ['client', 'delete', data[:name], '--no-editor', '--yes' ]
+          with_args *argv do
+            ::Chef::Application::Knife.new.run
+          end
         end
 
       end # class knife

@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
+require 'stringio'
 require 'fakefs/safe'
 require 'fakefs/spec_helpers'
 require 'rvm'

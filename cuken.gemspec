@@ -453,7 +453,6 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<aruba>, ["~> 0.3.5"])
-      s.add_runtime_dependency(%q<ssh-forever>, ["~> 0.4.0"])
       s.add_runtime_dependency(%q<chef>, ["~> 0.9.12"])
       s.add_runtime_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_development_dependency(%q<rspec>, ["~> 2.5.0"])
@@ -466,7 +465,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<roodi>, ["~> 2.1.0"])
     else
       s.add_dependency(%q<aruba>, ["~> 0.3.5"])
-      s.add_dependency(%q<ssh-forever>, ["~> 0.4.0"])
       s.add_dependency(%q<chef>, ["~> 0.9.12"])
       s.add_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_dependency(%q<rspec>, ["~> 2.5.0"])
@@ -480,7 +478,6 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<aruba>, ["~> 0.3.5"])
-    s.add_dependency(%q<ssh-forever>, ["~> 0.4.0"])
     s.add_dependency(%q<chef>, ["~> 0.9.12"])
     s.add_dependency(%q<grit>, ["~> 2.4.1"])
     s.add_dependency(%q<rspec>, ["~> 2.5.0"])

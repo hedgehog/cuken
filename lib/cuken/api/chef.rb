@@ -1,6 +1,7 @@
 require 'aruba/api' unless defined? Aruba::Api
 require 'chef'  unless defined? Chef
 require 'grit' unless defined? Grit
+require 'cuken/api/common'
 require 'cuken/api/chef/common'
 require 'cuken/api/chef/knife'
 

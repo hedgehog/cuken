@@ -4,9 +4,6 @@ source "http://rubygems.org"
 #   gem "activesupport", ">= 2.3.5"
 group :default do
   gem 'aruba', "~> 0.3.5"
-#  gem 'ssh-forever', "~> 0.4.0",
-#      :git => "git://github.com/hedgehog/ssh-forever.git",
-#      :branch => 'v0.4.0'
   gem 'chef', "~>0.9.12"
   gem 'grit', "~>2.4.1"
   gem 'rvm', "~>1.5.2"
@@ -16,7 +13,7 @@ end
 group :development do
   gem "rr", "~> 1.0.2"
   gem "rspec", "~> 2.5.0"
-#  gem "yard", "~> 0.6.0"
+  gem "yard", "~> 0.6.0"
   gem "cucumber", ">= 0"
   gem "bundler", "~> 1.0.11"
   gem "jeweler", "~> 1.5.2"

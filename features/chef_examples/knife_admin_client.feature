@@ -14,9 +14,9 @@ Feature: Reusable Chef Knife steps
 
   Background:
     Given the Chef server URI "http://localhost:4000"
-    And the Chef admin client "bobo-admin" exists
-    Given a directory named "foo/bar"
-    And a file named "foo/bar/bobo-admin.pem" with:
+      And the Chef admin client "bobo-admin" exists
+      And a directory named "foo/bar"
+      And a file named "foo/bar/bobo-admin.pem" with:
     """
     -----BEGIN RSA PRIVATE KEY-----
     MIIEogIBAAKCAQEA2iu6ETTD3Ig/0dlbbQSPsVcSUGQ3O3Kgt+6h6OwD1HnQUHge

@@ -6,14 +6,34 @@ module ::Cuken
         include ::Grit
         ::Grit.debug = true
 
-        attr_accessor :recipe, :cookbook, :api_response, :inflated_response, :log_level,
-                      :chef_args, :config_file, :stdout, :stderr, :status, :exception,
-                      :gemserver_thread, :sandbox_url,
-                      :uri, :client_private_key_path, :admin_client_name,
-                      :client_name, :client_knife_path, :cookbook_paths, :cookbooks_paths,
-                      :knife_debug, :local_cookbook_repo, :local_site_cookbook_repo, :remote_cookbook_repo,
-                      :local_chef_repo, :remote_chef_repo, :cookbooks_uri,
-                      :root_dir
+        attr_accessor :admin_client_name,
+                      :api_response,
+                      :exception,
+                      :chef_args,
+                      :client_knife_path,
+                      :client_name,
+                      :client_private_key_path,
+                      :config_file,
+                      :cookbook,
+                      :cookbook_paths,
+                      :cookbooks_paths,
+                      :cookbooks_uri,
+                      :knife_debug,
+                      :gemserver_thread,
+                      :inflated_response,
+                      :local_chef_repo,
+                      :local_cookbook_repo,
+                      :local_site_cookbook_repo,
+                      :log_level,
+                      :recipe,
+                      :remote_chef_repo,
+                      :remote_cookbook_repo,
+                      :root_dir,
+                      :sandbox_url,
+                      :status,
+                      :stderr,
+                      :stdout,
+                      :uri
 
         def self.ohai
           # ohai takes a while, so only ever run it once.
@@ -58,6 +78,14 @@ module ::Cuken
             c.ohai = ohai
             c
           end
+        end
+
+        def root_dir
+         @root_dir ||= Pathname.getwd
+        end
+
+        def config_file
+          @config_file ||= (chef.root_dir + '/.chef/knife.rb')
         end
 
         def make_admin

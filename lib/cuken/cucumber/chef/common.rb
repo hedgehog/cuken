@@ -29,6 +29,7 @@ Given /^the Chef client "([^"]*)" exists$/ do |name|
 end
 
 Given /^the Chef admin client "([^"]*) exists"$/ do |name|
+  chef.show_client(:name => name)
   chef.admin_client_name =  name
 end
 

@@ -14,6 +14,7 @@ module ::Cuken::Api::Chef
     describe "#create_client(data)" do
       it "should create a new named admin Client" do
         data = {:name => 'Im_new_here',
+                :config_file => '/some/knife.rb',
                 :admin => true,
                 :file => '/some/sekret.pem',
                 :no_editor => true}
@@ -32,6 +33,7 @@ module ::Cuken::Api::Chef
       end
       it "should create a new named non-admin Client" do
         data = {:name => 'Im_new_here',
+                :config_file => '/some/knife.rb',
                 :admin => false,
                 :file => '/some/sekret2.pem',
                 :no_editor => true}
@@ -52,18 +54,33 @@ module ::Cuken::Api::Chef
     describe "#show_client(data)" do
       it "should show a named Client" do
         data = {:name => 'Im_new_here',
+                :config_file => '/some/knife.rb',
                 :file => '/some/sekret.pem',
                 :no_editor => true}
         stub(Chef::Config).from_file.with(is_a(String))
         stub(Chef::ApiClient).load.with(data[:name]){['somthing: displayed']}
         FakeFS do
           chef.knife.show_client(data).should be_nil
+
         end
       end
     end
+#    describe "#check_client(data)" do
+#      it "should check a named Client" do
+#        data = {:name => 'Im_new_here',
+#                :file => '/some/sekret.pem',
+#                :no_editor => true}
+#        stub(Chef::Config).from_file.with(is_a(String))
+#        stub(Chef::ApiClient).load.with(data[:name]){['somthing: displayed']}
+#        FakeFS do
+#          chef.knife.check_client(data).should match /somthing: displayed/
+#         end
+#      end
+#    end
     describe "#delete_client(data)" do
       it "should delete a named Client" do
         data = {:name => 'Im_new_here',
+                :config_file => '/some/knife.rb',
                 :file => '/some/sekret.pem',
                 :no_editor => true}
         stub(Chef::Config).from_file.with(is_a(String))

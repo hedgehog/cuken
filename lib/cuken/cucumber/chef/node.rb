@@ -26,22 +26,22 @@ Given /^a validated Node$/ do
   client.node.run_list << "integration_setup"
 end
 
-Given /^a Node "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-###
-# When
-###
-When /^I add these Node Roles to the Run Lists:$/ do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
-end
-
-###
-# Then
-###
-Then /^the Chef nodes are:$/ do |partial_output|
-  run_knife_command('node list')
-  all_stdout.should include(partial_output)
-end
+#Given /^a Node "([^"]*)"$/ do |arg1|
+#  pending # express the regexp above with the code you wish you had
+#end
+#
+####
+## When
+####
+#When /^I add these Node Roles to the Run Lists:$/ do |table|
+#  # table is a Cucumber::Ast::Table
+#  pending # express the regexp above with the code you wish you had
+#end
+#
+####
+## Then
+####
+#Then /^the Chef nodes are:$/ do |partial_output|
+#  run_knife_command('node list')
+#  all_stdout.should include(partial_output)
+#end

@@ -19,19 +19,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+World(::Cuken::Api::Chef::Knife)
+
 Given /^the Knife file "([^"]*)"$/ do |path|
   in_current_dir do
     chef.client_knife_path = Pathname(path).expand_path.realdirpath
   end
 end
 
+When /^I delete the Chef admin client "([^"]*)"$/ do |client_name|
+  delete_client(client_name)
+end
+
 When /^I create the Chef admin client "([^"]*)"$/ do |client_name|
-  cmd = "client create monitor --no-editor --admin --file #{chef.root_dir}/.chef/#{client_name}.pem --config #{chef.root_dir}/.chef/knife.rb"
-  check = run_knife_command("client show #{client_name} --attribute admin")
-  client_name.should == '' if check['admin']
-  unless File.exist?("#{chef.root_dir}/.chef/#{client_name}.pem")
-    # run_knife_command(cmd)
-  end
+  create_client(client_name)
 end
 
 When /^I successfully run Knife's "([^"]*)"$/ do |cmd|
