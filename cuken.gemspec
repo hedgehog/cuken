@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cuken}
-  s.version = "0.1.4"
+  s.version = "0.1.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hedgehog"]
-  s.date = %q{2011-03-29}
+  s.date = %q{2011-04-17}
   s.description = %q{Reusable Cucumber steps and API for post-convergence system integration descriptions}
   s.email = %q{hedgehogshiatus@gmail.com}
   s.extra_rdoc_files = [
@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".relish",
     ".rspec",
     "Gemfile",
     "Gemfile.lock",
@@ -27,16 +28,19 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "cucumber.yml",
+    "cuken.gems",
     "cuken.gemspec",
     "examples/chef/features/support/env.rb",
     "features/.nav",
     "features/about.md",
     "features/chef_examples/cookbooks_cookbook.feature",
     "features/chef_examples/cookbooks_metadata.feature",
+    "features/chef_examples/cookbooks_remote_repo.feature",
     "features/chef_examples/cookbooks_repo.feature",
+    "features/chef_examples/knife_admin_client.feature",
+    "features/chef_examples/knife_client_create.feature",
     "features/chef_steps/common_steps.feature",
     "features/chef_steps/cookbook_steps.feature",
-    "features/chef_steps/knife_admin_client.feature",
     "features/chef_steps/knife_steps.feature",
     "features/chef_steps/node_steps.feature",
     "features/command_examples/commands.feature",
@@ -394,11 +398,15 @@ Gem::Specification.new do |s|
     "features/step_definitions/cuken_steps.rb",
     "features/support/env.rb",
     "lib/cuken.rb",
+    "lib/cuken/all.rb",
     "lib/cuken/api/chef.rb",
     "lib/cuken/api/chef/common.rb",
+    "lib/cuken/api/chef/knife.rb",
     "lib/cuken/api/cmd.rb",
     "lib/cuken/api/common.rb",
     "lib/cuken/api/file.rb",
+    "lib/cuken/api/rvm.rb",
+    "lib/cuken/api/ssh-forever.rb",
     "lib/cuken/api/ssh.rb",
     "lib/cuken/api/ssh/password.rb",
     "lib/cuken/chef.rb",
@@ -408,6 +416,7 @@ Gem::Specification.new do |s|
     "lib/cuken/cucumber/chef/common.rb",
     "lib/cuken/cucumber/chef/cookbook.rb",
     "lib/cuken/cucumber/chef/cookbook_steps.rb",
+    "lib/cuken/cucumber/chef/data_bag.rb",
     "lib/cuken/cucumber/chef/deploy_steps.rb",
     "lib/cuken/cucumber/chef/done_directory_steps.rb",
     "lib/cuken/cucumber/chef/done_file_steps.rb",
@@ -431,19 +440,27 @@ Gem::Specification.new do |s|
     "lib/cuken/cucumber/cmd.rb",
     "lib/cuken/cucumber/common.rb",
     "lib/cuken/cucumber/file.rb",
+    "lib/cuken/cucumber/rvm.rb",
     "lib/cuken/cucumber/ssh.rb",
     "lib/cuken/file.rb",
+    "lib/cuken/rvm.rb",
     "lib/cuken/ssh.rb",
+    "spec/api/knife_spec.rb",
+    "spec/api/rvm_spec.rb",
+    "spec/api/rvmrc_processor_spec.rb",
     "spec/cuken_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/hedgehog/cuken}
   s.licenses = ["Apache 2.0"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
+  s.rubygems_version = %q{1.7.2}
   s.summary = %q{Reusable Cucumber steps and API for post-convergence system integration descriptions}
   s.test_files = [
     "examples/chef/features/support/env.rb",
+    "spec/api/knife_spec.rb",
+    "spec/api/rvm_spec.rb",
+    "spec/api/rvmrc_processor_spec.rb",
     "spec/cuken_spec.rb",
     "spec/spec_helper.rb"
   ]
@@ -455,39 +472,48 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<aruba>, ["~> 0.3.5"])
       s.add_runtime_dependency(%q<chef>, ["~> 0.9.12"])
       s.add_runtime_dependency(%q<grit>, ["~> 2.4.1"])
+      s.add_runtime_dependency(%q<rvm>, ["~> 1.5.2"])
+      s.add_development_dependency(%q<rr>, ["~> 1.0.2"])
       s.add_development_dependency(%q<rspec>, ["~> 2.5.0"])
       s.add_development_dependency(%q<yard>, ["~> 0.6.0"])
       s.add_development_dependency(%q<cucumber>, [">= 0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.10"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0.11"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_development_dependency(%q<reek>, ["~> 1.2.8"])
       s.add_development_dependency(%q<roodi>, ["~> 2.1.0"])
+      s.add_development_dependency(%q<fakefs>, ["~> 0.3.1"])
     else
       s.add_dependency(%q<aruba>, ["~> 0.3.5"])
       s.add_dependency(%q<chef>, ["~> 0.9.12"])
       s.add_dependency(%q<grit>, ["~> 2.4.1"])
+      s.add_dependency(%q<rvm>, ["~> 1.5.2"])
+      s.add_dependency(%q<rr>, ["~> 1.0.2"])
       s.add_dependency(%q<rspec>, ["~> 2.5.0"])
       s.add_dependency(%q<yard>, ["~> 0.6.0"])
       s.add_dependency(%q<cucumber>, [">= 0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.10"])
+      s.add_dependency(%q<bundler>, ["~> 1.0.11"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<rcov>, [">= 0"])
       s.add_dependency(%q<reek>, ["~> 1.2.8"])
       s.add_dependency(%q<roodi>, ["~> 2.1.0"])
+      s.add_dependency(%q<fakefs>, ["~> 0.3.1"])
     end
   else
     s.add_dependency(%q<aruba>, ["~> 0.3.5"])
     s.add_dependency(%q<chef>, ["~> 0.9.12"])
     s.add_dependency(%q<grit>, ["~> 2.4.1"])
+    s.add_dependency(%q<rvm>, ["~> 1.5.2"])
+    s.add_dependency(%q<rr>, ["~> 1.0.2"])
     s.add_dependency(%q<rspec>, ["~> 2.5.0"])
     s.add_dependency(%q<yard>, ["~> 0.6.0"])
     s.add_dependency(%q<cucumber>, [">= 0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.10"])
+    s.add_dependency(%q<bundler>, ["~> 1.0.11"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<rcov>, [">= 0"])
     s.add_dependency(%q<reek>, ["~> 1.2.8"])
     s.add_dependency(%q<roodi>, ["~> 2.1.0"])
+    s.add_dependency(%q<fakefs>, ["~> 0.3.1"])
   end
 end
 
