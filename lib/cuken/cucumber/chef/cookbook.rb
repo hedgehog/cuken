@@ -116,25 +116,28 @@ end
 
 Given /^I clone the remote Cookbook repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, ckbk_path|
   if ckbk_path[/\/cookbooks\//]
-    chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.remote_cookbook_repo, brnch)
+    chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.remote_cookbook_repo, {'branch' => brnch})
   elsif ckbk_path[/\/site-cookbooks\//]
-    chef.local_site_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.remote_cookbook_repo, brnch)
+    chef.local_site_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.remote_cookbook_repo, {'branch' => brnch})
   end
 end
 
 Given /^I clone the Cookbook "([^"]*)" branch "([^"]*)" to "([^"]*)"$/ do |ckbk, brnch, ckbk_path|
   if ckbk_path[/\/cookbooks\//]
-    chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.cookbooks_uri + ckbk + '.git', brnch)
+    chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.cookbooks_uri + ckbk + '.git', {'branch' => brnch})
   elsif ckbk_path[/\/site-cookbooks\//]
-    chef.local_site_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.cookbooks_uri + ckbk + '.git', brnch)
+    chef.local_site_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.cookbooks_uri + ckbk + '.git', {'branch' => brnch})
   end
 end
 
 When /^I clone the Cookbooks:$/ do |table|
   # table is a Cucumber::Ast::Table
   table.hashes.each do |hsh|
-    #TODO: Accept cloning from tag and reference
-    local_repo = chef_clone_repo(hsh['destination'], true, chef.cookbooks_uri + hsh['cookbook'] + '.git', hsh['branch'])
+    src = {}
+    src['branch'] = hsh['branch'] if hsh['branch']
+    src['tag'] = hsh['tag'] if hsh['tag']
+    src['ref'] = hsh['ref'] if hsh['ref']
+    local_repo = chef_clone_repo(hsh['destination'], true, chef.cookbooks_uri + hsh['cookbook'] + '.git', src )
     Pathname(local_repo).exist?.should be_true
   end
 end

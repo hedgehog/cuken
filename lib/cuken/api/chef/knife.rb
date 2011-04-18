@@ -99,6 +99,56 @@ module ::Cuken
           end
         end
 
+        def ensure_node_presence(node_name, expect_presence = true)
+          nd = node_show(node_name)
+          unless nd.class.to_s == 'Chef::Node' && nd.name == node_name
+            node_create(node_name)
+          end
+          nd = node_show(node_name)
+          nd.should be_an_instance_of(::Chef::Node)
+          nd.name.should == node_name
+        end
+
+        def node_show(node_name, attr = :all)
+          Pathname(chef.config_file).exist?.should be_true
+          argv = ['node', 'show', node_name, '--no-editor', '--config', chef.config_file]
+          unless attr == :all
+            argv << '--attribute' << attr
+          end
+          if Pathname(chef.config_file).exist?
+            with_args *argv do
+              ::Chef::Application::Knife.new.run
+            end
+          else
+            # TODO: no config file error handling
+          end
+          ::Chef::Knife.cuken
+        end
+
+        def node_role_load(hsh)
+          argv = ['node', 'run_list', 'add', hsh[:node], "role[#{hsh[:role]}]", '--no-editor', '--config', chef.config_file]
+          if Pathname(chef.config_file).exist?
+            with_args *argv do
+              ::Chef::Application::Knife.new.run
+            end
+          else
+            # TODO: no config file error handling
+          end
+          ::Chef::Knife.cuken
+        end
+
+        def node_create(node_name)
+          argv = ['node', 'create', node_name, '--no-editor', '--config', chef.config_file]
+          if Pathname(chef.config_file).exist?
+            with_args *argv do
+              ::Chef::Application::Knife.new.run
+            end
+          else
+            # TODO: no config file error handling
+          end
+          ::Chef::Knife.cuken
+        end
+
       end # class knife
 
     end # module Chef

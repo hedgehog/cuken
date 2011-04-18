@@ -10,11 +10,11 @@ Feature: Listing Cookbook steps
   Scenario: Common Chef
     Then these steps are defined for "cuken/cucumber/chef/cookbook.rb":
       | step                                                                |
-      |a cookbook path "([^"]*)"                                            |
-      |a cookbooks path "([^"]*)"                                           |
-      |I successfully generate all cookbook metadata                        |
-      |I successfully generate cookbook "([^"]*)" metadata                  |
-      |the local cookbook "([^"]*)" exists                                  |
+      |a Cookbook path "([^"]*)"                                            |
+      |a Cookbooks path "([^"]*)"                                           |
+      |I successfully generate all Cookbook metadata                        |
+      |I successfully generate Cookbook "([^"]*)" metadata                  |
+      |the local Cookbook "([^"]*)" exists                                  |
 
   Scenario: Local and remote Cookbook repository commands
     Then these steps are defined for "cuken/cucumber/chef/cookbook.rb":

@@ -23,6 +23,7 @@ module ::Cuken
         end
       end
 
+
       def update_cookbook_paths(ckbk_path, cookbook)
         lp = Pathname(ckbk_path).expand_path.realdirpath
         lrp = lp + '.git'
@@ -40,20 +41,32 @@ module ::Cuken
         end
       end
 
-      def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, brnch = 'master')
+      def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, type = {'branch' => 'master'})
         in_current_dir do
           pth = Pathname(ckbk_path).expand_path
           gritty = ::Grit::Git.new(current_dir)
-          $stdout.puts gritty.inspect
-          clone_opts = {:quiet => false, :verbose => true, :progress => true, :branch => brnch}
+          announce_or_puts gritty.inspect
+          clone_opts = {:quiet => false, :verbose => true, :progress => true}
+          clone_opts[:branch] = type['branch'].empty? ? 'master' : type['branch']
+          type['tag'] = type['tag'].nil? ? '' : type['tag']
+          type['ref'] = type['ref'].nil? ? '' : type['ref']
           if pth.directory?
-            $stdout.puts "Pulling: #{repo} into #{pth}"
-            gritty.pull(clone_opts, repo, pth.to_s)
+            announce_or_puts "Pulling: #{repo} into #{pth}"
+            res = gritty.pull(clone_opts, repo, pth.to_s)
           else
-            $stdout.puts "Cloning: #{repo} into #{pth}"
+            announce_or_puts "Cloning: #{repo} into #{pth}"
             res = gritty.clone(clone_opts, repo, pth.to_s)
           end
           update_cookbook_paths(pth, cookbook)
+          unless chef.cookbooks_paths.empty?   # is empty after cloning default chef-repo
+            grotty = ::Grit::Git.new((pth + '.git').to_s)
+            grotty.checkout( { :b => true }, clone_opts[:branch] )
+            if !type['tag'].empty? || !type['ref'].empty?
+              grotty.checkout( { :B => true }, 'cuken', type['tag']||type['ref'] )
+            else
+              grotty.checkout( { :B => true }, 'cuken' )
+            end
+          end
           pth
         end
       end

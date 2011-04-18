@@ -11,7 +11,7 @@ Feature: Examining files
 
   @steps
   Scenario: File exists
-    Given the empty file "foo.file"
+    Given the file "foo.file" contains nothing
      Then the file "foo.file" exists
 
   @steps
@@ -20,7 +20,7 @@ Feature: Examining files
 
   @steps
   Scenario: Atime
-    Given the empty file "foo.file"
+    Given the file "foo.file" contains nothing
       And we record the a-mtime of "foo.file"
       And I run `sleep 1`
       And I run `touch -a foo.file`

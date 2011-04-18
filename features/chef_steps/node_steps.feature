@@ -9,6 +9,7 @@ Feature: Listing Node steps
 
   Scenario: Common Node
     Then these steps are defined for "cuken/cucumber/chef/node.rb":
-      | step                                                                |
-      |a validated node  |
-      |the Chef nodes are:    |
+      | step                      |
+      | a validated Node          |
+      | the Node "([^"]*)" exists |
+      | the Nodes are:            |

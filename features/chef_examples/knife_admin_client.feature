@@ -72,8 +72,11 @@ Feature: Reusable Chef Knife steps
 
   Scenario: Knife steps with path to knife.rb created earlier
      Given the Knife file "foo/bar/.chef/knife.rb"
-      When I successfully run Knife's "node list"
-      When the output should contain:
+       And Explanation: to check a list of Chef nodes
+      When the Nodes are:
+      | node |
+      |      |
+      Then the output should contain:
      """
      DEBUG: Signing the request as bobo-admin
      DEBUG: Sending HTTP Request via GET to localhost:4000/nodes
@@ -83,7 +86,7 @@ Feature: Reusable Chef Knife steps
   Scenario: Upload a non-Git managed cookbook with path to knife.rb created earlier
     Given the Knife file "foo/bar/.chef/knife.rb"
       And I cd to "./../../"
-      And a cookbook path "features/data/cookbooks_not_uploaded_at_feature_start"
+      And a Cookbook path "features/data/cookbooks_not_uploaded_at_feature_start"
      When I successfully run Knife's "cookbook upload version_updated"
      Then the output should contain:
     """
@@ -94,7 +97,7 @@ Feature: Reusable Chef Knife steps
   Scenario: Upload a Git managed cookbook with path to knife.rb created earlier
     Given the Knife file "foo/bar/.chef/knife.rb"
       And I cd to "./../../"
-      And a cookbook path "features/data/repositories/cookbooks_not_uploaded_at_feature_start/version_updated"
+      And a Cookbook path "features/data/repositories/cookbooks_not_uploaded_at_feature_start/version_updated"
      When I successfully run Knife's "cookbook upload version_updated"
      Then the output should contain "INFO: Uploading files"
       And the output should contain "DEBUG: Committing sandbox"
@@ -132,7 +135,7 @@ Feature: Reusable Chef Knife steps
   Scenario: Auto upload and Delete a cookbook with path to knife.rb created earlier
     Given the Knife file "foo/bar/.chef/knife.rb"
       And I cd to "./../../"
-      And a cookbooks path "features/data/repositories/cookbooks_not_uploaded_at_feature_start"
+      And a Cookbooks path "features/data/repositories/cookbooks_not_uploaded_at_feature_start"
      When I successfully run Knife's "cookbook upload version_updated"
       And I interactively run Knife's "cookbook delete version_updated 2.0.0"
       And I type "Y"

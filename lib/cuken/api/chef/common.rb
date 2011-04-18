@@ -49,7 +49,7 @@ module ::Cuken
         end
 
         def chef
-          @remote_chef_repo ||= "git://github.com/opscode/chef-repo.git"
+          @remote_chef_repo ||= "git://github.com/cookbooks/chef-repo.git"
           @knife_debug = true if @knife_debug.nil?
           @cookbooks_paths ||= []
           @cookbook_paths ||= []

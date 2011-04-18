@@ -20,19 +20,20 @@ Feature: Cookbook Metadata
       cookbook_path ["#{current_dir}/../cookbooks","#{current_dir}/../site-cookbooks"]
 
       """
-      And the remote Cookbook repository "features/data/repositories/cookbooks/hosts/.git"
+      And Explanation: Next we step up two levels to escape Aruba's working folder
+      And the remote Cookbook repository "./../../features/data/repositories/cookbooks/hosts/.git"
       And I clone the remote Cookbook repository branch "master" to "ckbk/scratch/myapp/cookbooks/hosts"
       And the local Cookbook repository exists
 
   Scenario: Generate metadata for all cookbooks
-     When I successfully generate all cookbook metadata
+     When I successfully generate all Cookbook metadata
       And the output should contain "DEBUG: Generated "
       And the output should not contain "DEBUG: No "
     Then the file "ckbk/scratch/myapp/cookbooks/hosts/metadata.json" exists
 
   Scenario: Generate metadata for a specific cookbook
      When we record the a-mtime of "ckbk/scratch/myapp/cookbooks/hosts/metadata.json"
-      And I successfully generate cookbook "hosts" metadata
+      And I successfully generate Cookbook "hosts" metadata
       And the output should contain "DEBUG: Generated "
       And the output should not contain "DEBUG: No "
     Then the file "ckbk/scratch/myapp/cookbooks/hosts/metadata.json" exists

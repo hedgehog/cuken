@@ -12,14 +12,14 @@ GEM
       erubis
       extlib
       highline
-      json (>= 1.4.4, <= 1.4.6)
+      json (<= 1.4.6, >= 1.4.4)
       mixlib-authentication (>= 1.1.0)
       mixlib-cli (>= 1.1.0)
       mixlib-config (>= 1.1.2)
       mixlib-log (>= 1.2.0)
       moneta
       ohai (>= 0.5.7)
-      rest-client (>= 1.0.4, < 1.7.0)
+      rest-client (< 1.7.0, >= 1.0.4)
       uuidtools
     childprocess (0.1.8)
       ffi (~> 1.0.6)
@@ -60,6 +60,7 @@ GEM
       mixlib-log
       systemu
       yajl-ruby
+    open4 (1.0.1)
     rake (0.8.7)
     rcov (0.9.9)
     reek (1.2.8)
@@ -96,13 +97,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aruba (~> 0.3.5)
+  aruba (~> 0.3.6)
   bundler (~> 1.0.11)
   chef (~> 0.9.12)
   cucumber
   fakefs (~> 0.3.1)
   grit (~> 2.4.1)
   jeweler (~> 1.5.2)
+  open4
   rcov
   reek (~> 1.2.8)
   roodi (~> 2.1.0)

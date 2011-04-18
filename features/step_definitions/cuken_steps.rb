@@ -8,7 +8,7 @@ end
 
 Then /^these steps are defined for "([^\"]*)":$/ do |file, table|
   rsc = ::Cucumber::Runtime::SupportCode.new 'ui', :autoload_code_paths => 'lib/cuken/cucumber'
-  rsc.load_files! ["lib/#{file}", "#{ENV['GEM_HOME']}/gems/aruba-0.3.5/lib/aruba/cucumber.rb"]
+  rsc.load_files! ["lib/#{file}", "#{ENV['GEM_HOME']}/gems/aruba-0.3.6/lib/aruba/cucumber.rb"]
   sd_array = rsc.step_definitions
   #sd_array.each{|sd| puts sd.regexp_source}
   table.hashes.each do |hsh|

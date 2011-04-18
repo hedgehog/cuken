@@ -26,6 +26,27 @@ Given /^a validated Node$/ do
   client.node.run_list << "integration_setup"
 end
 
+Given /^the Node "([^"]*)" exists$/ do |node_name|
+  ensure_node_presence(node_name)
+end
+
+###
+# When
+###
+When /^I add these Roles to the Nodes:$/ do |table|
+  table.hashes.each do |hsh|
+    node_role_load(hsh)
+  end
+end
+
+###
+# Then
+###
+Then /^the Nodes are:$/ do |partial_output|
+  run_knife_command('node list')
+  all_stdout.should include(partial_output)
+end
+
 #Given /^a Node "([^"]*)"$/ do |arg1|
 #  pending # express the regexp above with the code you wish you had
 #end

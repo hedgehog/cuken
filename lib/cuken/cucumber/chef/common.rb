@@ -28,7 +28,7 @@ Given /^the Chef client "([^"]*)" exists$/ do |name|
   chef.client_name =  name
 end
 
-Given /^the Chef admin client "([^"]*) exists"$/ do |name|
+Given /^the Chef admin client "([^"]*)" exists$/ do |name|
   chef.show_client(:name => name)
   chef.admin_client_name =  name
 end
@@ -61,7 +61,7 @@ Then /^the local Chef repository exists$/ do
 end
 
 Given /^I clone the remote Chef repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, path|
-  chef.local_chef_repo = chef_clone_repo(path, false, chef.remote_chef_repo, brnch)
+  chef.local_chef_repo = chef_clone_repo(path, false, chef.remote_chef_repo, {'branch' => brnch})
   chef.local_chef_repo.exist?.should be_true
 end
 
