@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cuken}
-  s.version = "0.1.8"
+  s.version = "0.1.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hedgehog"]
-  s.date = %q{2011-04-18}
+  s.date = %q{2011-04-21}
   s.description = %q{Reusable Cucumber steps and API for post-convergence system integration descriptions}
   s.email = %q{hedgehogshiatus@gmail.com}
   s.extra_rdoc_files = [
@@ -470,10 +470,12 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<aruba>, ["~> 0.3.6"])
-      s.add_runtime_dependency(%q<chef>, ["~> 0.9.12"])
+      s.add_runtime_dependency(%q<cucumber>, [">= 0"])
+      s.add_runtime_dependency(%q<chef>, ["~> 0.10.0.rc.0"])
       s.add_runtime_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_runtime_dependency(%q<rvm>, ["~> 1.5.2"])
       s.add_runtime_dependency(%q<open4>, [">= 0"])
+      s.add_runtime_dependency(%q<vagrant>, ["~> 0.7.2"])
       s.add_development_dependency(%q<rr>, ["~> 1.0.2"])
       s.add_development_dependency(%q<rspec>, ["~> 2.5.0"])
       s.add_development_dependency(%q<yard>, ["~> 0.6.0"])
@@ -486,10 +488,12 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<fakefs>, ["~> 0.3.1"])
     else
       s.add_dependency(%q<aruba>, ["~> 0.3.6"])
-      s.add_dependency(%q<chef>, ["~> 0.9.12"])
+      s.add_dependency(%q<cucumber>, [">= 0"])
+      s.add_dependency(%q<chef>, ["~> 0.10.0.rc.0"])
       s.add_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_dependency(%q<rvm>, ["~> 1.5.2"])
       s.add_dependency(%q<open4>, [">= 0"])
+      s.add_dependency(%q<vagrant>, ["~> 0.7.2"])
       s.add_dependency(%q<rr>, ["~> 1.0.2"])
       s.add_dependency(%q<rspec>, ["~> 2.5.0"])
       s.add_dependency(%q<yard>, ["~> 0.6.0"])
@@ -503,10 +507,12 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<aruba>, ["~> 0.3.6"])
-    s.add_dependency(%q<chef>, ["~> 0.9.12"])
+    s.add_dependency(%q<cucumber>, [">= 0"])
+    s.add_dependency(%q<chef>, ["~> 0.10.0.rc.0"])
     s.add_dependency(%q<grit>, ["~> 2.4.1"])
     s.add_dependency(%q<rvm>, ["~> 1.5.2"])
     s.add_dependency(%q<open4>, [">= 0"])
+    s.add_dependency(%q<vagrant>, ["~> 0.7.2"])
     s.add_dependency(%q<rr>, ["~> 1.0.2"])
     s.add_dependency(%q<rspec>, ["~> 2.5.0"])
     s.add_dependency(%q<yard>, ["~> 0.6.0"])
