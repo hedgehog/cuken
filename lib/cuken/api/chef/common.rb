@@ -10,10 +10,9 @@ module ::Cuken
                       :api_response,
                       :exception,
                       :chef_args,
-                      :client_knife_path,
                       :client_name,
                       :client_private_key_path,
-                      :config_file,
+                      :knife_config_file,
                       :cookbook,
                       :cookbook_paths,
                       :cookbooks_paths,
@@ -84,8 +83,8 @@ module ::Cuken
          @root_dir ||= Pathname.getwd
         end
 
-        def config_file
-          @config_file ||= (chef.root_dir + '/.chef/knife.rb')
+        def knife_config_file
+          @knife_config_file ||= (chef.root_dir + '/.chef/knife.rb')
         end
 
         def make_admin

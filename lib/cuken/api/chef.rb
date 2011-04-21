@@ -82,12 +82,12 @@ module ::Cuken
         end
         ckbk_pth_opt = false if no_ckbk_pth_opt.is_a? TrueClass
         in_current_dir do
-          unless chef.client_knife_path
-            chef.client_knife_path = Pathname(chef.local_chef_repo).ascend { |d| h=d+'.chef'+'knife.rb'; break h if h.file? }
+          unless chef.knife_config_file
+            chef.knife_config_file = Pathname(chef.local_chef_repo).ascend { |d| h=d+'.chef'+'knife.rb'; break h if h.file? }
           end
-          raise(RuntimeError, "chef.client_knife_path is required", caller) unless chef.client_knife_path
+          raise(RuntimeError, "chef.knife_config_file is required", caller) unless chef.knife_config_file
         end
-        cmd += " -c #{chef.client_knife_path.expand_path.to_s}" if chef.client_knife_path.expand_path.exist?
+        cmd += " -c #{chef.knife_config_file.expand_path.to_s}" if chef.knife_config_file.expand_path.exist?
         cmd += " -o #{ckbk_pth}" if ckbk_pth_opt
         cmd += " --log_level debug" if chef.knife_debug
         chef.root_dir ||= current_dir

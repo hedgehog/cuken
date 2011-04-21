@@ -23,7 +23,7 @@ World(::Cuken::Api::Chef::Knife)
 
 Given /^the Knife file "([^"]*)"$/ do |path|
   in_current_dir do
-    chef.client_knife_path = Pathname(path).expand_path.realdirpath
+    chef.knife_config_file = Pathname(path).expand_path.realdirpath
   end
 end
 

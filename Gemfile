@@ -4,10 +4,12 @@ source "http://rubygems.org"
 #   gem "activesupport", ">= 2.3.5"
 group :default do
   gem 'aruba', "~> 0.3.6"
-  gem 'chef', "~>0.9.12"
+  gem "cucumber", ">= 0"
+  gem 'chef', "~>0.10.0.rc.0"
   gem 'grit', "~>2.4.1"
   gem 'rvm', "~>1.5.2"
   gem 'open4'
+  gem "vagrant", "~>0.7.2"
 end
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

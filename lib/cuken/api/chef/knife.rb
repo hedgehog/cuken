@@ -62,7 +62,7 @@ module ::Cuken
                   :admin => true,
                   :file => chef.client_private_key_path,
                   :no_editor => true,
-                  :config_file => chef.config_file}
+                  :config_file => chef.knife_config_file}
           argv = ['client', 'create', data[:name], '--file', data[:file], '--config', data[:config_file],'--no-editor']
           argv << '--admin' if data[:admin]
           unless Pathname(chef.client_private_key_path).exist?
@@ -77,7 +77,7 @@ module ::Cuken
         def show_client(client_name)
           chef.client_private_key_path = chef.root_dir + "/.chef/#{client_name}.pem"
           data = {:name => client_name,
-                  :config_file => chef.config_file}
+                  :config_file => chef.knife_config_file}
           argv = ['client', 'show', data[:name], '--config', data[:config_file],'--no-editor']
           argv << '--admin' if data[:admin]
           with_args *argv do
@@ -92,7 +92,7 @@ module ::Cuken
                   :no_editor => true,
                   :yes => true,
                   :print_after => true,
-                  :config_file => chef.config_file}
+                  :config_file => chef.knife_config_file}
           argv = ['client', 'delete', data[:name], '--no-editor', '--yes' ]
           with_args *argv do
             ::Chef::Application::Knife.new.run
@@ -110,12 +110,12 @@ module ::Cuken
         end
 
         def node_show(node_name, attr = :all)
-          Pathname(chef.config_file).exist?.should be_true
-          argv = ['node', 'show', node_name, '--no-editor', '--config', chef.config_file]
+          Pathname(chef.knife_config_file).exist?.should be_true
+          argv = ['node', 'show', node_name, '--no-editor', '--config', chef.knife_config_file]
           unless attr == :all
             argv << '--attribute' << attr
           end
-          if Pathname(chef.config_file).exist?
+          if Pathname(chef.knife_config_file).exist?
             with_args *argv do
               ::Chef::Application::Knife.new.run
             end
@@ -126,8 +126,8 @@ module ::Cuken
         end
 
         def node_role_load(hsh)
-          argv = ['node', 'run_list', 'add', hsh[:node], "role[#{hsh[:role]}]", '--no-editor', '--config', chef.config_file]
-          if Pathname(chef.config_file).exist?
+          argv = ['node', 'run_list', 'add', hsh[:node], "role[#{hsh[:role]}]", '--no-editor', '--config', chef.knife_config_file]
+          if Pathname(chef.knife_config_file).exist?
             with_args *argv do
               ::Chef::Application::Knife.new.run
             end
@@ -138,8 +138,8 @@ module ::Cuken
         end
 
         def node_create(node_name)
-          argv = ['node', 'create', node_name, '--no-editor', '--config', chef.config_file]
-          if Pathname(chef.config_file).exist?
+          argv = ['node', 'create', node_name, '--no-editor', '--config', chef.knife_config_file]
+          if Pathname(chef.knife_config_file).exist?
             with_args *argv do
               ::Chef::Application::Knife.new.run
             end
