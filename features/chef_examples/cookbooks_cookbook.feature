@@ -1,4 +1,4 @@
-@announce @work_in_cwd @cookbooks @cookbook_validity
+@announce @cookbooks @cookbook_validity
 Feature: Cookbook Validity
   In order to understand cookbooks without evaluating them
   As an Administrator
@@ -42,11 +42,22 @@ Feature: Cookbook Validity
   Scenario: Clone multiple Site-Cookbooks from a Cookbooks URI
     Given the remote Cookbooks URI "git://github.com/cookbooks/"
      When I clone the Cookbooks:
-     |cookbook | branch | destination                         |
-     | hosts   | master | ckbk/scratch/myapp/site-cookbooks/hosts4 |
-     | users   | master | ckbk/scratch/myapp/site-cookbooks/users2 |
+          |cookbook | branch | destination                         |
+          | hosts   | master | ckbk/scratch/myapp/site-cookbooks/hosts4 |
+          | users   | master | ckbk/scratch/myapp/site-cookbooks/users2 |
       And these local Site-Cookbooks exist:
-     |cookbook |
-     | hosts4  |
-     | users2  |
+          |cookbook |
+          | hosts4  |
+          | users2  |
+
+  Scenario: Download Site-Cookbooks from a Cookbooks URI
+    Given the remote Cookbooks URI "git://github.com/cookbooks/"
+     When I clone the Cookbooks:
+          | cookbook | branch  | destination                   |
+          | users    | 37s     | ckbk/scratch/myapp/cookbooks/users       |
+          | users    | 37s     | ckbk/scratch/myapp/site-cookbooks/users2 |
+     Then these local Cookbooks exist:
+          | cookbook  | site-cookbook  |
+          | users     |                |
+          |           | users2         |
 

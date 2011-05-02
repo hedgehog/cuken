@@ -1,8 +1,10 @@
 require 'aruba/api' unless defined? Aruba::Api
 require 'chef'  unless defined? Chef
 require 'grit' unless defined? Grit
+require 'vagrant' unless defined? Vagrant
 require 'cuken/api/common'
 require 'cuken/api/chef/common'
+require 'cuken/api/chef/cookbook'
 require 'cuken/api/chef/knife'
 
 module ::Cuken
@@ -13,13 +15,13 @@ module ::Cuken
 
       def append_cookbook_path(cookbook, lp, lrp)
         if lrp.exist?
-          announce_or_puts(%{# Adding cookbook path: #{lp}}) if @announce_env && cookbook
+          announce_or_puts(%{Adding cookbook path: #{lp}}) if @announce_env && cookbook
           chef.cookbook_paths << lp if cookbook
-          announce_or_puts(%{# Adding cookbooks path: #{lp.parent}}) if @announce_env && cookbook
+          announce_or_puts(%{Adding cookbooks path: #{lp.parent}}) if @announce_env && cookbook
           chef.cookbooks_paths << lp.parent if cookbook
           lrp
         else
-          announce_or_puts(%{# WARNING: cookbook(s) path: #{lp} is not a Git repository.}) if @announce_env && cookbook
+          announce_or_puts(%{WARNING: cookbook(s) path: #{lp} is not a Git repository.}) if @announce_env && cookbook
         end
       end
 
@@ -36,7 +38,7 @@ module ::Cuken
           end
           chef.cookbooks_paths.uniq!
           if chef.cookbooks_paths.empty?
-            announce_or_puts(%{# WARNING: cookbooks path: #{lp} does not contain any Git repositories.}) if @announce_env
+            announce_or_puts(%{WARNING: cookbooks path: #{lp} does not contain any Git repositories.}) if @announce_env
           end
         end
       end

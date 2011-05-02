@@ -14,6 +14,15 @@ For example usage see the [Cucumber-Nagios][0] gem.
 This library structure is modeled on Aruba, and infact
 largely uses Aruba's steps.
 
+## Related projects
+Cucumber steps for verifing metrics from NewRelic's API, [here][1]
+Cucumber steps for verifying Scout metrics, [here][2]
+A library for using mailinator for testing email from rspec and cucumber, [here][3]
+
+[1]: https://github.com/jnewland/cucumber-newrelic
+[2]: https://github.com/jnewland/cucumber-scout/
+[3]: https://github.com/technicalpickles/mailinator-spec
+
 ## Contributing to cuken
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet

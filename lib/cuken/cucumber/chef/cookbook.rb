@@ -22,6 +22,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+World(::Cuken::Api::Chef::Cookbook)
 
 Given /^the remote Cookbook repository "([^"]*)"$/ do |ckbk_repo|
   in_current_dir do
@@ -90,15 +91,7 @@ Then /^the local Site\-Cookbook "([^"]*)" exists$/ do |ckbk|
 end
 
 And /^these local Cookbooks exist:$/ do |table|
-  # table is a Cucumber::Ast::Table
-  table.hashes.each do |hsh|
-    chef.cookbook_paths.each do |pn|
-      curr_ckbk = pn.basename.to_s
-      if curr_ckbk == hsh['cookbook']
-        break true if curr_ckbk.should == hsh['cookbook']
-      end
-    end
-  end
+  check_cookbooks_table_presence(table)
 end
 
 And /^these local Site\-Cookbooks exist:$/ do |table|
@@ -131,7 +124,6 @@ Given /^I clone the Cookbook "([^"]*)" branch "([^"]*)" to "([^"]*)"$/ do |ckbk,
 end
 
 When /^I clone the Cookbooks:$/ do |table|
-  # table is a Cucumber::Ast::Table
   table.hashes.each do |hsh|
     src = {}
     src['branch'] = hsh['branch'] if hsh['branch']

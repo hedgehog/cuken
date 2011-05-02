@@ -18,15 +18,53 @@ If you have ideas to clarify or improve any of these cucumber features,
 please submit an [issue][9] or [pull request][8].
 
 ## The Chef JSON Issue
-As of 0.9.12 thru Chef 0.10 beta (latest at the time of writing),
-Chef restricts the JSON gem to versions >= 1.4.4
-and <= 1.4.6. Vagrant requires the JSON gem be version >= 1.5.1.
-Unitl Chef updates it JSON version or moves to somthing else, we
-have to workaround this.  This means compromise or introduce conditons.
-Rather than compromise, I've chosen the condition that RVM be required,
-and that you have a gemset named `vargant`, wiht just vagrant installed.
-That's it.
-Hopefully that wasn't too painful.
+Due to several JSON gem conflicts between various gems, Cuken is only intended
+to work with the 0.10 series of Chef.  Of course you are free to work whatever
+magic you wish.
+
+## Opinons
+Virtual machines are [Vagrant][11] VM's.
+Vagrant VM's are all named.
+Configuration management and system integration is done with [Opscode's Chef][12].
+Chef Cookbooks are sourced from the the [Cookbooks account][13] on Github.
+
+## Conventions
+Rather than repeatedly refer to Chef and Vagrant in step definitions, where it is unambiguous,
+we simply treat the item or attribute as the pro-noun, and capitalize it.
+Examples:
+
+    Given the VM "chef" is not running
+    Given I create the Data Bag "user"
+
+Aruba will timeout if a command takes too long.  A convention is to tag Features/Scenarios
+according to the size of the timeout threshold:
+
+    no tag:  3 seconds (Aruba default)
+    @slow
+    @glacial
+    @cosmic
+
+Aruba will timeout if IO takes too long.  This affects interactive SSH connections.
+
+    no tag:      0.1 seconds (Aruba default)
+    @ssh_local
+    @ssh_remote
+    @ssh_pigeon
+
+The default before blocks are in some of the Cucumber files. Example:
+
+    ./lib/cuken/cucumber/chef.rb
+
+If you need to change a default, add to your features/support/env.rb:
+
+    Before do
+      @aruba_timeout_seconds.nil? || @aruba_timeout_seconds < 3 ? @aruba_timeout_seconds = 3 : @aruba_timeout_seconds
+    end
+
+    Before('@glacial') do
+      @aruba_timeout_seconds.nil? || @aruba_timeout_seconds < 3600 ? @aruba_timeout_seconds = 3600 : @aruba_timeout_seconds
+    end
+
 
 ## Step contributions:
 - Ideally the API methods should be covered by RSpec (I've been slack
@@ -52,3 +90,6 @@ steps to port).
 [8]: http://help.github.com/pull-requests
 [9]: https://github.com/hedgehog/cuken/issues
 [10]: http://groups.google.com/group/agile-system-administration/msg/4128b2de36ccf899
+[11]: http://vagrantup.com/
+[12]: http://wiki.opscode.com/display/chef/Home
+[13]: https://github.com/cookbooks/

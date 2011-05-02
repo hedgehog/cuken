@@ -8,10 +8,6 @@ Before do
   ::Grit::Git.git_timeout = 3610
 end
 
-#Before('@work_in_cwd') do
-#  @dirs = [Pathname.getwd.expand_path.realpath.to_s]
-#end
-
 require 'cuken/cucumber/chef/common'
 require 'cuken/cucumber/chef/knife'
 require 'cuken/cucumber/chef/cookbook'
