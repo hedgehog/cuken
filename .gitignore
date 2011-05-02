@@ -17,6 +17,9 @@ pkg
 # jeweler generated
 *.gem
 
+# JetBrains generated
+.idea
+
 # Feature file generated
 ckbk
 
