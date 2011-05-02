@@ -43,6 +43,12 @@ module ::Cuken
         end
       end
 
+      def clone_pull_error_check(repo, res)
+        if res[/Could not find Repository /]
+          raise RuntimeError, "Could not find Cookbook in Repository #{repo}", caller
+        end
+      end
+
       def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, type = {'branch' => 'master'})
         in_current_dir do
           pth = Pathname(ckbk_path).expand_path
@@ -59,6 +65,7 @@ module ::Cuken
             announce_or_puts "Cloning: #{repo} into #{pth}"
             res = gritty.clone(clone_opts, repo, pth.to_s)
           end
+          clone_pull_error_check(repo, res) if res
           update_cookbook_paths(pth, cookbook)
           unless chef.cookbooks_paths.empty?   # is empty after cloning default chef-repo
             grotty = ::Grit::Git.new((pth + '.git').to_s)
