@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cuken}
-  s.version = "0.1.9"
+  s.version = "0.1.10"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hedgehog"]
-  s.date = %q{2011-04-21}
+  s.date = %q{2011-05-02}
   s.description = %q{Reusable Cucumber steps and API for post-convergence system integration descriptions}
   s.email = %q{hedgehogshiatus@gmail.com}
   s.extra_rdoc_files = [
@@ -401,6 +401,7 @@ Gem::Specification.new do |s|
     "lib/cuken/all.rb",
     "lib/cuken/api/chef.rb",
     "lib/cuken/api/chef/common.rb",
+    "lib/cuken/api/chef/cookbook.rb",
     "lib/cuken/api/chef/knife.rb",
     "lib/cuken/api/cmd.rb",
     "lib/cuken/api/common.rb",
