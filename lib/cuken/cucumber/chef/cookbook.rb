@@ -106,6 +106,10 @@ And /^these local Cookbooks exist:$/ do |table|
   check_cookbook_table_presence(table)
 end
 
+And /^these local Cookbooks do not exist:$/ do |table|
+  check_cookbook_table_presence(table, false)
+end
+
 And /^these local Site\-Cookbooks exist:$/ do |table|
   # table is a Cucumber::Ast::Table
   ckbk_path = 'site-cookbook'
