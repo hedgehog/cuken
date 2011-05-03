@@ -7,9 +7,10 @@ Feature: Listing Node steps
   Background:
     Given that "cuken/chef" has been required
 
-  Scenario: Common Node
+  Scenario: Common Node steps
     Then these steps are defined for "cuken/cucumber/chef/node.rb":
-      | step                      |
-      | a validated Node          |
-      | the Node "([^"]*)" exists |
-      | the Nodes are:            |
+      | step                           |
+      |a validated Node                |
+      |I add these Roles to the Nodes: |
+      |the Node "([^"]*)" exists       |
+      |the Nodes are:                  |

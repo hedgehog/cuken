@@ -24,6 +24,22 @@ Given /^the Chef server URI "([^"]*)"$/ do |uri|
   chef.uri = uri
 end
 
+When /^I create the Chef admin client "([^"]*)"$/ do |client_name|
+  create_client(client_name, true)
+end
+
+When /^I create the Chef client "([^"]*)"$/ do |client_name|
+  create_client(client_name)
+end
+
+When /^I delete the Chef admin client "([^"]*)"$/ do |client_name|
+  delete_client(client_name)
+end
+
+When /^I delete the Chef client "([^"]*)"$/ do |client_name|
+  delete_client(client_name)
+end
+
 Given /^the Chef client "([^"]*)" exists$/ do |name|
   chef.client_name =  name
 end

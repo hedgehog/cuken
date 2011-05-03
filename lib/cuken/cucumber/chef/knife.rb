@@ -27,14 +27,6 @@ Given /^the Knife file "([^"]*)"$/ do |path|
   end
 end
 
-When /^I delete the Chef admin client "([^"]*)"$/ do |client_name|
-  delete_client(client_name)
-end
-
-When /^I create the Chef admin client "([^"]*)"$/ do |client_name|
-  create_client(client_name)
-end
-
 When /^I successfully run Knife's "([^"]*)"$/ do |cmd|
   run_knife_command(cmd, false)
 end

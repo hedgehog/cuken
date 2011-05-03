@@ -68,6 +68,7 @@ module ::Cuken
           'knife '
         end
 
+        # TODO: Once a method is spec'd refactor to use this and knife_config_file_error_handling
         def run_knife(argv=[])
           argv << '--config' << chef.knife_config_file.to_s
           with_args *argv do
@@ -134,6 +135,37 @@ module ::Cuken
         def check_chef_root_presence(directory, expect_presence = true)
           chef.root_dir = directory
           check_placed_directory_presence([chef.root_dir], expect_presence)
+        end
+
+        def create_client(client_name, admin = false)
+          chef.client_private_key_path = chef.root_dir + "/.chef/#{client_name}.pem"
+          data = {:name => client_name,
+                  :file => chef.client_private_key_path,
+                  :no_editor => true,
+                  :config_file => chef.knife_config_file}
+          argv = ['client', 'create', data[:name], '--file', data[:file], '--config', data[:config_file],'--no-editor']
+          argv << '--admin' if admin
+          unless Pathname(chef.client_private_key_path).exist?
+            with_args *argv do
+              ::Chef::Application::Knife.new.run
+            end
+          else
+            #TODO: Verify client exists on the Chef server, and has matching public key.
+          end
+        end
+
+        def delete_client(client_name)
+          chef.client_private_key_path = chef.root_dir + "/.chef/#{client_name}.pem"
+          data = {:name => client_name,
+                  :file => chef.client_private_key_path,
+                  :no_editor => true,
+                  :yes => true,
+                  :print_after => true,
+                  :config_file => chef.knife_config_file}
+          argv = ['client', 'delete', data[:name], '--no-editor', '--yes' ]
+          with_args *argv do
+            ::Chef::Application::Knife.new.run
+          end
         end
 
       end
