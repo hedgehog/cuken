@@ -42,7 +42,7 @@ Feature: Zenoss Monitoring
        And a Cookbooks path "/tmp/monitor/cookbooks/"
        And a Cookbooks path "/tmp/monitor/site-cookbooks/"
        And the Knife file "/tmp/monitor/.chef/knife.rb"
-      When I load the Cookbook Roles:
+      When I load the Roles:
            | site-cookbook | role                            |
            | zenoss        | Class_Server-SSH-Linux.rb       |
            | zenoss        | Class_Server-SSH-Linux-MySQL.rb |
