@@ -5,7 +5,7 @@ source "http://rubygems.org"
 group :default do
   gem 'aruba', "~> 0.3.6"
   gem "cucumber", ">= 0"
-  gem 'chef', "~>0.10.0.rc.0"
+  gem 'chef', "~>0.10.0"
   gem 'grit', "~>2.4.1"
   gem 'rvm', "~>1.5.2"
   gem 'open4'

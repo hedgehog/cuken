@@ -14,7 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-load 'aruba/cucumber.rb' unless defined? ::Aruba
+Before('@ssh_local') do
+  @aruba_io_wait_seconds.nil? || @aruba_io_wait_seconds < 0.3 ? @aruba_io_wait_seconds = 0.3 : @aruba_io_wait_seconds
+end
 
-World(::Cuken::Api::Rvm)
+Before('@ssh_remote') do
+  @aruba_io_wait_seconds.nil? || @aruba_io_wait_seconds < 1 ? @aruba_io_wait_seconds = 1 : @aruba_io_wait_seconds
+end
 
+Before('@ssh_pigeon') do
+  @aruba_io_wait_seconds.nil? || @aruba_io_wait_seconds < 3 ? @aruba_io_wait_seconds = 3 : @aruba_io_wait_seconds
+end
+
+Before('@ssh_dodo') do
+  @aruba_io_wait_seconds.nil? || @aruba_io_wait_seconds < 10 ? @aruba_io_wait_seconds = 10 : @aruba_io_wait_seconds
+end

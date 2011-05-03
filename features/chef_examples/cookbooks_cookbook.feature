@@ -29,8 +29,8 @@ Feature: Cookbook Validity
   Scenario: Clone non-existant Cookbooks from a Cookbooks URI
     Given the remote Cookbooks URI "git://github.com/cookbooks/"
      When I clone the Cookbooks:
-     | cookbook | branch | tag       | ref        | destination                         |
-     | hfgrt    |        | 37s.0.1.0 |            | ckbk/scratch/myapp/cookbooks/hosts3 |
+     | cookbook | tag       | destination                         |
+     | hfgrt    | 37s.0.1.0 | ckbk/scratch/myapp/cookbooks/hosts3 |
      Then the output should contain "Could not find Repository cookbooks/hfgrt"
 
   Scenario: Clone multiple Cookbooks from a Cookbooks URI

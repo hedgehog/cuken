@@ -12,5 +12,6 @@ require 'cuken/ssh'
 require 'cuken/cmd'
 require 'cuken/file'
 require 'cuken/chef'
+require 'cuken/vagrant'
 
 require 'rspec/expectations'

@@ -1,11 +1,29 @@
-require 'aruba/api' unless defined? Aruba::Api
-require 'chef'  unless defined? Chef
-require 'grit' unless defined? Grit
-require 'vagrant' unless defined? Vagrant
+#
+# Author:: Hedgehog (<hedgehogshiatus@gmail.com>)
+# Copyright:: Copyright (c) 2011 Hedgehog.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+require 'aruba/api' unless defined? ::Aruba::Api
+require 'chef'  unless defined? ::Chef
+require 'grit' unless defined? ::Grit
+require 'vagrant' unless defined? ::Vagrant
 require 'cuken/api/common'
 require 'cuken/api/chef/common'
 require 'cuken/api/chef/cookbook'
 require 'cuken/api/chef/knife'
+require 'cuken/api/chef/role'
+require 'cuken/api/chef/data_bag'
 
 module ::Cuken
   module Api
@@ -43,10 +61,14 @@ module ::Cuken
         end
       end
 
-      def clone_pull_error_check(repo, res)
-        if res[/Could not find Repository /]
-          raise RuntimeError, "Could not find Cookbook in Repository #{repo}", caller
+      def clone_pull_error_check(res)
+        if repo = res[/Could not find Repository /]
+          raise RuntimeError, "Could not find Repository #{repo}", caller
         end
+        if repo = res[/ERROR: (.*) doesn't exist. Did you enter it correctly?/,1]
+          raise RuntimeError, "ERROR: #{repo} doesn't exist. Did you enter it correctly? #{repo}", caller
+        end
+
       end
 
       def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, type = {'branch' => 'master'})
@@ -55,9 +77,10 @@ module ::Cuken
           gritty = ::Grit::Git.new(current_dir)
           announce_or_puts gritty.inspect
           clone_opts = {:quiet => false, :verbose => true, :progress => true}
-          clone_opts[:branch] = type['branch'].empty? ? 'master' : type['branch']
+          type['branch'] = type['branch'].nil? ? '' : type['branch']
           type['tag'] = type['tag'].nil? ? '' : type['tag']
           type['ref'] = type['ref'].nil? ? '' : type['ref']
+          clone_opts[:branch] = type['branch'].empty? ? 'master' : type['branch']
           if pth.directory?
             announce_or_puts "Pulling: #{repo} into #{pth}"
             res = gritty.pull(clone_opts, repo, pth.to_s)
@@ -65,7 +88,7 @@ module ::Cuken
             announce_or_puts "Cloning: #{repo} into #{pth}"
             res = gritty.clone(clone_opts, repo, pth.to_s)
           end
-          clone_pull_error_check(repo, res) if res
+          clone_pull_error_check(res) if res
           update_cookbook_paths(pth, cookbook)
           unless chef.cookbooks_paths.empty?   # is empty after cloning default chef-repo
             grotty = ::Grit::Git.new((pth + '.git').to_s)
@@ -172,6 +195,25 @@ module ::Cuken
           ::Chef::REST.new('http://localhost:5984/chef_integration', false, false)
         end
 
+    end
+  end
+end
+
+class ::Chef
+  class Knife
+  class << self
+    attr_accessor :cuken
+  end
+  private
+    def output(data)
+      ::Chef::Knife.cuken = data
+    end
+    module Core
+      class GenericPresenter
+        def format_cookbook_list_for_display(data)
+          ::Chef::Knife.cuken = data
+        end
+      end
     end
   end
 end

@@ -16,6 +16,10 @@
 #
 World(::Cuken::Api::Chef)
 
+Given /^the Chef root directory "([^"]*)" exists$/ do |directory|
+  check_chef_root_presence(directory)
+end
+
 Given /^the Chef server URI "([^"]*)"$/ do |uri|
   chef.uri = uri
 end

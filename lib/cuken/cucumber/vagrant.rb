@@ -15,6 +15,12 @@
 # limitations under the License.
 #
 load 'aruba/cucumber.rb' unless defined? ::Aruba
+require 'grit'
 
-World(::Cuken::Api::Rvm)
+World(::Cuken::Api::Vagrant)
 
+require 'cuken/cucumber/git/hooks'
+require 'cuken/cucumber/ssh/hooks'
+
+require 'cuken/cucumber/vagrant/hooks'
+require 'cuken/cucumber/vagrant/common'

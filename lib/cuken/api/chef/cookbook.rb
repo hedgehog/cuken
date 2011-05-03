@@ -1,3 +1,19 @@
+#
+# Author:: Hedgehog (<hedgehogshiatus@gmail.com>)
+# Copyright:: Copyright (c) 2011 Hedgehog.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 module ::Cuken
   module Api
     module Chef
@@ -17,12 +33,25 @@ module ::Cuken
           return ckbk, ckbk_src
         end
 
-        def check_cookbooks_table_presence(table, expect_presence = true)
+        def check_cookbook_table_presence(table, expect_presence = true)
           table.hashes.each do |hsh|
             ckbk, ckbk_src = parse_to_cookbooks_path(hsh)
             full_cookbook_src = find_path_in_cookbook_folders(ckbk, ckbk_src, ckbk)
             announce_or_puts(%{Looking for cookbook: #{full_cookbook_src}}) if @announce_env
             check_cookbook_presence(full_cookbook_src, expect_presence)
+          end
+        end
+
+        def check_remote_cookbook_table_presence(table, expect_presence = true)
+          books = cookbooks_list
+          table.hashes.each do |hsh|
+            if expect_presence
+              books.should include(hsh['cookbook']) if not (hsh['cookbook'].nil? || hsh['cookbook'].empty?)
+              books.should include(hsh['site-cookbook']) if not (hsh['site-cookbook'].nil? || hsh['site-cookbook'].empty?)
+            else
+              books.should_not include(hsh['cookbook']) if not (hsh['cookbook'].nil? || hsh['cookbook'].empty?)
+              books.should_not include(hsh['site-cookbook']) if not (hsh['site-cookbook'].nil? || hsh['site-cookbook'].empty?)
+            end
           end
         end
 
@@ -72,6 +101,38 @@ module ::Cuken
               announce_or_puts(%{Found cookbook: #{pn}}) if @announce_env
             end
           end
+        end
+
+        def cookbooks_load(table)
+          table.hashes.each do |hsh|
+            ckbk, ckbk_src = parse_to_cookbooks_path(hsh)
+            full_cookbook_src = find_path_in_cookbook_folders(ckbk, ckbk_src, ckbk)
+            cookbook_load(ckbk)
+          end
+        end
+
+        def cookbook_load(ckbk)
+
+          knife_config_file_error_handling()
+
+          ckbk_pth = nil
+          in_chef_root do
+            ckbk_pth = unless chef.cookbooks_paths.empty?
+                  (chef.cookbooks_paths.collect { |pn| pn.expand_path.to_s }).join(':')
+              end
+          end
+
+          argv = ['cookbook', 'upload', ckbk]
+          ( argv << '--cookbook-path' << ckbk_pth ) if ckbk_pth
+          run_knife(argv)
+        end
+
+        def cookbooks_list
+
+          knife_config_file_error_handling()
+
+          argv = ['cookbook', 'list']
+          run_knife(argv)
         end
 
       end

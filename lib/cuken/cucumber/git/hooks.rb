@@ -14,7 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-load 'aruba/cucumber.rb' unless defined? ::Aruba
-
-World(::Cuken::Api::Rvm)
-
+Before('@git_quick') do
+  ::Grit::Git.git_timeout = 20
+end
+Before('@git_slow') do
+  ::Grit::Git.git_timeout = 60
+end
+Before('@git_glacial') do
+  ::Grit::Git.git_timeout = 600
+end
+Before('@git_cosmic') do
+  ::Grit::Git.git_timeout = 3600
+end

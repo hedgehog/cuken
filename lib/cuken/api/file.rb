@@ -69,6 +69,74 @@ module Cuken
         end
       end
 
+      def place_file(src, dst)
+        dest = Pathname(dst).expand_path.realdirpath
+        FileUtils.mkdir_p((dest+src).dirname.to_s)
+        in_current_dir do
+          opts = {:verbose => true, :preserve => true, :remove_destination => true}
+          FileUtils.cp_r(src, (dest+src).to_s, opts).should be_nil
+          FileUtils.compare_file(src, (dest+src).to_s).should be_true
+        end
+      end
+
+      def place_folder_contents(dest_dir_name, src_dir_name)
+        dest = Pathname(dest_dir_name).expand_path.realdirpath
+        dest_parent = dest.dirname.to_s
+        FileUtils.mkdir_p((dest+src_dir_name).to_s)
+        in_current_dir do
+          opts = {:verbose => true, :preserve => true, :remove_destination => true}
+          FileUtils.cp_r(src_dir_name+'/.', dest.to_s, opts).should be_nil
+        end
+        Dir.glob("#{src_dir_name}/**/*").each do |fn|
+          if File.file?(fn)
+            fn2 = File.join(dest_parent, fn)
+            FileUtils.compare_file(fn, fn2).should be_true
+          end
+        end
+      end
+
+      def check_placed_file_content(file, partial_content, expect_match)
+        prep_for_placed_fs_check do
+          content = IO.read(file)
+          if expect_match
+            content.should include partial_content
+          else
+            content.should_not include partial_content
+          end
+        end
+      end
+
+      def prep_for_placed_fs_check(&block)
+        stop_processes!
+        block.call
+      end
+
+      def check_placed_file_presence(paths, expect_presence)
+        prep_for_placed_fs_check do
+          paths.each do |path|
+            if expect_presence
+              ::File.should be_file(path)
+            else
+              ::File.should_not be_file(path)
+            end
+          end
+        end
+      end
+
+      def check_placed_directory_presence(paths, expect_presence)
+        prep_for_placed_fs_check do
+          paths.each do |path|
+            if expect_presence
+              dest = Pathname(path).expand_path.realdirpath
+              Pathname(dest).mkpath
+              Pathname(path).should be_directory
+            else
+              Pathname(path).should_not be_directory
+            end
+          end
+        end
+      end
+
     end
   end
 end

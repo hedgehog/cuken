@@ -68,6 +68,21 @@ module ::Cuken
           'knife '
         end
 
+        def run_knife(argv=[])
+          argv << '--config' << chef.knife_config_file.to_s
+          with_args *argv do
+            ::Chef::Application::Knife.new.run
+          end
+          ::Chef::Knife.cuken
+        end
+
+        def knife_config_file_error_handling
+          unless chef.knife_config_file && Pathname(chef.knife_config_file).exist?
+            chef.knife_config_file = Pathname(chef.local_chef_repo).ascend { |d| h=d+'.chef'+'knife.rb'; break h if h.file? }
+          end
+          raise(RuntimeError, "chef.knife_config_file is required", caller) unless chef.knife_config_file
+        end
+
         def knife_debug
           @knife_debug ||= true
         end
@@ -114,6 +129,11 @@ module ::Cuken
             c.cdb_save
             @admin_client = c
           end
+        end
+
+        def check_chef_root_presence(directory, expect_presence = true)
+          chef.root_dir = directory
+          check_placed_directory_presence([chef.root_dir], expect_presence)
         end
 
       end

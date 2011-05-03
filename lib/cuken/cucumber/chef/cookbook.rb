@@ -24,6 +24,18 @@
 #
 World(::Cuken::Api::Chef::Cookbook)
 
+When /^I load the Cookbooks:$/ do |table|
+  cookbooks_load(table)
+end
+
+Then /^these remote Cookbooks exist:$/ do |table|
+  check_remote_cookbook_table_presence(table)
+end
+
+Then /^these remote Cookbooks do not exist:$/ do |table|
+  check_remote_cookbook_table_presence(table, false)
+end
+
 Given /^the remote Cookbook repository "([^"]*)"$/ do |ckbk_repo|
   in_current_dir do
     repo = Dir.exist?(ckbk_repo) ? Pathname(ckbk_repo).expand_path.realdirpath : ckbk_repo
@@ -91,7 +103,7 @@ Then /^the local Site\-Cookbook "([^"]*)" exists$/ do |ckbk|
 end
 
 And /^these local Cookbooks exist:$/ do |table|
-  check_cookbooks_table_presence(table)
+  check_cookbook_table_presence(table)
 end
 
 And /^these local Site\-Cookbooks exist:$/ do |table|
@@ -129,7 +141,9 @@ When /^I clone the Cookbooks:$/ do |table|
     src['branch'] = hsh['branch'] if hsh['branch']
     src['tag'] = hsh['tag'] if hsh['tag']
     src['ref'] = hsh['ref'] if hsh['ref']
-    local_repo = chef_clone_repo(hsh['destination'], true, chef.cookbooks_uri + hsh['cookbook'] + '.git', src )
+    ckbk = hsh['cookbook'] if hsh['cookbook']
+    ckbk = hsh['site-cookbook'] if hsh['site-cookbook']
+    local_repo = chef_clone_repo(hsh['destination'], true, chef.cookbooks_uri + ckbk + '.git', src )
     Pathname(local_repo).exist?.should be_true
   end
 end
