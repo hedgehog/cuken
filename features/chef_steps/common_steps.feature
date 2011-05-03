@@ -12,10 +12,11 @@ Feature: Listing common steps
       | step                                                            |
       |a default base Chef repository in "([^"]*)"                      |
       |I clone the remote Chef repository branch "([^"]*)" to "([^"]*)" |
-      |the Chef server URI "([^"]*)"                                    |
-      |the Chef client "([^"]*)" exists                                 |
       |the Chef admin client "([^"]*)" exists                           |
+      |the Chef client "([^"]*)" exists                                 |
       |the Chef client private key path "([^"]*)"                       |
+      |the Chef root directory "([^"]*)" exists                         |
+      |the Chef server URI "([^"]*)"                                    |
 
   Scenario: Local and remote Chef repository commands
     Then these steps are defined for "cuken/cucumber/chef/common.rb":
