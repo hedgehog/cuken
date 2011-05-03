@@ -38,7 +38,7 @@ Feature: Listing file steps
       |the (.)time of "([^"]*)" changes                        |
       |we record the a-mtime of "([^"]*)"                      |
 
-  Scenario: File and directory content
+  Scenario: File content
     Then these steps are defined for "cuken/cucumber/file.rb":
       | step                                                               |
       |the file "([^"]*)" contains:                                        |
@@ -55,4 +55,17 @@ Feature: Listing file steps
       |I write to "([^"]*)":                                               |
       |I overwrite "([^"]*)":                                              |
       |I append to "([^"]*)":                                              |
+
+  Scenario: File placement
+    Then these steps are defined for "cuken/cucumber/file.rb":
+      | step                                         |
+      |I place "([^"]*)" in "([^"]*)"                |
+      |I place all in "([^"]*)" in "([^"]*)"         |
+      |the placed directory "([^"]*)" exists         |
+      |the placed directory "([^"]*)" does not exist |
+      |the placed file "([^"]*)" contains:           |
+      |the placed file "([^"]*)" contains "([^"]*)"  |
+      |the placed file "([^"]*)" exists              |
+      |the placed file "([^"]*)" does not exist      |
+
 
