@@ -1,8 +1,8 @@
-@chef @cookbook @step_features
+@chef @node @step_features
 Feature: Listing Node steps
   In order to test automated Chef deployments
   As an administrator
-  I want to know what Cookbook steps are available
+  I want to know what Node steps are available
 
   Background:
     Given that "cuken/chef" has been required
