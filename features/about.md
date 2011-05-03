@@ -16,12 +16,21 @@ The Chef steps assume you have Chef server accessible on `localhost:4040`.
 If you have ideas to clarify or improve any of these cucumber features,
 please submit an [issue][9] or [pull request][8].
 
+## The Zenoss Example
+This is a proof of concept rather than best practice example.
+It is modeled on Matt Ray's blip.tv [screencast][17].  The intention is that you read, adjust and then run the features
+in the numbered order.
+Some things to adjust are the writable GitHub URI's, and the location of the Vagrant basebox.
+In the final version all examples should 'just-run', until then, or until you make a pull request to change it,
+it is more convenient for me.
+
 ## The Chef vs Vagrant/Aruba JSON Issue
 Due to several JSON gem conflicts between Chef and the Vagrant/Aruba gems, Cuken is only intended
 to work with the 0.10 series of Chef.  Of course you are free to work whatever
 magic you wish for the 0.9.x releases.
 
 ## Opinons
+Cuken is an 'Opinionated library':
 Virtual machines are [Vagrant][11] VM's.
 Vagrant VM's are all named.
 Configuration management and system integration is done with [Opscode's Chef][12].
@@ -71,8 +80,9 @@ outside of that ephemeral area and verifying the contents.
 ### Chef
 In most cases Chef operations refer to the remote server, e.g. 'I create the Data Bag "...".  The reason we leave remote
 implicit in these steps, are:
-a) to keep steps descriptions succint yet informative/accurate.
-b) a 'local' version of this step is not accurate because local, filesystem, operations are properly done with the file
+
+ a) to keep steps descriptions succint yet informative/accurate.
+ b) a 'local' version of this step is not accurate because local, filesystem, operations are properly done with the file
 and directory steps and API, and are not done through Chef/Knife.
 
 Cookbooks are are checked out into the branch 'cuken'.
@@ -176,4 +186,4 @@ convinced this approach is a long term disaster, review Bundler's code base circ
 [14]: http://book.git-scm.com/4_rebasing.html
 [15]: http://book.git-scm.com/4_interactive_rebasing.html
 [16]: https://github.com/aslakhellesoy/aruba/issues/69
-
+[17]: http://blip.tv/file/4687890
