@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cuken}
-  s.version = "0.1.12"
+  s.version = "0.1.13"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hedgehog"]
@@ -39,13 +39,15 @@ Gem::Specification.new do |s|
     "features/chef_examples/cookbooks_repo.feature",
     "features/chef_examples/knife_admin_client.feature",
     "features/chef_examples/knife_client_create.feature",
-    "features/chef_examples/zenoss/01_chef_server_setup.feature",
-    "features/chef_examples/zenoss/02_monitor_vm_setup.feature",
-    "features/chef_examples/zenoss/03_monitor_chef_setup.feature",
+    "features/chef_examples/zenoss_example/01_chef_server_setup.feature",
+    "features/chef_examples/zenoss_example/02_monitor_vm_setup.feature",
+    "features/chef_examples/zenoss_example/03_monitor_chef_setup.feature",
     "features/chef_steps/common_steps.feature",
     "features/chef_steps/cookbook_steps.feature",
+    "features/chef_steps/data_bag_steps.feature",
     "features/chef_steps/knife_steps.feature",
     "features/chef_steps/node_steps.feature",
+    "features/chef_steps/role_steps.feature",
     "features/command_examples/commands.feature",
     "features/command_steps/command_steps.feature",
     "features/cuken.feature",
@@ -372,13 +374,13 @@ Gem::Specification.new do |s|
     "features/data/node-load-test.rb",
     "features/data/node-simple.rb",
     "features/data/repositories/chef-repo/.gitignore",
-    "features/data/repositories/chef-repo/README.md",
+    "features/data/repositories/chef-repo/README.md.relish",
     "features/data/repositories/chef-repo/Rakefile",
-    "features/data/repositories/chef-repo/certificates/README.md",
+    "features/data/repositories/chef-repo/certificates/README.md.relish",
     "features/data/repositories/chef-repo/config/rake.rb",
-    "features/data/repositories/chef-repo/cookbooks/README.md",
-    "features/data/repositories/chef-repo/data_bags/README.md",
-    "features/data/repositories/chef-repo/roles/README.md",
+    "features/data/repositories/chef-repo/cookbooks/README.md.relish",
+    "features/data/repositories/chef-repo/data_bags/README.md.relish",
+    "features/data/repositories/chef-repo/roles/README.md.relish",
     "features/data/repositories/cookbooks/attribute_include/README.rdoc",
     "features/data/repositories/cookbooks/attribute_include/attributes/a.rb",
     "features/data/repositories/cookbooks/attribute_include/attributes/b.rb",
