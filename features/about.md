@@ -1,8 +1,7 @@
 # About Cuken's Reusable Steps
 
 These [Cucumber][0] features summarise the steps defined in
-[Cuken][1] and [Aruba][2]. Cuken's step+API structure is modeled on Aruba, and
-largely uses Aruba's steps and API.
+[Cuken][1] and [Aruba][2]. Cuken's step+API structure is modeled on Aruba.
 
 Cucumber features where these steps might be useful have been variously described as:
 - Infrastructure integration tests
@@ -150,6 +149,8 @@ convinced this approach is a long term disaster, review Bundler's code base circ
 - General passwordless and interactive SSH steps (currently Vagrant VM specific)
 - Cloud launch and basic management steps, i.e. CRUD operations for Cloud VM
 - Updating packages on a VM, and repackaging the VM, essentialy CRUD too.
+- Remove 'should' from steps
+- Make output steps expression consistent with file/directory steps
 
 ## Prior Art:
 - [Aruba][2] confirmed the utility of reusable steps.

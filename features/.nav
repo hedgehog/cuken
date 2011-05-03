@@ -2,27 +2,34 @@
 - about.md (About Cuken's Reusable Steps)
 - LICENSE (License)
 - NOTICE (Notice)
-- generic_steps:
-  - generic_steps.feature
-- file_steps:
-  - file_steps.feature
-- command_steps:
-  - command_steps.feature
-- ssh_steps:
-  - ssh_steps.feature
 - chef_steps:
   - common_steps.feature
-  - knife_steps.feature
   - cookbook_steps.feature
+  - knife_steps.feature
+  - data_bag_steps.feature
+  - knife_steps.feature
   - node_steps.feature
-- file_examples:
-  - files.feature
-- command_examples:
-  - commands.feature
-- ssh_examples:
-  - ssh.feature
+  - role_steps.feature
+- command_steps:
+  - command_steps.feature
+- file_steps:
+  - file_steps.feature
+- generic_steps:
+  - generic_steps.feature
+- ssh_steps:
+  - ssh_steps.feature
 - chef_examples:
   - cookbooks_metadata.feature
   - cookbooks_repo.feature
   - cookbooks_cookbook.feature
+- command_examples:
+  - commands.feature
+- file_examples:
+  - files.feature
+- ssh_examples:
+  - ssh.feature
+- zenoss_example:
+  - 01_chef_server_setup.feature
+  - 02_monitor_vm_setup.feature
+  - 03_monitor_chef_setup.feature
 

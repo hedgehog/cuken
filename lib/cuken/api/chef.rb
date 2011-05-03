@@ -68,7 +68,6 @@ module ::Cuken
         if repo = res[/ERROR: (.*) doesn't exist. Did you enter it correctly?/,1]
           raise RuntimeError, "ERROR: #{repo} doesn't exist. Did you enter it correctly? #{repo}", caller
         end
-
       end
 
       def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, type = {'branch' => 'master'})
@@ -121,7 +120,7 @@ module ::Cuken
         end
         cmd += " -c #{chef.knife_config_file.expand_path.to_s}" if chef.knife_config_file.expand_path.exist?
         cmd += " -o #{ckbk_pth}" if ckbk_pth_opt
-        cmd += " --log_level debug" if chef.knife_debug
+        # cmd += " --log_level debug" if chef.knife_debug
         chef.root_dir ||= current_dir
         in_chef_root do
           if interactive

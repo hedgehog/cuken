@@ -1,5 +1,5 @@
 @announce
-Feature: Zenoss Monitoring
+Feature: 02) Prepare Monitor VM
   In order to launch a Zenoss server
   As a admin/developer
   I want to define the VM configuration via executable features

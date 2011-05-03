@@ -1,5 +1,5 @@
 @step_features
-Feature: Listing SSH steps
+Feature: SSH steps
   In order to test a running system
   As an administrator
   I want to know what SSH steps are available

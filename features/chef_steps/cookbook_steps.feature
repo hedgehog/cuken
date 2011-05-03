@@ -1,5 +1,5 @@
 @chef @cookbook @step_features
-Feature: Listing Cookbook steps
+Feature: Cookbook steps
   In order to test automated Chef deployments
   As an administrator
   I want to know what Cookbook steps are available

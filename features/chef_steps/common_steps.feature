@@ -1,5 +1,5 @@
 @chef @common @step_features
-Feature: Listing common steps
+Feature: Common steps
   In order to test automated Chef deployments.
   As an administrator.
   I want to know what generic steps are available.

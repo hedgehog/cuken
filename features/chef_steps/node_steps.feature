@@ -1,5 +1,5 @@
 @chef @node @step_features
-Feature: Listing Node steps
+Feature: Node steps
   In order to test automated Chef deployments
   As an administrator
   I want to know what Node steps are available

@@ -1,5 +1,5 @@
 @chef @data_bag @step_features
-Feature: Listing Node steps
+Feature: Data Bag steps
   In order to test automated Chef deployments
   As an administrator
   I want to know what Data Bag steps are available

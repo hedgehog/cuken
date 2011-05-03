@@ -1,5 +1,5 @@
 @announce
-Feature: Zenoss Monitoring
+Feature: 01) Chef-Server VM
   In order to launch a Zenoss server
   As a admin/developer
   I want to define the Chef admin client configuration via executable features
@@ -176,7 +176,7 @@ Feature: Zenoss Monitoring
 
   Scenario: Start the Chef server VM
     Given the Chef root directory "/tmp/chef" exists
-      And the VM "chef" is not "running"
+      And the state of VM "chef" is not "running"
       And the Vagrantfile "/tmp/chef/Vagrantfile" exists
      When I launch the VM "chef"
      Then the state of VM "chef" is "running"

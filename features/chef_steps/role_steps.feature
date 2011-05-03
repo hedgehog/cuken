@@ -1,5 +1,5 @@
 @chef @role @step_features
-Feature: Listing Node steps
+Feature: Role steps
   In order to test automated Chef deployments
   As an administrator
   I want to know what Role steps are available

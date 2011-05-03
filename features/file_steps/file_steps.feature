@@ -1,5 +1,5 @@
 @step_features
-Feature: Listing file steps
+Feature: File and Directory steps
   In order to test a running system
   As an administrator
   I want to know what files steps are available

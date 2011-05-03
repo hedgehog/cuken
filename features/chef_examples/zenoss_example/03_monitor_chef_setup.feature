@@ -1,5 +1,5 @@
 @announce
-Feature: Zenoss Monitoring
+Feature: 03) Launch Monitor VM
   In order to launch a Zenoss server
   As a admin/developer
   I want to define the Chef configuration via executable features

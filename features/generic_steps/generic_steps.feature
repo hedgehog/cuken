@@ -1,5 +1,5 @@
 @step_features
-Feature: Listing common steps
+Feature: Generic steps
   In order to test a running system
   As an administrator
   I want to know what common steps are available

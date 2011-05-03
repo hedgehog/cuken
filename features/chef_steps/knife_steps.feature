@@ -1,5 +1,5 @@
 @chef @knife @step_features
-Feature: Listing Knife steps
+Feature: Knife steps
   In order to test automated Chef deployments
   As an administrator
   I want to know what Knife steps are available
