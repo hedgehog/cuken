@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cuken}
-  s.version = "0.1.11"
+  s.version = "0.1.12"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hedgehog"]
-  s.date = %q{2011-05-02}
+  s.date = %q{2011-05-03}
   s.description = %q{Reusable Cucumber steps and API for post-convergence system integration descriptions}
   s.email = %q{hedgehogshiatus@gmail.com}
   s.extra_rdoc_files = [
@@ -39,6 +39,9 @@ Gem::Specification.new do |s|
     "features/chef_examples/cookbooks_repo.feature",
     "features/chef_examples/knife_admin_client.feature",
     "features/chef_examples/knife_client_create.feature",
+    "features/chef_examples/zenoss/01_chef_server_setup.feature",
+    "features/chef_examples/zenoss/02_monitor_vm_setup.feature",
+    "features/chef_examples/zenoss/03_monitor_chef_setup.feature",
     "features/chef_steps/common_steps.feature",
     "features/chef_steps/cookbook_steps.feature",
     "features/chef_steps/knife_steps.feature",
@@ -402,7 +405,9 @@ Gem::Specification.new do |s|
     "lib/cuken/api/chef.rb",
     "lib/cuken/api/chef/common.rb",
     "lib/cuken/api/chef/cookbook.rb",
+    "lib/cuken/api/chef/data_bag.rb",
     "lib/cuken/api/chef/knife.rb",
+    "lib/cuken/api/chef/role.rb",
     "lib/cuken/api/cmd.rb",
     "lib/cuken/api/common.rb",
     "lib/cuken/api/file.rb",
@@ -410,6 +415,9 @@ Gem::Specification.new do |s|
     "lib/cuken/api/ssh-forever.rb",
     "lib/cuken/api/ssh.rb",
     "lib/cuken/api/ssh/password.rb",
+    "lib/cuken/api/vagrant.rb",
+    "lib/cuken/api/vagrant/common.rb",
+    "lib/cuken/api/vagrant/v_m.rb",
     "lib/cuken/chef.rb",
     "lib/cuken/cmd.rb",
     "lib/cuken/common.rb",
@@ -441,11 +449,17 @@ Gem::Specification.new do |s|
     "lib/cuken/cucumber/cmd.rb",
     "lib/cuken/cucumber/common.rb",
     "lib/cuken/cucumber/file.rb",
+    "lib/cuken/cucumber/git/hooks.rb",
     "lib/cuken/cucumber/rvm.rb",
     "lib/cuken/cucumber/ssh.rb",
+    "lib/cuken/cucumber/ssh/hooks.rb",
+    "lib/cuken/cucumber/vagrant.rb",
+    "lib/cuken/cucumber/vagrant/common.rb",
+    "lib/cuken/cucumber/vagrant/hooks.rb",
     "lib/cuken/file.rb",
     "lib/cuken/rvm.rb",
     "lib/cuken/ssh.rb",
+    "lib/cuken/vagrant.rb",
     "spec/api/knife_spec.rb",
     "spec/api/rvm_spec.rb",
     "spec/api/rvmrc_processor_spec.rb",
@@ -472,7 +486,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<aruba>, ["~> 0.3.6"])
       s.add_runtime_dependency(%q<cucumber>, [">= 0"])
-      s.add_runtime_dependency(%q<chef>, ["~> 0.10.0.rc.0"])
+      s.add_runtime_dependency(%q<chef>, ["~> 0.10.0"])
       s.add_runtime_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_runtime_dependency(%q<rvm>, ["~> 1.5.2"])
       s.add_runtime_dependency(%q<open4>, [">= 0"])
@@ -490,7 +504,7 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<aruba>, ["~> 0.3.6"])
       s.add_dependency(%q<cucumber>, [">= 0"])
-      s.add_dependency(%q<chef>, ["~> 0.10.0.rc.0"])
+      s.add_dependency(%q<chef>, ["~> 0.10.0"])
       s.add_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_dependency(%q<rvm>, ["~> 1.5.2"])
       s.add_dependency(%q<open4>, [">= 0"])
@@ -509,7 +523,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<aruba>, ["~> 0.3.6"])
     s.add_dependency(%q<cucumber>, [">= 0"])
-    s.add_dependency(%q<chef>, ["~> 0.10.0.rc.0"])
+    s.add_dependency(%q<chef>, ["~> 0.10.0"])
     s.add_dependency(%q<grit>, ["~> 2.4.1"])
     s.add_dependency(%q<rvm>, ["~> 1.5.2"])
     s.add_dependency(%q<open4>, [">= 0"])
