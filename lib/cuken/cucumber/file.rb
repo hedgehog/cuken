@@ -14,90 +14,95 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-load 'aruba/cucumber.rb' unless defined? ::Aruba
+#load 'aruba/cucumber.rb' unless defined? ::Aruba
 World(::Cuken::Api::File)
 
 #
 # Refactorings, yet to be submitted to Aruba:
 #
-Given /^the directory "([^"]*)"$/ do |arg1|
-  Then %Q{a directory named \"#{arg1}\"}
+
+When /^the file "([^"]*)" is removed$/ do |file_name|
+  remove_file(file_name)
+end
+
+Given /^the directory "([^"]*)"$/ do |dir_name|
+  create_dir(dir_name)
 end
 
 Given /^the file "([^"]*)" contains nothing$/ do |file_name|
-  Given %Q{an empty file named "#{file_name}"}
+  write_file(file_name, "")
 end
 
 Given /^the file "([^"]*)" contains:$/ do |file_name, file_content|
-  Given %Q{a file named "#{file_name}" with:}, file_content
+  write_file(file_name, file_content)
 end
 
-When /^I write to "([^"]*)":$/ do  |file_name, file_content|
-  When %Q{I write to "#{file_name}" with:}, file_content
+When /^I write to "([^"]*)":$/ do |file_name, file_content|
+  write_file(file_name, file_content)
 end
 
-When /^I overwrite "([^"]*)":$/ do  |file_name, file_content|
-  When %Q{I overwrite "#{file_name}" with:}, file_content
+When /^I overwrite "([^"]*)":$/ do |file_name, file_content|
+  overwrite_file(file_name, file_content)
 end
 
-When /^I append to "([^"]*)":$/ do  |file_name, file_content|
-  When %Q{I append to "#{file_name}" with:}, file_content
+When /^I append to "([^"]*)":$/ do |file_name, file_content|
+  append_to_file(file_name, file_content)
 end
 
-Then /^the file "([^"]*)" exists$/ do |arg1|
-  Then %Q{a file named \"#{arg1}\" should exist}
+Then /^the file "([^"]*)" exists$/ do |file|
+  check_file_presence([file], true)
 end
 
-Then /^the file "([^"]*)" does not exist$/ do |arg1|
-  Then %Q{a file named \"#{arg1}\" should not exist}
+Then /^the file "([^"]*)" does not exist$/ do |file|
+  check_file_presence([file], false)
 end
 
-Then /^the directory "([^"]*)" exists$/ do |arg1|
-  Then %Q{a directory named \"#{arg1}\" should exist}
+Then /^the directory "([^"]*)" exists$/ do |directory|
+  check_directory_presence([directory], true)
 end
 
-Then /^the directory "([^"]*)" does not exist$/ do |arg1|
-  Then %Q{a directory named \"#{arg1}\" should not exist}
+Then /^the directory "([^"]*)" does not exist$/ do |directory|
+  check_directory_presence([directory], false)
 end
 
-Then /^the file "([^"]*)" contains "([^"]*)"$/ do |file, content|
-  Then %Q{the file "#{file}" should contain "#{content}"}
+Then /^the file "([^"]*)" contains "([^"]*)"$/ do |file, partial_content|
+  check_file_content(file, partial_content, true)
 end
 
-Then /^the file "([^"]*)" does not contain "([^"]*)"$/ do |file, content|
-  Then %Q{the file "#{file}" should not contain "#{content}"}
+Then /^the file "([^"]*)" does not contain "([^"]*)"$/ do |file, partial_content|
+  check_file_content(file, partial_content, false)
 end
 
-Then /^the file "([^"]*)" contains \/([^\/]*)\/$/ do |file, re|
-  Then %Q{the file "#{file}" should match /#{re}/}
+Then /^the file "([^"]*)" matches \/([^\/]*)\/$/ do |file, partial_content|
+  check_file_content(file, /#{partial_content}/, true)
+ end
+
+Then /^the file "([^"]*)" does not match \/([^\/]*)\/$/ do |file, partial_content|
+  check_file_content(file, /#{partial_content}/, false)
 end
 
-Then /^the file "([^"]*)" does not contain \/([^\/]*)\/$/ do |file, re|
-  Then %Q{the file "#{file}" should not match /#{re}/}
+Then /^the file "([^"]*)" contains exactly:$/ do |file, exact_content|
+  check_exact_file_content(file, exact_content)
 end
 
-Then /^the file "([^"]*)" contains exactly:$/ do |file, content|
-  Then %Q{the file "#{file}" should contain exactly:}, content
-end
-
-Then /^the file "([^"]*)" does not contain exactly:$/ do |file, content|
-  Then %Q{the file "#{file}" should not contain exactly:}, content
+Then /^the file "([^"]*)" does not contain exactly:$/ do |file, exact_content|
+  check_exact_file_content(file, exact_content)
 end
 
 Then /^these directories exist:$/ do |table|
-  Then %Q{the following directories should exist:}, table
+  check_directory_presence(table.raw.map{|directory_row| directory_row[0]}, true)
 end
 
 Then /^these directories do not exist:$/ do |table|
-  Then %Q{the following directories should not exist:}, table
+  check_directory_presence(table.raw.map{|directory_row| directory_row[0]}, false)
 end
 
 Then /^these files exist:$/ do |table|
-  Then %Q{the following files should exist:}, table
+  check_file_presence(table.raw.map{|file_row| file_row[0]}, true)
 end
 
 Then /^these files do not exist:$/ do |table|
-  Then %Q{the following files should exist:}, table
+  check_file_presence(table.raw.map{|file_row| file_row[0]}, false)
 end
 
 #
@@ -164,7 +169,7 @@ Then /^the (.)time of "([^"]*)" changes$/ do |time_type, filename|
 end
 
 Then /^the file "([^"]*)" contains "([^"]*)" exactly "(\d+)" times$/ do |file, partial_content, times|
- check_file_content(file, partial_content, true, times)
+  check_file_content(file, partial_content, true, times)
 end
 
 Then /^the file "([^"]*)" does not contain "([^"]*)" exactly "(\d+)" times$/ do |file, partial_content, times|

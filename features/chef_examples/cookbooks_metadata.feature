@@ -7,7 +7,7 @@ Feature: Cookbook Metadata
   Background:
     Given a default base Chef repository in "ckbk/scratch/myapp"
       And the local Chef repository exists
-      And a file named "ckbk/scratch/myapp/.chef/knife.rb" with:
+      And the file "ckbk/scratch/myapp/.chef/knife.rb" contains:
       """
       current_dir = File.dirname(__FILE__)
       log_level :debug
@@ -27,15 +27,15 @@ Feature: Cookbook Metadata
 
   Scenario: Generate metadata for all cookbooks
      When I successfully generate all Cookbook metadata
-      And the output should contain "DEBUG: Generated "
-      And the output should not contain "DEBUG: No "
+      And the output contains "DEBUG: Generated "
+      And the output does not contain "DEBUG: No "
     Then the file "ckbk/scratch/myapp/cookbooks/hosts/metadata.json" exists
 
   Scenario: Generate metadata for a specific cookbook
      When we record the a-mtime of "ckbk/scratch/myapp/cookbooks/hosts/metadata.json"
       And I successfully generate Cookbook "hosts" metadata
-      And the output should contain "DEBUG: Generated "
-      And the output should not contain "DEBUG: No "
+      And the output contains "DEBUG: Generated "
+      And the output does not contain "DEBUG: No "
     Then the file "ckbk/scratch/myapp/cookbooks/hosts/metadata.json" exists
       And the mtime of "ckbk/scratch/myapp/cookbooks/hosts/metadata.json" changes
 

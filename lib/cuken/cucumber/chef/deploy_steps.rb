@@ -63,7 +63,7 @@ end
 Then /^a callback named <callback_file> should exist$/ do |callback_files|
   callback_files.raw.each do |file|
     want_file = "deploy/current/deploy/#{file.first}"
-    Then "a file named '#{want_file}' should exist"
+    Then "the file'#{want_file}' should exist"
   end
 end
 

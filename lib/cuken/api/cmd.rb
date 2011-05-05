@@ -1,9 +1,9 @@
-require 'aruba/api' unless defined? Aruba::Api
+#require 'aruba/api' unless defined? Aruba::Api
 
-module Cuken
-  module Api
-    module Cmd
-
-    end
-  end
-end
+#module Cuken
+#  module Api
+#    module Cmd
+#
+#    end
+#  end
+#end

@@ -10,4 +10,4 @@
 #Background:
 #  Given the Chef server URI "http://localhost:4000"
 #    And the Chef admin client "bobo-admin" exists
-#    And a directory named "foo/bar"
+#    And the directory "foo/bar"

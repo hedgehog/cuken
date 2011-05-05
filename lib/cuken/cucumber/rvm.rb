@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-load 'aruba/cucumber.rb' unless defined? ::Aruba
+#load 'aruba/cucumber.rb' unless defined? ::Aruba
 
 World(::Cuken::Api::Rvm)
 

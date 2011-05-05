@@ -39,7 +39,7 @@ World(::Cuken::Api::Vagrant)
 # Then
 #
 ########################################################################################################################
-
+puts 'what is here...'
 And /^I switch Vagrant environment$/ do
   switch_vagrant_environment
 end
@@ -91,3 +91,5 @@ end
 When /^I reload the VM "([^"]*)"$/ do |vm_name|
   run_vm_manager_command(:reload, vm_name)
 end
+
+puts 'do we get here??'

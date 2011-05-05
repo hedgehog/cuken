@@ -95,7 +95,7 @@ Feature: 02) Prepare Monitor VM
 
     Scenario: Configure Knife file for the Monitor's client certificate
         Given the directory ".chef"
-          And a file named ".chef/knife.rb" with:
+          And the file ".chef/knife.rb" contains:
               """
               current_dir = File.dirname(__FILE__)
               user = ENV['CHEF_USER'] || ENV['OPSCODE_USER'] || ENV['USER'] || `whoami`

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-require 'vagrant' unless defined? ::Vagrant
+require 'vagrant' #unless defined? ::Vagrant
 
 require 'cuken/api/common'
 require 'cuken/api/vagrant/common'

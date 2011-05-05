@@ -1,9 +1,8 @@
 source "http://rubygems.org"
 # Add dependencies required to use your gem here.
-# Example:
-#   gem "activesupport", ">= 2.3.5"
 group :default do
-  gem 'aruba', "~> 0.3.6"
+  gem 'childprocess', '>= 0.1.7'
+  gem 'rspec', '>= 2.5.0'
   gem "cucumber", ">= 0"
   gem 'chef', "~>0.10.0"
   gem 'grit', "~>2.4.1"
@@ -15,9 +14,7 @@ end
 # Include everything needed to run rake, tests, features, etc.
 group :development do
   gem "rr", "~> 1.0.2"
-  gem "rspec", "~> 2.5.0"
   gem "yard", "~> 0.6.0"
-  gem "cucumber", ">= 0"
   gem "bundler", "~> 1.0.11"
   gem "jeweler", "~> 1.5.2"
   gem "rcov", ">= 0"

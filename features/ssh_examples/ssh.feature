@@ -14,7 +14,7 @@ Feature: Password-less SSH
 
   Scenario: Aruba steps for remote commands via password-less SSH access
     Given I successfully run "ssh cuken 'echo Supercalifragilisticexpialidocious;'"
-    Then the output should contain "Supercalifragilisticexpialidocious"
+    Then the output contains "Supercalifragilisticexpialidocious"
 
   Scenario: Batch initialize password-less SSH access
     When I initialize password-less SSH access for:
@@ -23,4 +23,4 @@ Feature: Password-less SSH
       | :default  | localhost  | `echo cuken` | 22          |
       | :default  | :default   | :default     | :default    |
     And I successfully run `ssh cuken 'echo Supercalifragilisticexpialidocious;'`
-    Then the output should contain "Supercalifragilisticexpialidocious"
+    Then the output contains "Supercalifragilisticexpialidocious"

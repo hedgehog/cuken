@@ -41,7 +41,7 @@ module ::Cuken
               end
             end
           else
-            in_current_dir do
+            in_dir do
               if expect_presence
                 load_vagrant_file(path)
               end

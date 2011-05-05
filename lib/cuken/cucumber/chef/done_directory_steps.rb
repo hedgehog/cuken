@@ -16,11 +16,11 @@
 # limitations under the License.
 #
 
-#Then /^a directory named '(.+)' should exist$/ do |dir|
+#Then /^the directory'(.+)' should exist$/ do |dir|
 #  File.directory?(File.join(tmpdir, dir)).should be(true)
 #end
 #
-#Then /^a directory named '(.+)' should not exist$/ do |dir|
+#Then /^the directory'(.+)' should not exist$/ do |dir|
 #  File.directory?(File.join(tmpdir, dir)).should be(false)
 #end
 

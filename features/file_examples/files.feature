@@ -28,7 +28,7 @@ Feature: Examining files
 
   @steps
   Scenario: Mtime
-    Given an empty file named "foo.file"
+    Given the file "foo.file" contains nothing
       And we record the a-mtime of "foo.file"
       And I run `sleep 1`
       And I run `touch -m foo.file`
@@ -36,7 +36,7 @@ Feature: Examining files
 
   @steps
   Scenario: File contents
-    When I write to "monkeytest.file" with:
+    When I write to "monkeytest.file":
     """
     monkeypants
     monkeyshorts
@@ -45,7 +45,7 @@ Feature: Examining files
 
   @steps
   Scenario: File contents exact match
-    When I write to "monkeytest.file" with:
+    When I write to "monkeytest.file":
     """
     monkeypants
     monkeyshorts
@@ -58,7 +58,7 @@ Feature: Examining files
 
     """
   Scenario: File contents multiple matches
-    When I write to "monkeytest.file" with:
+    When I write to "monkeytest.file":
     """
     monkeypants
     monkeyshorts
@@ -80,7 +80,7 @@ Feature: Examining files
 
   @steps
   Scenario: Directory exists
-    When I run "mkdir -p dirtest"
+    When I run `mkdir -p dirtest`
     Then the directory "dirtest" exists
 
   @steps

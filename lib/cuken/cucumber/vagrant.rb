@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-load 'aruba/cucumber.rb' unless defined? ::Aruba
+#load 'aruba/cucumber.rb' unless defined? ::Aruba
 require 'grit'
 
 World(::Cuken::Api::Vagrant)
@@ -24,3 +24,4 @@ require 'cuken/cucumber/ssh/hooks'
 
 require 'cuken/cucumber/vagrant/hooks'
 require 'cuken/cucumber/vagrant/common'
+puts 'do we get here'

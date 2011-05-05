@@ -50,13 +50,13 @@ Given /^the Chef admin client "([^"]*)" exists$/ do |name|
 end
 
 Given /^the Chef client private key path "([^"]*)"$/ do |path|
-  in_current_dir do
+  in_dir do
     chef.client_private_key_path = Pathname(path)
   end
 end
 
 Given /^the remote Chef repository "([^"]*)"$/ do |chf_pth|
-  in_current_dir do
+  in_dir do
     if Pathname(chf_pth).exist?
       chef.remote_chef_repo = Pathname(chf_pth).expand_path.realdirpath
     else
@@ -66,7 +66,7 @@ Given /^the remote Chef repository "([^"]*)"$/ do |chf_pth|
 end
 
 Given /^the local Chef repository "([^"]*)"$/ do |chf_pth|
-  in_current_dir do
+  in_dir do
     chef.local_chef_repo = Pathname(chf_pth).expand_path.realdirpath
   end
 end

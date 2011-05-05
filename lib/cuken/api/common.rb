@@ -1,4 +1,4 @@
-require 'aruba/api' unless defined? Aruba::Api
+require 'cuken/api/aruba'
 
 module ::Cuken
   module Api

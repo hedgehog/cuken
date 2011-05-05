@@ -15,8 +15,8 @@ Feature: Reusable Chef Knife steps
   Background:
     Given the Chef server URI "http://localhost:4000"
       And the Chef admin client "bobo-admin" exists
-      And a directory named "foo/bar"
-      And a file named "foo/bar/bobo-admin.pem" with:
+      And the directory "foo/bar"
+      And the file "foo/bar/bobo-admin.pem" contains:
     """
     -----BEGIN RSA PRIVATE KEY-----
     MIIEogIBAAKCAQEA2iu6ETTD3Ig/0dlbbQSPsVcSUGQ3O3Kgt+6h6OwD1HnQUHge
@@ -46,7 +46,7 @@ Feature: Reusable Chef Knife steps
     osFXY7fq6Hd9CEFLcDacyxXShu095MPJGTSBwwykWo+C+DUC5ts=
     -----END RSA PRIVATE KEY-----
     """
-    And a file named "foo/bar/.chef/knife.rb" with:
+    And the file "foo/bar/.chef/knife.rb" contains:
     """
     current_dir = File.dirname(__FILE__)
     log_level :debug
@@ -63,7 +63,7 @@ Feature: Reusable Chef Knife steps
   Scenario: Knife steps default knife.rb path
      Given I cd to "foo/bar"
       When I successfully run `knife node list`
-      Then the output should contain:
+      Then the output contains:
      """
      DEBUG: Signing the request as bobo-admin
      DEBUG: Sending HTTP Request via GET to localhost:4000/nodes
@@ -76,7 +76,7 @@ Feature: Reusable Chef Knife steps
       When the Nodes are:
       | node |
       |      |
-      Then the output should contain:
+      Then the output contains:
      """
      DEBUG: Signing the request as bobo-admin
      DEBUG: Sending HTTP Request via GET to localhost:4000/nodes
@@ -88,7 +88,7 @@ Feature: Reusable Chef Knife steps
       And I cd to "./../../"
       And a Cookbook path "features/data/cookbooks_not_uploaded_at_feature_start"
      When I successfully run Knife's "cookbook upload version_updated"
-     Then the output should contain:
+     Then the output contains:
     """
     ERROR: Could not find cookbook version_updated in your cookbook path, skipping it
 
@@ -99,14 +99,14 @@ Feature: Reusable Chef Knife steps
       And I cd to "./../../"
       And a Cookbook path "features/data/repositories/cookbooks_not_uploaded_at_feature_start/version_updated"
      When I successfully run Knife's "cookbook upload version_updated"
-     Then the output should contain "INFO: Uploading files"
-      And the output should contain "DEBUG: Committing sandbox"
-      And the output should contain "INFO: Upload complete!"
+     Then the output contains "INFO: Uploading files"
+      And the output contains "DEBUG: Committing sandbox"
+      And the output contains "INFO: Upload complete!"
 
   Scenario: Verify a cookbook with path to knife.rb created earlier
     Given the Knife file "foo/bar/.chef/knife.rb"
     And I successfully run Knife's "cookbook show version_updated"
-    And the output should contain:
+    And the output contains:
     """
     DEBUG: Signing the request as bobo-admin
     DEBUG: Sending HTTP Request via GET to localhost:4000/cookbooks/version_updated
@@ -123,7 +123,7 @@ Feature: Reusable Chef Knife steps
      When I interactively run Knife's "cookbook delete version_updated"
       And I type "Y"
       And wait "5" seconds
-     Then the output should contain:
+     Then the output contains:
       """
       DEBUG: Signing the request as bobo-admin
       DEBUG: Sending HTTP Request via GET to localhost:4000/cookbooks/version_updated
@@ -140,7 +140,7 @@ Feature: Reusable Chef Knife steps
       And I interactively run Knife's "cookbook delete version_updated 2.0.0"
       And I type "Y"
       And wait "5" seconds
-     Then the output should contain:
+     Then the output contains:
       """
       Do you really want to delete version_updated version 2.0.0? (Y/N) DEBUG: Signing the request as bobo-admin
       DEBUG: Sending HTTP Request via DELETE to localhost:4000/cookbooks/version_updated/2.0.0

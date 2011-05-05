@@ -170,7 +170,7 @@ When /^I create a sandbox named '(.+)' for cookbook '([^\']+)'(?: minus files '(
   end
 end
 
-Then /^I upload a file named '(.+)' from cookbook '(.+)' to the sandbox/ do |path, cookbook_name|
+Then /^I upload the file'(.+)' from cookbook '(.+)' to the sandbox/ do |path, cookbook_name|
   cookbook = @cookbook_loader_not_uploaded_at_feature_start[cookbook_name]
   raise ArgumentError, "no such cookbook in cookbooks_not_uploaded_at_feature_start: #{cookbook_name}" unless cookbook
 

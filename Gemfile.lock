@@ -3,10 +3,6 @@ GEM
   specs:
     abstract (1.0.0)
     archive-tar-minitar (0.5.2)
-    aruba (0.3.6)
-      childprocess (>= 0.1.7)
-      cucumber (>= 0.10.0)
-      rspec (>= 2.5.0)
     builder (3.0.0)
     bunny (0.6.0)
     chef (0.10.0)
@@ -127,9 +123,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aruba (~> 0.3.6)
   bundler (~> 1.0.11)
   chef (~> 0.10.0)
+  childprocess (>= 0.1.7)
   cucumber
   fakefs (~> 0.3.1)
   grit (~> 2.4.1)
@@ -139,7 +135,7 @@ DEPENDENCIES
   reek (~> 1.2.8)
   roodi (~> 2.1.0)
   rr (~> 1.0.2)
-  rspec (~> 2.5.0)
+  rspec (>= 2.5.0)
   rvm (~> 1.5.2)
   vagrant (~> 0.7.2)
   yard (~> 0.6.0)

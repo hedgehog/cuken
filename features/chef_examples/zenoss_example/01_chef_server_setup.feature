@@ -85,6 +85,7 @@ Feature: 01) Chef-Server VM
         cvm.hw_virt.enabled = false
         cvm.hw_virt.nested_paging = false
         # STORAGE
+        cvm.use_host_io_cache = true
       end
       """
     And I place "hobos/vm.bo" in "/tmp/chef"
@@ -191,7 +192,7 @@ Feature: 01) Chef-Server VM
       And I type "sudo chmod 0644 /etc/chef/certificates/key.pem"
       And I type "stat -c %A /etc/chef/webui.pem"
       And I type "stat -c %A /etc/chef/certificates/key.pem"
-     Then the output should contain:
+     Then the output contains:
           """
           -rw-r--r--
           -rw-r--r--

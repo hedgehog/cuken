@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-require 'aruba/api' unless defined? ::Aruba::Api
+#require 'aruba/api' unless defined? ::Aruba::Api
 require 'chef'  unless defined? ::Chef
 require 'grit' unless defined? ::Grit
 require 'vagrant' unless defined? ::Vagrant
@@ -30,6 +30,7 @@ module ::Cuken
     module Chef
 
       include ::Cuken::Api::Chef::Common
+      include ::Aruba::Api
 
       def append_cookbook_path(cookbook, lp, lrp)
         if lrp.exist?
@@ -71,7 +72,7 @@ module ::Cuken
       end
 
       def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, type = {'branch' => 'master'})
-        in_current_dir do
+        in_dir do
           pth = Pathname(ckbk_path).expand_path
           gritty = ::Grit::Git.new(current_dir)
           announce_or_puts gritty.inspect
@@ -112,7 +113,7 @@ module ::Cuken
           ckbk_pth_opt = true
         end
         ckbk_pth_opt = false if no_ckbk_pth_opt.is_a? TrueClass
-        in_current_dir do
+        in_dir do
           unless chef.knife_config_file
             chef.knife_config_file = Pathname(chef.local_chef_repo).ascend { |d| h=d+'.chef'+'knife.rb'; break h if h.file? }
           end

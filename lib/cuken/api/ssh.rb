@@ -1,4 +1,4 @@
-require 'aruba/api' unless defined? Aruba::Api
+#require 'aruba/api' unless defined? Aruba::Api
 require 'cuken/api/ssh-forever'  unless defined? SecureShellForever
 
 module Cuken

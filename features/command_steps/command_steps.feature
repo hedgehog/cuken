@@ -8,61 +8,68 @@ Feature: Command steps
     Given that "cuken/cmd" has been required
 
   Scenario: Command execution
-    Then these steps are defined for "cuken/cucumber/cmd.rb":
-      | step                                                   |
-      |I run `([^`]*)`                                         |
-      |I run `([^`]*)` interactively                           |
-      |I successfully run `([^`]*)`                            |
-      |I type "([^"]*)"                                        |
+    Then these steps are defined for "cuken/cucumber/cmd/execution.rb":
+         | step                                                   |
+         |I run `([^`]*)`                                         |
+         |I run `([^`]*)` in "([^"]*)"                            |
+         |I interactively run `([^`]*)`                           |
+         |I interactively run `([^`]*)` in "([^"]*)"              |
+         |I successfully run `([^`]*)`                            |
+         |I successfully run `([^`]*)` in "([^"]*)"               |
+         |I type "([^"]*)"                                        |
 
   Scenario: Command exit status
-    Then these steps are defined for "cuken/cucumber/cmd.rb":
-      | step                                                   |
-      |the exit status should be (\d+)                         |
-      |the exit status should not be (\d+)                     |
+    Then these steps are defined for "cuken/cucumber/cmd/exit_status.rb":
+         | step                                                   |
+         |the exit status should be (\d+)                         |
+         |the exit status should not be (\d+)                     |
 #    Pending:
 #    https://rspec.lighthouseapp.com/projects/16211-cucumber/tickets/707-element-size-differs-2-should-be-1-indexerror
 #      |it should (pass|fail) with:                             |
 #      |it should (pass|fail) with exactly:                     |
 #      |it should (pass|fail) with regexp?:                     |
 
-  Scenario: Command output (stdout+stderr)
-    Then these steps are defined for "cuken/cucumber/cmd.rb":
+  Scenario: All output (stdout+stderr) per command
+    Then these steps are defined for "cuken/cucumber/output/cmd.rb":
+         | step                                                |
+         |the output from "([^"]*)" contains exactly:          |
+         |the output from "([^"]*)" does not contain exactly:  |
+         |the output from "([^"]*)" contains:                  |
+         |the output from "([^"]*)" does not contain:          |
+         |the output from "([^"]*)" contains "([^"]*)"         |
+         |the output from "([^"]*)" does not contain "([^"]*)" |
+
+  Scenario: All output (stdout+stderr) for all commands
+    Then these steps are defined for "cuken/cucumber/output/all.rb":
       | step                                                   |
-      |the output from "(.*)" contains exactly:                |
-      |the output from "([^"]*)" does not contain exactly:     |
-      |the output from "([^"]*)" contains:                     |
-      |the output from "([^"]*)" does not contain:             |
-      |the output from "([^"]*)" should contain "([^"]*)"      |
-      |the output from "([^"]*)" should not contain "([^"]*)"  |
-      |the output should contain "([^"]*)"                     |
-      |the output should contain:                              |
-      |the output should contain exactly "([^"]*)"             |
-      |the output should contain exactly:                      |
-      |the output should match \/([^\/]*)\/                    |
-      |the output should match:                                |
-      |the output should not contain "([^"]*)"                 |
-      |the output should not contain:                          |
+      |the output contains "([^"]*)"                     |
+      |the output contains:                              |
+      |the output contains exactly "([^"]*)"             |
+      |the output contains exactly:                      |
+      |the output does not contain "([^"]*)"                 |
+      |the output does not contain:                          |
+      |the output matches \/([^\/]*)\/                    |
+      |the output matches:                                |
 
   Scenario: Command stderr
-    Then these steps are defined for "cuken/cucumber/cmd.rb":
+    Then these steps are defined for "cuken/cucumber/output/stderr.rb":
       | step                                                   |
-      |the stderr from "([^"]*)" should contain "([^"]*)"      |
-      |the stderr from "([^"]*)" should not contain "([^"]*)"  |
-      |the stderr should contain "([^"]*)"                     |
-      |the stderr should contain:                              |
-      |the stderr should contain exactly:                      |
-      |the stderr should not contain "([^"]*)"                 |
-      |the stderr should not contain:                          |
+      |the stderr from "([^"]*)" contains "([^"]*)"      |
+      |the stderr from "([^"]*)" does not contain "([^"]*)"  |
+      |the stderr contains "([^"]*)"                     |
+      |the stderr contains:                              |
+      |the stderr contains exactly:                      |
+      |the stderr does not contain "([^"]*)"                 |
+      |the stderr does not contain:                          |
 
   Scenario: Command stdout
-    Then these steps are defined for "cuken/cucumber/cmd.rb":
+    Then these steps are defined for "cuken/cucumber/output/stdout.rb":
       | step                                                   |
-      |the stdout from "([^"]*)" should contain "([^"]*)"      |
-      |the stdout from "([^"]*)" should not contain "([^"]*)"  |
-      |the stdout should contain "([^"]*)"                     |
-      |the stdout should contain:                              |
-      |the stdout should contain exactly:                      |
-      |the stdout should not contain "([^"]*)"                 |
-      |the stdout should not contain:                          |
+      |the stdout from "([^"]*)" contains "([^"]*)"      |
+      |the stdout from "([^"]*)" does not contain "([^"]*)"  |
+      |the stdout contains "([^"]*)"                     |
+      |the stdout contains:                              |
+      |the stdout contains exactly:                      |
+      |the stdout does not contain "([^"]*)"                 |
+      |the stdout does not contain:                          |
 

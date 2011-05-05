@@ -11,15 +11,15 @@ Feature: Executing commands
 
   Scenario: Check Stdout
     When I run `echo 'i like cheese'`
-    Then the stdout from "echo 'i like cheese'" should contain "i like cheese"
+    Then the stdout from "echo 'i like cheese'" contains "i like cheese"
 
   Scenario: Check Stderr
     When I run `some_error`
-    Then the stderr from "some_error" should contain "No such file or directory - some_error"
+    Then the stderr from "some_error" contains "No such file or directory - some_error"
 
   Scenario: Check Stdout for multiple lines
     When I run `echo 'one\none\none\n'`
-    Then the output should contain:
+    Then the output contains:
     """
     one
     one

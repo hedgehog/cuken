@@ -42,11 +42,11 @@ require 'etc'
 # Then
 ####
 
-#Then /^a file named '(.+)' should exist$/ do |filename|
+#Then /^the file'(.+)' should exist$/ do |filename|
 #  File.exists?(File.join(tmpdir, filename)).should be(true)
 #end
 
-#Then /^a file named '(.+)' should not exist$/ do |filename|
+#Then /^the file'(.+)' should not exist$/ do |filename|
 #  File.exists?(File.join(tmpdir, filename)).should be(false)
 #end
 
@@ -69,17 +69,17 @@ require 'etc'
 #  end
 #end
 
-#Then /^a file named '(.+)' should contain '(.+)'$/ do |filename, contents|
+#Then /^the file'(.+)' contains '(.+)'$/ do |filename, contents|
 #  file = IO.read(File.join(tmpdir, filename))
 #  file.should =~ /#{contents}/m
 #end
 
-#Then /^a file named '(.+)' should be from the '(.+)' specific directory$/ do |filename, specificity|
+#Then /^the file'(.+)' should be from the '(.+)' specific directory$/ do |filename, specificity|
 #  file = IO.read(File.join(tmpdir, filename))
 #  file.should == "#{specificity}\n"
 #end
 
-#Then /^a file named '(.+)' should contain '(.+)' only '(.+)' time$/ do |filename, string, count|
+#Then /^the file'(.+)' contains '(.+)' only '(.+)' time$/ do |filename, string, count|
 #  seen_count = 0
 #  IO.foreach(File.join(tmpdir, filename)) do |line|
 #    if line =~ /#{string}/
