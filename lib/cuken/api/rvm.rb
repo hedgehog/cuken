@@ -438,13 +438,15 @@ module ::Cuken
         _rvmrc_gemsets.each do |hsh|
           rubie = hsh[0]
           hsh[1][:gemsets].each do |gmst|
-            #RVM.gemset.create([gmst])
-            RVM.gemset.use(gmst)
-            if _rvm_gem_available?(spec)
-              puts "info: Gem #{gem}-#{version} already installed in #{rvm_current_name}."
-            else
-              puts "info: Installing gem #{gem}-#{version} in #{rvm_current_name}..."
-              RVM.run("rvm --create use #{rubie}@#{gmst}; gem install #{gem} -v#{version} #{rvm_gem_install_options}")
+            if RVM.gemset.instance_of? ::RVM::Environment::GemsetWrapper
+              #RVM.gemset.create([gmst])
+              RVM.gemset.use(gmst)
+              if _rvm_gem_available?(spec)
+                puts "info: Gem #{gem}-#{version} already installed in #{rvm_current_name}."
+              else
+                puts "info: Installing gem #{gem}-#{version} in #{rvm_current_name}..."
+                RVM.run("rvm --create use #{rubie}@#{gmst}; gem install #{gem} -v#{version} #{rvm_gem_install_options}")
+              end
             end
           end
         end
