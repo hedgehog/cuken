@@ -127,7 +127,7 @@ module Cuken
         prep_for_placed_fs_check do
           paths.each do |path|
             if expect_presence
-              dest = Pathname(path).expand_path.realdirpath
+              dest = Pathname(path).expand_path
               Pathname(dest).mkpath
               Pathname(path).expand_path.should be_directory
             else

@@ -24,4 +24,3 @@ require 'cuken/cucumber/ssh/hooks'
 
 require 'cuken/cucumber/vagrant/hooks'
 require 'cuken/cucumber/vagrant/common'
-puts 'do we get here'

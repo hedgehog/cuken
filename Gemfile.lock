@@ -1,3 +1,8 @@
+PATH
+  remote: /usr/src/rvm
+  specs:
+    rvm (1.6.5)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -35,7 +40,10 @@ GEM
     fakefs (0.3.2)
     ffi (0.6.3)
       rake (>= 0.8.7)
+    ffi (0.6.3-java)
     gherkin (2.3.7)
+      json (>= 1.4.6)
+    gherkin (2.3.7-java)
       json (>= 1.4.6)
     git (1.2.5)
     grit (2.4.1)
@@ -48,6 +56,7 @@ GEM
       git (>= 1.2.5)
       rake
     json (1.5.1)
+    json (1.5.1-java)
     mario (0.0.6)
     mime-types (1.16)
     mixlib-authentication (1.1.4)
@@ -74,6 +83,7 @@ GEM
     polyglot (0.3.1)
     rake (0.8.7)
     rcov (0.9.9)
+    rcov (0.9.9-java)
     reek (1.2.8)
       ruby2ruby (~> 1.2)
       ruby_parser (~> 2.0)
@@ -87,7 +97,7 @@ GEM
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)
       rspec-mocks (~> 2.5.0)
-    rspec-core (2.5.1)
+    rspec-core (2.5.2)
     rspec-expectations (2.5.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.5.0)
@@ -96,7 +106,6 @@ GEM
       sexp_processor (~> 3.0)
     ruby_parser (2.0.6)
       sexp_processor (~> 3.0)
-    rvm (1.5.2)
     sexp_processor (3.0.5)
     systemu (2.2.0)
     term-ansicolor (1.0.5)
@@ -120,6 +129,7 @@ GEM
     yard (0.6.8)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
@@ -136,6 +146,6 @@ DEPENDENCIES
   roodi (~> 2.1.0)
   rr (~> 1.0.2)
   rspec (>= 2.5.0)
-  rvm (~> 1.5.2)
+  rvm (~> 1.6.5)!
   vagrant (~> 0.7.2)
   yard (~> 0.6.0)

@@ -61,7 +61,7 @@ module ::Cuken
           in_chef_root do
             list1 = chef.cookbooks_paths.find_all { |dir| Pathname(dir + path_fragment1 + path_fagment2).exist? }
             list2 = chef.cookbook_paths.find_all { |dir| (dir.to_s[/#{ckbk_src}/] && Pathname(dir+path_fagment2).exist?) }
-            loc = list2[0] || ((list1[0] + ckbk) if list1[0].exist?)
+            loc = list2[0] || ((list1[0] + ckbk) if list1[0] && list1[0].exist?)
             if loc.nil? || not(loc.exist?)
               # TODO: error handling if data bags or cookbooks do not exist
             else
@@ -111,6 +111,15 @@ module ::Cuken
           end
         end
 
+        def cookbooks_delete(table)
+          table.hashes.each do |hsh|
+            ckbk, ckbk_src = parse_to_cookbooks_path(hsh)
+            full_cookbook_src = find_path_in_cookbook_folders(ckbk, ckbk_src, ckbk)
+            version = hsh['version'] ? hsh['version'] : 'all'
+            cookbook_delete(ckbk, version)
+          end
+        end
+
         def cookbook_load(ckbk)
 
           knife_config_file_error_handling()
@@ -124,6 +133,23 @@ module ::Cuken
 
           argv = ['cookbook', 'upload', ckbk]
           ( argv << '--cookbook-path' << ckbk_pth ) if ckbk_pth
+          run_knife(argv)
+        end
+
+        def cookbook_delete(ckbk, version='all')
+
+          knife_config_file_error_handling()
+
+          ckbk_pth = nil
+          in_chef_root do
+            ckbk_pth = unless chef.cookbooks_paths.empty?
+                  (chef.cookbooks_paths.collect { |pn| pn.expand_path.to_s }).join(':')
+              end
+          end
+
+          argv = ['cookbook', 'delete', ckbk]
+          version == 'all' ? argv << '--all' : argv << version
+          argv << '--yes' << '--no-editor'
           run_knife(argv)
         end
 

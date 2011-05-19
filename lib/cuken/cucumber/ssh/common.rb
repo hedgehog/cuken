@@ -14,9 +14,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-#load 'aruba/cucumber.rb' unless defined? ::Aruba
+Given /^a SSH client user "([^\"]*)"$/ do |name|
+  ssh_client_hostname name
+end
 
-World(::Cuken::Api::Rvm)
+Given /^a SSH client user$/ do
+  ssh_client_hostname
+end
 
-require 'cuken/cucumber/rvm/common'
-require 'cuken/cucumber/rvm/gemsets'
+Given /^a SSH client hostname "([^\"]*)"$/ do |name|
+  ssh_client_hostname name
+end
+
+Given /^a SSH client hostname$/ do
+  ssh_client_hostname
+end
+
+Given /^default ssh-forever options$/ do
+  ssh_forever_options(:default)
+end
+
+Given /^the ssh-forever options:$/ do |table|
+  ssh_forever_options(table)
+end
+
+When /^I initialize password-less SSH access for:$/ do |table|
+  ssh_init_password_less_batch(table)
+end
+
+Given /^I initialize password-less SSH access$/ do
+  ssh_init_password_less
+end

@@ -111,6 +111,10 @@ If you need to change a default hook, add your variation of the following to you
       @aruba_timeout_seconds.nil? || @aruba_timeout_seconds < 3600 ? @aruba_timeout_seconds = 3600 : @aruba_timeout_seconds
     end
 
+    Before('@ssh_local') do
+      @aruba_io_wait_seconds.nil? || @aruba_io_wait_seconds < 0.3 ? @aruba_io_wait_seconds = 0.3 : @aruba_io_wait_seconds
+    end
+
 ### Aruba
 Aruba will timeout if a command takes too long.  A convention is to tag Features/Scenarios
 according to the size of the timeout threshold:

@@ -85,7 +85,6 @@ Feature: 01) Chef-Server VM
         cvm.hw_virt.enabled = false
         cvm.hw_virt.nested_paging = false
         # STORAGE
-        cvm.use_host_io_cache = true
       end
       """
     And I place "hobos/vm.bo" in "/tmp/chef"

@@ -13,6 +13,8 @@ require 'chef/knife/client_create'
 require 'cuken/api/rvm'
 require 'cuken/api/chef'
 require 'cuken/api/chef/knife'
+require 'cuken/api/vagrant'
+require 'cuken/api/aruba'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
@@ -22,6 +24,11 @@ RSpec.configure do |config|
 
     config.mock_with :rr
     include ::Cuken::Api::Chef
+    include ::Cuken::Api::Rvm
+    include ::Cuken::Api::Rvm::Gemsets
+    include ::Cuken::Api::Vagrant
+    include ::Vagrant::TestHelpers
+
     # or if that doesn't work due to a version incompatibility
     # config.mock_with RR::Adapters::Rspec
 end
@@ -65,4 +72,27 @@ def setup_rvmrc_gems_files(count)
   end
   root.to_s
 end
+def test_vagrantfile(names=['web','db'])
+%Q{
+Vagrant::Config.run do |config|
+  config.vm.define :#{names[0]} do |config|
+    config.vm.box = "#{names[0]}"
+    config.vm.forward_port("http", 80, 8080)
+  end
 
+  config.vm.define :#{names[1]} do |cnfg|
+    cnfg.vm.box = "#{names[1]}"
+    cnfg.vm.forward_port("#{names[1]}", 3306, 3306)
+  end
+end
+}
+end
+
+class ::VagrantVMExampleHelpers
+  include ::Aruba::Api
+  include ::Cuken::Api::Vagrant::VM
+
+   def self.create_vm_instance(name)
+     new(name)
+   end
+end

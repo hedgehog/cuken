@@ -14,9 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-#load 'aruba/cucumber.rb' unless defined? ::Aruba
+World(::Cuken::Api::Rvm::Gemsets)
 
-World(::Cuken::Api::Rvm)
+Given /^the Gemset "([^"]*)" is active$/ do |gemset|
+  check_gemset_activation(gemset, true)
+end
 
-require 'cuken/cucumber/rvm/common'
-require 'cuken/cucumber/rvm/gemsets'
+Given /^the Gemset "([^"]*)" is not active$/ do |gemset|
+  check_gemset_activation(gemset, true)
+end
+Given /^the Gemset "([^"]*)" exists$/ do |gemset|
+  check_gemset_presence([gemset], true)
+end
+Given /^the Gemset "([^"]*)" does not exist$/ do |gemset|
+  check_gemset_presence([gemset], true)
+end
+

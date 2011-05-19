@@ -2,12 +2,14 @@ require Pathname(__FILE__).ascend { |d| h=d+'spec_helper.rb'; break h if h.file?
 
 #Reference:
 # http://www.metaskills.net/2010/07/30/the-rvm-ruby-api/
-
+@announce = true
 module ::Cuken::Api
   describe Rvm do
     before(:all) do
       include ::Cuken::Api::Rvm
-      @rvm_rubie_now=(`rvm current`)[/(.*)@/,1]
+      current=`rvm current`
+      @rvm_rubie_now=current[/(.*)@/,1]
+      @rvm_gemset_now=current[/@(.*)/,1]
 #      ::FakeFS.activate!
 #      ::FakeFS::FileSystem.clear
 #      @rvmrc_root = setup_rvmrc_gems_files(1)
@@ -28,10 +30,53 @@ module ::Cuken::Api
 #        FakeFS { lambda{ ::B3::Bdd::Helpers.b3_setup}.should raise_error(RuntimeError, /Could not find BigBlueButton's sources root./) }
 #      end
 #    end
+    describe "run_simple_gemset" do
+      context "with no options given" do
+        it "should use the current rubie and gemset in the RVM environment " do
+          ::Cuken::Api::Rvm.run_simple_gemset( "puts 'x'" ).should match "#{`rvm current`}".strip
+        end
+      end
+      context "with rubie given" do
+        it "should use the current gemset in the RVM environment" do
+          current_env = `rvm current`
+          rubie = current_env[/(.*)@/,1]
+          ::Cuken::Api::Rvm.run_simple_gemset( "RVM.current.expanded_name.to_s", :ruby => rubie ).should match "#{`rvm current`}".strip
+        end
+      end
+      context "with gemset given" do
+        it "should use the current rubie in the RVM environment" do
+          current_env = `rvm current`
+          gs = current_env[/@(.*)/,1]
+          ::Cuken::Api::Rvm.run_simple_gemset( "RVM.current.expanded_name.to_s", :gemset => gs ).should match "#{`rvm current`}".strip
+        end
+      end
+      context "with any existing ruby and gemset given" do
+        it "should use the given rubie and gemset in the RVM environment" do
+          current_env = `rvm current`
+          curr_rubie = current_env[/(.*)@/,1]
+          rl =  ::RVM.list_strings
+          rl.delete("=> #{curr_rubie}")
+          rl.shift(1)
+          rb = rl[rand(rl.size)]
+          gsl = ::RVM.list_gemsets.find_all{|g| /#{rb}/.match g}
+          rbgs = gsl[rand(gsl.size)]
+          rb, gs = rbgs.split('@')
+          #gs = gs.nil? ? 'default' : gs
+          rb = "ruby-1.9.2-p180"
+          gs = "bbb_bdd_sys_os"
+          cmd = <<-"EOT".gsub(/^          /,'')
+          #!/usr/bin/env ruby
+          puts "patchlevel: #{RUBY_PATCHLEVEL}, release_date: #{RUBY_RELEASE_DATE}, ruby_version: #{RUBY_VERSION}, ruby_platform: #{RUBY_PLATFORM}"
+          `echo "patchlevel: #{RUBY_PATCHLEVEL}, release_date: #{RUBY_RELEASE_DATE}, ruby_version: #{RUBY_VERSION}, ruby_platform: #{RUBY_PLATFORM}" >/tmp/this_is_it.txt`
+          EOT
 
-    describe ".rvm_current_name" do
-      it "should return the full rubie and gemset name" do
-        ::Cuken::Api::Rvm.rvm_current_name.should =~ /ruby(.*)@(.*)/
+          lambda{::Cuken::Api::Rvm.run_simple_gemset( cmd, :ruby => rb, :gemset => gs )}.should_not raise_error
+        end
+      end
+      context "with any non-existing ruby and gemset given" do
+        it "should raise RuntimeError" do
+          lambda{::Cuken::Api::Rvm.run_simple_gemset( "never called", :ruby => 'more', :gemset => 'junk' )}.should  raise_error ::ArgumentError, 'The RVM gemset more@junk is not present.'
+        end
       end
     end
 

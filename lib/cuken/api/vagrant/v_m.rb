@@ -37,7 +37,7 @@ module ::Cuken
         end
 
         def vms
-          @vms = environment.instance_variable_get(:@vms)
+          @vms = environment.vms
         end
 
 #        def name
@@ -80,7 +80,7 @@ module ::Cuken
         end
 
         def state(name)
-          vm[name.to_sym].vm.state
+          vms[name.to_sym].vm ? vms[name.to_sym].vm.state : nil
         end
 
         def run_vagrant_cli(cmd, vm_name)

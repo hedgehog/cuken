@@ -68,10 +68,12 @@ module ::Cuken
         def check_vm_state(name, state, expect_state = true )
           in_chef_root do
             if expect_state
+              puts vagrant.status(name).inspect
               vagrant.vm[name.to_sym].vm.state.should == state
             else
-              vagrant.vm[name.to_sym].vm.state.should_not == state
-            end
+              puts vagrant.status(name).inspect
+              vagrant.status(name).include?(state).should be_false
+             end
           end
         end
 

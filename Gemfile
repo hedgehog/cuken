@@ -6,7 +6,7 @@ group :default do
   gem "cucumber", ">= 0"
   gem 'chef', "~>0.10.0"
   gem 'grit', "~>2.4.1"
-  gem 'rvm', "~>1.5.2"
+  gem 'rvm', "~>1.6.5", :path => '/usr/src/rvm'
   gem 'open4'
   gem "vagrant", "~>0.7.2"
 end

@@ -3,6 +3,10 @@ When /^I load the Cookbooks:$/ do |table|
   cookbooks_load(table)
 end
 
+When /^I delete the Cookbooks:$/ do |table|
+  cookbooks_delete(table)
+end
+
 Given /^I clone the remote Cookbook repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, ckbk_path|
   if ckbk_path[/\/cookbooks\//]
     chef.local_cookbook_repo = chef_clone_repo(ckbk_path, true, chef.remote_cookbook_repo, {'branch' => brnch})
