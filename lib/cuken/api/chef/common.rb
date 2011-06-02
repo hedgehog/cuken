@@ -57,7 +57,14 @@ module ::Cuken
 
         def in_chef_root(&block)
           raise "You need to specify a Chef root directory." unless chef.root_dir
-          ::Dir.chdir(chef.root_dir, &block)
+          if chef.root_dir[0] == '/'
+            ::Dir.chdir(chef.root_dir, &block)
+          else
+            in_dir do
+              chef.root_dir = ::File.expand_path(chef.root_dir)
+              ::Dir.chdir(chef.root_dir, &block)
+            end
+          end
         end
 
         def knife

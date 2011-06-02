@@ -32,7 +32,7 @@ module ::Cuken
                 else
                   src =""
               end
-              role_load(src)
+              role_load(::File.expand_path(src))
             end
           end
         end

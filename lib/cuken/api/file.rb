@@ -10,7 +10,7 @@ module Cuken
 #        regexp = regexp(partial_content)
 #        seen_count = 0
 #        prep_for_fs_check do
-#          content = IO.read(file)
+#          content = IO.read(::File.expand_path(file))
 #          while (seen_count < times.to_i || content =~ regexp)do
 #            if content =~ regexp
 #              content = content.sub(regexp,'')
@@ -97,7 +97,7 @@ module Cuken
 
       def check_placed_file_content(file, partial_content, expect_match)
         prep_for_placed_fs_check do
-          content = IO.read(file)
+          content = IO.read(::File.expand_path(file))
           if expect_match
             content.should include partial_content
           else
