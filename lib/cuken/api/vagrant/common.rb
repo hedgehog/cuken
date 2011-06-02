@@ -20,7 +20,8 @@ module ::Cuken
       module Common
 
         def establish_vm_interactive_ssh(boxname)
-          cmd = vagrant.vm[boxname.to_sym].ssh.ssh_connect_command
+          name = vagrant.vm.key?(:primary) ? :primary  : boxname.to_sym
+          cmd = vagrant.vm[name].ssh.ssh_connect_command
           run_interactive(unescape(cmd))
         end
 
@@ -68,7 +69,7 @@ module ::Cuken
         def check_vm_state(name, state, expect_state = true )
           in_chef_root do
             if expect_state
-              puts vagrant.status(name).inspect
+              # puts vagrant.status(name).inspect
               vagrant.vm[name.to_sym].vm.state.should == state
             else
               puts vagrant.status(name).inspect
