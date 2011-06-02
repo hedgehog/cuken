@@ -74,17 +74,19 @@ module ::Cuken
       def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, type = {'branch' => 'master'})
         in_dir do
           pth = Pathname(ckbk_path).expand_path
-          gritty = ::Grit::Git.new(current_dir)
+          gritty = ::Grit::Git.new((pth + '.git').to_s)
           announce_or_puts gritty.inspect
-          clone_opts = {:quiet => false, :verbose => true, :progress => true}
+          clone_opts = {:depth => 1, :quiet => false, :verbose => true, :progress => true}
           type['branch'] = type['branch'].nil? ? '' : type['branch']
           type['tag'] = type['tag'].nil? ? '' : type['tag']
           type['ref'] = type['ref'].nil? ? '' : type['ref']
-          clone_opts[:branch] = type['branch'].empty? ? 'master' : type['branch']
           if pth.directory?
             announce_or_puts "Pulling: #{repo} into #{pth}"
-            res = gritty.pull(clone_opts, repo, pth.to_s)
+            FileUtils.cd(pth.to_s) do
+              res = gritty.pull(clone_opts, repo)
+            end
           else
+            clone_opts[:branch] = type['branch'].empty? ? 'master' : type['branch']
             announce_or_puts "Cloning: #{repo} into #{pth}"
             res = gritty.clone(clone_opts, repo, pth.to_s)
           end
