@@ -10,7 +10,7 @@ module ::Cuken
 
       extend ::RVM
       include ::Cuken::Api::Rvm::Common
-      include ::Aruba::Api
+      include ::Cuken::Api::Aruba::Api
 
       class RvmHelper
 

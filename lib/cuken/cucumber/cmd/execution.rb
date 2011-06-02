@@ -1,3 +1,6 @@
+#
+World(::Cuken::Api::Aruba::Api)
+
 When /^I run `([^`]*)`$/ do |cmd|
   run_simple(unescape(cmd), current_dir, false)
 end
@@ -24,4 +27,8 @@ end
 
 When /^I type "([^"]*)"$/ do |input|
   type(input)
+end
+
+And /^I set the environment variable "([^"]*)" to "([^"]*)"$/ do |variable, value|
+  ENV[variable] = value
 end

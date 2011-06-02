@@ -89,7 +89,7 @@ end
 end
 
 class ::VagrantVMExampleHelpers
-  include ::Aruba::Api
+  include ::Cuken::Api::Aruba::Api
   include ::Cuken::Api::Vagrant::VM
 
    def self.create_vm_instance(name)

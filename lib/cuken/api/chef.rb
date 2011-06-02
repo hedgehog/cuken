@@ -30,7 +30,7 @@ module ::Cuken
     module Chef
 
       include ::Cuken::Api::Chef::Common
-      include ::Aruba::Api
+      include ::Cuken::Api::Aruba::Api
 
       def append_cookbook_path(cookbook, lp, lrp)
         if lrp.exist?
