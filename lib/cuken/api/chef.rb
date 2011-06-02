@@ -85,6 +85,7 @@ module ::Cuken
             FileUtils.cd(pth.to_s) do
               res = gritty.pull(clone_opts, repo)
             end
+            clone_opts[:branch] = type['branch'].empty? ? 'master' : type['branch']
           else
             clone_opts[:branch] = type['branch'].empty? ? 'master' : type['branch']
             announce_or_puts "Cloning: #{repo} into #{pth}"
@@ -94,7 +95,7 @@ module ::Cuken
           update_cookbook_paths(pth, cookbook)
           unless chef.cookbooks_paths.empty?   # is empty after cloning default chef-repo
             grotty = ::Grit::Git.new((pth + '.git').to_s)
-            grotty.checkout( { :b => true }, clone_opts[:branch] )
+            grotty.checkout( { :B => clone_opts[:branch]||'master' } )
             if !type['tag'].empty? || !type['ref'].empty?
               grotty.checkout( { :B => true }, 'cuken', type['tag']||type['ref'] )
             else
