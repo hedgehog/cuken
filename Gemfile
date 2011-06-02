@@ -8,7 +8,7 @@ group :default do
   gem 'grit', "~>2.4.1"
   gem 'rvm', "~>1.6.5", :path => '/usr/src/rvm'
   gem 'open4'
-  gem "vagrant", "~>0.7.2"
+  gem "vagrant", "~>0.7.5"
 end
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
