@@ -1,3 +1,4 @@
+@announce
 Feature: Interactive process control
 
   In order to test interactive command line applications
@@ -32,11 +33,20 @@ Feature: Interactive process control
   Scenario: Running interactively in a directory outside Aruba's scratch
     When I interactively run `echo 'correct' >discovered.txt` in "/tmp"
     When I run `cat /tmp/discovered.txt`
-    Then the output should contain:
+    Then the output contains:
       """
       correct
       """
-     And a file named "discovered.txt" should not exist
+     And the file "discovered.txt" does not exist
+
+  Scenario: Running successfully in a directory outside Aruba's scratch
+    When I successfully run `echo 'correct2' >discovered.txt` in "~/tmp/"
+    When I run `cat ~/tmp/discovered.txt`
+    Then the output contains:
+      """
+      correct2
+      """
+     And the file "discovered.txt" does not exist
 
   Scenario: Stop processes before checking for filesystem changes 
     See: http://github.com/aslakhellesoy/aruba/issues#issue/17 for context
