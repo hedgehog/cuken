@@ -94,7 +94,7 @@ module ::Cuken
           chef.cookbook_paths.each do |pn|
             curr_ckbk = pn.basename.to_s
             condition = Pathname(pn).exist?
-            given_ckbk = Pathname(ckbk).basename.to_s
+            given_ckbk = Pathname(ckbk).basename.to_s if ckbk
             result = given_ckbk == curr_ckbk
             if condition && result
               given_ckbk.should == curr_ckbk
