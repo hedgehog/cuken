@@ -22,6 +22,25 @@ require 'cuken/cucumber/output/cmd'
 require 'cuken/cucumber/output/stderr'
 require 'cuken/cucumber/output/stdout'
 
+Before('@fast') do
+  @aruba_timeout_seconds.nil? || @aruba_timeout_seconds < 6 ? @aruba_timeout_seconds = 6 : @aruba_timeout_seconds
+end
+Before('@quick') do
+  @aruba_timeout_seconds.nil? || @aruba_timeout_seconds < 20 ? @aruba_timeout_seconds = 20 : @aruba_timeout_seconds
+end
+Before('@slow') do
+  @aruba_timeout_seconds.nil? || @aruba_timeout_seconds < 60 ? @aruba_timeout_seconds = 60 : @aruba_timeout_seconds
+end
+Before('@glacial') do
+  @aruba_timeout_seconds.nil? || @aruba_timeout_seconds < 600 ? @aruba_timeout_seconds = 600 : @aruba_timeout_seconds
+end
+# Some VM builds can take a while, depending on package repository speeds etc.
+# Note:
+# In a genuine disaster scenario you are more likely to, eventually, trying throwing this at the top of a feature file :(
+Before('@cosmic') do
+  @aruba_timeout_seconds.nil? || @aruba_timeout_seconds < 3600 ? @aruba_timeout_seconds = 3600 : @aruba_timeout_seconds
+end
+
 When /^I cd to "([^"]*)"$/ do |dir|
   cd(dir)
 end
