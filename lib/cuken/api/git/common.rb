@@ -21,8 +21,10 @@ module ::Cuken
 
         include ::Grit
         ::Grit.debug = true
-        attr_accessor :local_git_repo,
+        attr_accessor :git_uri,
+                      :local_git_repo,
                       :remote_git_repo
+
 
         def git
           @remote_git_repo ||= "git://github.com/cookbooks/chef-repo.git"

@@ -18,6 +18,7 @@ require 'grit' unless defined? ::Grit
 require 'cuken/api/common'
 require 'cuken/api/git/common'
 require 'cuken/api/git/clone'
+require 'cuken/api/git/remote'
 
 module ::Cuken
   module Api

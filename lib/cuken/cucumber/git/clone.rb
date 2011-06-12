@@ -20,3 +20,7 @@ Given /^I clone the remote Git repository branch "([^"]*)" to "([^"]*)"$/ do |br
   git.local_git_repo = git_clone_repo(repo_path, git.remote_git_repo, {'branch' => brnch})
 end
 
+Given /^I clone the Repository "([^"]*)" branch "([^"]*)" to "([^"]*)"$/ do |repo, brnch, repo_path|
+    git.local_git_repo = git_clone_repo(repo_path, git.git_uri + repo + '.git', {'branch' => brnch})
+end
+
