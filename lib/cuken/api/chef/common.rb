@@ -57,7 +57,7 @@ module ::Cuken
 
         def in_chef_root(&block)
           raise "You need to specify a Chef root directory." unless chef.root_dir
-          if chef.root_dir[0] == '/'
+          if chef.root_dir.to_s[0] == '/'
             ::Dir.chdir(chef.root_dir, &block)
           else
             in_dir do
