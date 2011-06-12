@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-Given /^the remote Git URI "([^"]*)"$/ do |git_uri|
+Given /^the Git URI "([^"]*)"$/ do |git_uri|
   in_dir do
     repo = Dir.exist?(git_uri) ? Pathname(git_uri).expand_path.realdirpath : git_uri
     git.git_uri = repo
