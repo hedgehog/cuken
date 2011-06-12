@@ -14,13 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-require 'grit'
-
-World(::Cuken::Api::Git)
-
-require 'cuken/cucumber/git/hooks'
-
-require 'cuken/cucumber/git/common'
-require 'cuken/cucumber/git/clone'
-require 'cuken/cucumber/git/local'
-require 'cuken/cucumber/git/remote'
+And /^these local Repositories exist:$/ do |table|
+  check_repository_table_presence(table)
+end

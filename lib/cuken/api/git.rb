@@ -19,6 +19,7 @@ require 'cuken/api/common'
 require 'cuken/api/git/common'
 require 'cuken/api/git/clone'
 require 'cuken/api/git/remote'
+require 'cuken/api/git/repository'
 
 module ::Cuken
   module Api
@@ -26,6 +27,7 @@ module ::Cuken
 
       include ::Cuken::Api::Git::Common
       include ::Cuken::Api::Git::Clone
+      include ::Cuken::Api::Git::Repository
       include ::Cuken::Api::Aruba::Api
 
       #TODO: Refactor with chef_clone_repo method

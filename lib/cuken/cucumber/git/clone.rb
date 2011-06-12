@@ -24,3 +24,16 @@ Given /^I clone the Repository "([^"]*)" branch "([^"]*)" to "([^"]*)"$/ do |rep
     git.local_git_repo = git_clone_repo(repo_path, git.git_uri + repo + '.git', {'branch' => brnch})
 end
 
+When /^I clone the Repositories:$/ do |table|
+  table.hashes.each do |hsh|
+    src = {}
+    src['branch'] = hsh['branch'] if hsh['branch']
+    src['tag'] = hsh['tag'] if hsh['tag']
+    src['ref'] = hsh['ref'] if hsh['ref']
+    repo = hsh['repo'] if hsh['repo']
+    repo = hsh['repository'] if hsh['repository']
+    local_repo = git_clone_repo(hsh['destination'], git.git_uri + repo + '.git', src )
+    Pathname(local_repo).exist?.should be_true
+  end
+end
+
