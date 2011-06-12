@@ -17,17 +17,7 @@
 module ::Cuken
   module Api
     module Git
-      module Common
-
-        include ::Grit
-        ::Grit.debug = true
-        attr_accessor :local_git_repo,
-                      :remote_git_repo
-
-        def git
-          @remote_git_repo ||= "git://github.com/cookbooks/chef-repo.git"
-          @git ||= self
-        end
+      module Clone
 
       end
     end

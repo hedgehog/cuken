@@ -16,3 +16,21 @@
 #
 World(::Cuken::Api::Git)
 
+Given /^a default Git repository in "([^"]*)"$/ do |path|
+  git.local_git_repo = git_clone_repo(path)
+  git.local_git_repo.exist?.should be_true
+end
+
+Given /^the remote Git repository "([^"]*)"$/ do |git_repo|
+  in_dir do
+    repo = Dir.exist?(git_repo) ? Pathname(git_repo).expand_path.realdirpath : git_repo
+    git.remote_git_repo = repo
+  end
+end
+
+Then /^the local Git repository exists$/ do
+  git.local_git_repo.exist?.should be_true
+  #TODO: check_file_presence([file], true), etc.
+end
+
+

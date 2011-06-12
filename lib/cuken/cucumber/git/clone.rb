@@ -14,22 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-module ::Cuken
-  module Api
-    module Git
-      module Common
+World(::Cuken::Api::Git)
 
-        include ::Grit
-        ::Grit.debug = true
-        attr_accessor :local_git_repo,
-                      :remote_git_repo
-
-        def git
-          @remote_git_repo ||= "git://github.com/cookbooks/chef-repo.git"
-          @git ||= self
-        end
-
-      end
-    end
-  end
+Given /^I clone the remote Git repository branch "([^"]*)" to "([^"]*)"$/ do |brnch, repo_path|
+  git.local_git_repo = git_clone_repo(repo_path, git.remote_git_repo, {'branch' => brnch})
 end
+

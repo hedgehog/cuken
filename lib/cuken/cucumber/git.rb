@@ -21,3 +21,4 @@ World(::Cuken::Api::Git)
 require 'cuken/cucumber/git/hooks'
 
 require 'cuken/cucumber/git/common'
+require 'cuken/cucumber/git/clone'
