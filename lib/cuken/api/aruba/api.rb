@@ -281,11 +281,7 @@ module ::Cuken
         end
 
         def announce_or_puts(msg)
-          if(@puts)
-            puts(msg)
-          else
-            announce(msg)
-          end
+          puts(msg)
         end
 
         def detect_ruby(cmd)
