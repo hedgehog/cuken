@@ -62,7 +62,7 @@ module ::Cuken
             list1 = chef.cookbooks_paths.find_all { |dir| Pathname(dir + path_fragment1 + path_fagment2).exist? }
             list2 = chef.cookbook_paths.find_all { |dir| (dir.to_s[/#{ckbk_src}/] && Pathname(dir+path_fagment2).exist?) }
             loc = list2[0] || ((list1[0] + ckbk) if list1[0] && list1[0].exist?)
-            if loc.nil? || not(loc.exist?)
+            if loc.nil? || !(loc.exist?)
               # TODO: error handling if data bags or cookbooks do not exist
             else
               full_data_bag_src = (loc + path_fagment2).expand_path.realdirpath.to_s
