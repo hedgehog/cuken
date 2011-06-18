@@ -21,10 +21,10 @@ module ::Cuken
 
         def parse_to_cookbooks_path(hsh)
           case
-            when not(hsh['cookbook'].nil? || hsh['cookbook'].empty?)
+            when !(hsh['cookbook'].nil? || hsh['cookbook'].empty?)
               ckbk = hsh['cookbook']
               ckbk_src = "cookbooks/#{ckbk}"
-            when not(hsh['site-cookbook'].nil? || hsh['site-cookbook'].empty?)
+            when !(hsh['site-cookbook'].nil? || hsh['site-cookbook'].empty?)
               ckbk = hsh['site-cookbook']
               ckbk_src = "site-cookbooks/#{ckbk}"
             else
