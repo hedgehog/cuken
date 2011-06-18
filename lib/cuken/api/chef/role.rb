@@ -25,9 +25,9 @@ module ::Cuken
           in_chef_root do
             table.hashes.each do |hsh|
               case
-                when not(hsh['cookbook'].nil? || hsh['cookbook'].empty?)
+                when !(hsh['cookbook'].nil? || hsh['cookbook'].empty?)
                   src = "cookbooks/#{hsh['cookbook']}/roles/#{hsh['role']}"
-                when not(hsh['site-cookbook'].nil? || hsh['site-cookbook'].empty?)
+                when !(hsh['site-cookbook'].nil? || hsh['site-cookbook'].empty?)
                   src = "site-cookbooks/#{hsh['site-cookbook']}/roles/#{hsh['role']}"
                 else
                   src =""
