@@ -31,12 +31,13 @@ module ::Cuken
       include ::Cuken::Api::Aruba::Api
 
       #TODO: Refactor with chef_clone_repo method
-      def git_clone_repo(repo_path, repo = git.remote_git_repo, type = {'branch' => 'master'})
+      def git_clone_repo(repo_path, repo = git.remote_git_repo, type = {'branch' => 'master'} , deep_clone = true)
         in_dir do
           pth = Pathname(repo_path).expand_path
           gritty = ::Grit::Git.new((pth + '.git').to_s)
           announce_or_puts gritty.inspect
-          clone_opts = {:depth => 1, :quiet => false, :verbose => true, :progress => true}
+          clone_opts = {:quiet => false, :verbose => true, :progress => true}
+          clone_opts[:depth] = 1 unless deep_clone
           type['branch'] = type['branch'].nil? ? '' : type['branch']
           type['tag'] = type['tag'].nil? ? '' : type['tag']
           type['ref'] = type['ref'].nil? ? '' : type['ref']

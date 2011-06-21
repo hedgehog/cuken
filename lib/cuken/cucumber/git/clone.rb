@@ -37,3 +37,15 @@ When /^I clone the Repositories:$/ do |table|
   end
 end
 
+When /^I shallow clone the Repositories:$/ do |table|
+  table.hashes.each do |hsh|
+    src = {}
+    src['branch'] = hsh['branch'] if hsh['branch']
+    src['tag'] = hsh['tag'] if hsh['tag']
+    src['ref'] = hsh['ref'] if hsh['ref']
+    repo = hsh['repo'] if hsh['repo']
+    repo = hsh['repository'] if hsh['repository']
+    local_repo = git_clone_repo(hsh['destination'], git.git_uri + repo + '.git', src, false )
+    Pathname(local_repo).exist?.should be_true
+  end
+end
