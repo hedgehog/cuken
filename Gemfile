@@ -22,4 +22,5 @@ group :development do
   gem "reek", "~> 1.2.8"
   gem "roodi", "~> 2.1.0"
   gem "fakefs", '~>0.3.1'
+  gem "vagrant", "0.8.6"
 end
