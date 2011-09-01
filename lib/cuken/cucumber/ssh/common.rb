@@ -38,8 +38,12 @@ Given /^the ssh-forever options:$/ do |table|
   ssh_forever_options(table)
 end
 
-When /^I initialize password-less SSH access for:$/ do |table|
+When /^I SSH to:$/ do |table|
   ssh_init_password_less_batch(table)
+end
+
+When /^I interactively SSH to:$/ do |table|
+  ssh_init_password_less_interactive(table)
 end
 
 Given /^I initialize password-less SSH access$/ do

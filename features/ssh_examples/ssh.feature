@@ -24,3 +24,12 @@ Feature: Password-less SSH
       | :default  | :default   | :default     | :default    |
     And I successfully run `ssh cuken 'echo Supercalifragilisticexpialidocious;'`
     Then the output contains "Supercalifragilisticexpialidocious"
+
+    Scenario: Initialize interactive password-less SSH access
+      When I interactively SSH to:
+        | user      | hostname   | name         | port        |
+        | :default  | :default   | :default     | :default    |
+      And I type "echo $SSH_CLIENT"
+      And I type "echo $SSH_CONNECTION"
+      Then I type "exit"
+       And the output contains "..."

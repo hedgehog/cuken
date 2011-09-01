@@ -52,6 +52,18 @@ When /^I clone the Cookbooks:$/ do |table|
   end
 end
 
+When /^I submodule the Cookbooks:$/ do |table|
+  table.hashes.each do |hsh|
+    src = {}
+    src['branch'] = hsh['branch'] if hsh['branch']
+    src['tag'] = hsh['tag'] if hsh['tag']
+    src['ref'] = hsh['ref'] if hsh['ref']
+    ckbk = hsh['cookbook'] if hsh['cookbook']
+    local_repo = chef_submodule_repo(hsh['destination'], true, chef.cookbooks_uri + ckbk + '.git', src )
+    Pathname(local_repo).exist?.should be_true
+  end
+end
+
 When /^I successfully generate all Cookbook metadata$/ do
   chef.cookbook_paths.each do |pn|
     curr_ckbk = pn.basename.to_s

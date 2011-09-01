@@ -87,7 +87,7 @@ module ::Cuken
         end
       end
 
-      def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, type = {'branch' => 'master'})
+      def chef_clone_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, type = {'branch' => 'master'}, deep_clone = true)
         in_dir do
           pth = Pathname(ckbk_path).expand_path
           gritty = ::Grit::Git.new((pth + '.git').to_s)
@@ -96,6 +96,7 @@ module ::Cuken
           type['branch'] = type['branch'].nil? ? '' : type['branch']
           type['tag'] = type['tag'].nil? ? '' : type['tag']
           type['ref'] = type['ref'].nil? ? '' : type['ref']
+          clone_opts[:depth] = 1 unless deep_clone
           if pth.directory?
             announce_or_puts "Pulling: #{repo} into #{pth}"
             FileUtils.cd(pth.to_s) do
@@ -106,6 +107,14 @@ module ::Cuken
             clone_opts[:branch] = type['branch'].empty? ? 'master' : type['branch']
             announce_or_puts "Cloning: #{repo} into #{pth}"
             res = gritty.clone(clone_opts, repo, pth.to_s)
+            Dir.chdir(pth.to_s) do
+              if ::File.exist?('.gitmodules')
+                cmd = "git submodule init"
+                announce_or_puts `#{cmd}`
+                cmd = "git submodule update"
+                announce_or_puts `#{cmd}`
+              end
+            end
           end
           clone_pull_error_check(res) if res
           update_cookbook_paths(pth, cookbook)
@@ -116,6 +125,66 @@ module ::Cuken
               grotty.checkout( { :B => true }, 'cuken', type['tag']||type['ref'] )
             else
               grotty.checkout( { :B => true }, 'cuken' )
+            end
+          end
+          pth
+        end
+      end
+
+      def chef_submodule_repo(ckbk_path, cookbook = false, repo = chef.remote_chef_repo, type = {'branch' => 'master'}, deep_clone = true)
+        in_dir do
+          pth = (Pathname(chef.root_dir).expand_path)+ckbk_path
+          gritty = ::Grit::Git.new((pth + '.git').to_s)
+          announce_or_puts gritty.inspect
+          clone_opts = {:quiet => false, :verbose => true, :progress => true}
+          clone_opts[:depth] = 1 unless deep_clone
+          checkout = type['ref']||type['tag']||type['branch']||'master'
+          type['branch'] = type['branch'].nil? ? '' : type['branch']
+          type['tag'] = type['tag'].nil? ? '' : type['tag']
+          type['ref'] = type['ref'].nil? ? '' : type['ref']
+          res = nil
+          if pth.directory?
+               announce_or_puts "Updating submodule: #{repo} at #{pth}"
+              FileUtils.cd(pth.to_s) do
+                cmd = "git fetch"
+                res = `#{cmd}`
+                announce_or_puts res
+              end
+            clone_opts[:branch] = type['branch'].empty? ? 'master' : type['branch']
+          else
+            clone_opts[:branch] = type['branch'].empty? ? 'master' : type['branch']
+            announce_or_puts "Adding submodule: #{repo} at #{pth}"
+            FileUtils.cd(chef.root_dir) do
+              cmd = "git submodule add #{repo} #{pth.to_s}"
+              announce_or_puts `#{cmd}`
+            end
+            FileUtils.cd(pth.to_s) do
+              cmd = "git submodule init"
+              res = `#{cmd}`
+              announce_or_puts res
+              cmd = "git submodule update"
+              res = `#{cmd}`
+              announce_or_puts res
+            end
+          end
+          clone_pull_error_check(res) if res
+          update_cookbook_paths(pth, cookbook)
+          unless chef.cookbooks_paths.empty?   # is empty after cloning default chef-repo
+            grotty = ::Grit::Git.new((pth + '.git').to_s)
+            cmd = "git submodule add #{repo} #{pth.to_s}"
+            announce_or_puts `#{cmd}`
+            FileUtils.cd(pth.to_s) do
+              cmd = "git submodule init"
+              res = `#{cmd}`
+              announce_or_puts res
+              cmd = "git submodule update"
+              res = `#{cmd}`
+              announce_or_puts res
+              if !type['tag'].empty? || !type['ref'].empty?
+                grotty.checkout( { :B => true }, 'cuken', type['tag']||type['ref'] )
+              else
+                grotty.checkout( { :B => true }, 'cuken' )
+              end
             end
           end
           pth

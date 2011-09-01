@@ -82,15 +82,15 @@ module Cuken
       def place_folder_contents(dest_dir_name, src_dir_name)
         dest = Pathname(dest_dir_name).expand_path.realdirpath
         dest_parent = dest.dirname.to_s
-        FileUtils.mkdir_p((dest+src_dir_name).to_s)
+        ::FileUtils.mkdir_p((dest+src_dir_name).to_s)
         in_dir do
           opts = {:verbose => true, :preserve => true, :remove_destination => true}
-          FileUtils.cp_r(src_dir_name+'/.', dest.to_s, opts).should be_nil
+          ::FileUtils.cp_r(src_dir_name+'/.', dest.to_s, opts).should be_nil
         end
-        Dir.glob("#{src_dir_name}/**/*").each do |fn|
-          if File.file?(fn)
-            fn2 = File.join(dest_parent, fn)
-            FileUtils.compare_file(fn, fn2).should be_true
+        ::Dir.glob("#{src_dir_name}/**/*").each do |fn|
+          if ::File.file?(fn.to_s)
+            fn2 = ::File.join(dest_parent, fn)
+            ::FileUtils.compare_file(fn, fn2).should be_true if ::File.file?(fn2.to_s)
           end
         end
       end
