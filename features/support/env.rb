@@ -6,6 +6,7 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
+require 'rspec/expectations'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../lib')
 require 'cuken/ssh'
@@ -15,4 +16,3 @@ require 'cuken/chef'
 require 'cuken/vagrant'
 require 'cuken/git'
 
-require 'rspec/expectations'

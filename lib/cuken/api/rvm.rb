@@ -2,7 +2,6 @@ require 'rvm'
 require 'cuken/api/common'
 require 'cuken/api/rvm/common'
 require 'cuken/api/rvm/gemsets'
-require 'cuken/api/aruba/api'
 
 module ::Cuken
   module Api

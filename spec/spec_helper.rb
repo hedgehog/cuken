@@ -1,6 +1,15 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
+require 'bundler'
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  $stderr.puts e.message
+  $stderr.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
+end
 require 'rspec'
+require 'cucumber'
 require 'stringio'
 require 'fakefs/safe'
 require 'fakefs/spec_helpers'
@@ -10,11 +19,11 @@ require 'chef/mixins'
 require 'chef/knife/configure'
 require 'chef/knife/client_create'
 
+require 'cuken/api/aruba'
 require 'cuken/api/rvm'
 require 'cuken/api/chef'
 require 'cuken/api/chef/knife'
 require 'cuken/api/vagrant'
-require 'cuken/api/aruba'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
