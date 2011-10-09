@@ -3,7 +3,7 @@ source "http://rubygems.org"
 group :default do
   gem 'chef', "~>0.10.4"
   gem 'childprocess', '>= 0.1.7'
-  gem 'cucumber', '>= 1.1.0', :require => 'cucumber'
+  gem 'cucumber', '>= 1.0.0', :require => 'cucumber'
   gem 'grit', "~>2.4.1"
   gem 'json', "1.5.2"
   gem 'open4'
@@ -17,7 +17,7 @@ group :development do
   gem "rr", "~> 1.0.2"
   gem 'rspec', '>= 2.5.0'
   gem 'chef', "~>0.10.4"
-  gem 'cucumber', '>= 1.1.0', :require => 'cucumber'
+  gem 'cucumber', '>= 1.0.0', :require => 'cucumber'
   gem 'yard', "~> 0.6.0"
   gem 'bundler', "~> 1.0.21"
   gem 'jeweler', "~> 1.5.2"
