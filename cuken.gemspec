@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     ".rspec",
     ".rvmrc",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE",
     "NOTICE",
     "README.md",
@@ -29,6 +30,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "cucumber.yml",
     "cuken.gems",
+    "cuken.gemspec",
     "examples/chef/features/support/env.rb",
     "features/.nav",
     "features/about.md",
@@ -531,7 +533,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<chef>, ["~> 0.10.4"])
       s.add_runtime_dependency(%q<childprocess>, [">= 0.1.7"])
-      s.add_runtime_dependency(%q<cucumber>, [">= 1.1.0"])
+      s.add_runtime_dependency(%q<cucumber>, [">= 1.0.0"])
       s.add_runtime_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_runtime_dependency(%q<json>, ["= 1.5.2"])
       s.add_runtime_dependency(%q<open4>, [">= 0"])
@@ -541,7 +543,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rr>, ["~> 1.0.2"])
       s.add_development_dependency(%q<rspec>, [">= 2.5.0"])
       s.add_development_dependency(%q<chef>, ["~> 0.10.4"])
-      s.add_development_dependency(%q<cucumber>, [">= 1.1.0"])
+      s.add_development_dependency(%q<cucumber>, [">= 1.0.0"])
       s.add_development_dependency(%q<yard>, ["~> 0.6.0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.21"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
@@ -553,7 +555,7 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<chef>, ["~> 0.10.4"])
       s.add_dependency(%q<childprocess>, [">= 0.1.7"])
-      s.add_dependency(%q<cucumber>, [">= 1.1.0"])
+      s.add_dependency(%q<cucumber>, [">= 1.0.0"])
       s.add_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_dependency(%q<json>, ["= 1.5.2"])
       s.add_dependency(%q<open4>, [">= 0"])
@@ -563,7 +565,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rr>, ["~> 1.0.2"])
       s.add_dependency(%q<rspec>, [">= 2.5.0"])
       s.add_dependency(%q<chef>, ["~> 0.10.4"])
-      s.add_dependency(%q<cucumber>, [">= 1.1.0"])
+      s.add_dependency(%q<cucumber>, [">= 1.0.0"])
       s.add_dependency(%q<yard>, ["~> 0.6.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.21"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
@@ -576,7 +578,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<chef>, ["~> 0.10.4"])
     s.add_dependency(%q<childprocess>, [">= 0.1.7"])
-    s.add_dependency(%q<cucumber>, [">= 1.1.0"])
+    s.add_dependency(%q<cucumber>, [">= 1.0.0"])
     s.add_dependency(%q<grit>, ["~> 2.4.1"])
     s.add_dependency(%q<json>, ["= 1.5.2"])
     s.add_dependency(%q<open4>, [">= 0"])
@@ -586,7 +588,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rr>, ["~> 1.0.2"])
     s.add_dependency(%q<rspec>, [">= 2.5.0"])
     s.add_dependency(%q<chef>, ["~> 0.10.4"])
-    s.add_dependency(%q<cucumber>, [">= 1.1.0"])
+    s.add_dependency(%q<cucumber>, [">= 1.0.0"])
     s.add_dependency(%q<yard>, ["~> 0.6.0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.21"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
