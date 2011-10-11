@@ -1,5 +1,5 @@
 require 'cuken/api/aruba'
-World(Cuken::Aruba::Api)
+World(Cuken::Api::Aruba::Api)
 
 module ::Cuken
   module Api
