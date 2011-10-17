@@ -9,7 +9,7 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'rspec'
-require 'cucumber'
+#require 'cucumber'
 require 'stringio'
 require 'fakefs/safe'
 require 'fakefs/spec_helpers'

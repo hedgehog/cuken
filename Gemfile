@@ -1,14 +1,14 @@
 source "http://rubygems.org"
 # Add dependencies required to use your gem here.
 group :default do
-  gem 'chef', "~>0.10.4"
+  gem 'chef', "~>0.10.0"
   gem 'childprocess', '>= 0.1.7'
-  gem 'cucumber', '>= 1.0.0', :require => 'cucumber'
+  gem 'cucumber', '> 1.0.0' #, :require => 'cucumber'
   gem 'grit', "~>2.4.1"
-  gem 'json', "1.5.2"
+#  gem 'json', "1.5.2"
   gem 'open4'
   gem 'rspec', '>= 2.5.0'
-  gem 'rvm', '~>1.6.5', :path => '/usr/src/rvm'
+  gem 'rvm', '~>1.8.0' #, :path => '/usr/src/rvm'
   gem "vagrant", '0.8.7'
 end
 # Add dependencies to develop your gem here.
@@ -16,8 +16,8 @@ end
 group :development do
   gem "rr", "~> 1.0.2"
   gem 'rspec', '>= 2.5.0'
-  gem 'chef', "~>0.10.4"
-  gem 'cucumber', '>= 1.0.0', :require => 'cucumber'
+  gem 'chef', "~>0.10.0"
+  gem 'cucumber', '> 1.0.0' #, :require => 'cucumber'
   gem 'yard', "~> 0.6.0"
   gem 'bundler', "~> 1.0.21"
   gem 'jeweler', "~> 1.5.2"
