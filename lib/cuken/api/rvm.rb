@@ -32,9 +32,9 @@ module ::Cuken
         end
 
         def environment(gemset, options={})
-          @environemnt = self.new(gemset, options)
-          yield @environemnt if block_given?
-          @environemnt
+          @environment = self.new(gemset, options)
+          yield @environment if block_given?
+          @environment
         end
       end
 

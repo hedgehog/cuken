@@ -20,6 +20,10 @@ Given /^the Gemset "([^"]*)" is active$/ do |gemset|
   check_gemset_activation(gemset, true)
 end
 
+Given /^the Gemset "([^"]*)" is used$/ do |gemset|
+  gemset_use(gemset)
+end
+
 Given /^the Gemset "([^"]*)" is not active$/ do |gemset|
   check_gemset_activation(gemset, true)
 end

@@ -14,6 +14,15 @@ module ::Cuken
           end
         end
 
+        def gemset_use(gemset, rubie = 'ruby-1.9.2-p290', expect_active = true)
+          RVM.use!("#{gemset}").inspect
+          if expect_active
+            rvm.current.environment_name.should match(gemset)
+          else
+            rvm.current.environment_name.should_not match(gemset)
+          end
+        end
+
         def check_gemset_presence(gemsets, expect_presence = true)
           if expect_presence
             gemsets.each do |gs|
