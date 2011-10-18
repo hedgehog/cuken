@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "cuken"
-  s.version = "0.1.15"
+  s.version = "0.1.16"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hedgehog"]
-  s.date = "2011-10-17"
+  s.date = "2011-10-18"
   s.description = "Reusable Cucumber steps and API for post-convergence system integration descriptions"
   s.email = "hedgehogshiatus@gmail.com"
   s.extra_rdoc_files = [
@@ -516,16 +516,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.10"
   s.summary = "Reusable Cucumber steps and API for post-convergence system integration descriptions"
-  s.test_files = [
-    "examples/chef/features/support/env.rb",
-    "spec/api/knife_spec.rb",
-    "spec/api/rvm/gemsets/api_spec.rb",
-    "spec/api/rvm/gemsets/helper_spec.rb",
-    "spec/api/rvm_spec.rb",
-    "spec/api/rvmrc_processor_spec.rb",
-    "spec/api/vagrant/v_m/api_spec.rb",
-    "spec/spec_helper.rb"
-  ]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -536,16 +526,16 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<cucumber>, ["> 1.0.0"])
       s.add_runtime_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_runtime_dependency(%q<open4>, [">= 0"])
-      s.add_runtime_dependency(%q<rspec>, [">= 2.5.0"])
+      s.add_runtime_dependency(%q<rspec>, ["~> 2.5.0"])
       s.add_runtime_dependency(%q<rvm>, ["~> 1.8.0"])
       s.add_runtime_dependency(%q<vagrant>, ["= 0.8.7"])
       s.add_development_dependency(%q<rr>, ["~> 1.0.2"])
-      s.add_development_dependency(%q<rspec>, [">= 2.5.0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.5.0"])
       s.add_development_dependency(%q<chef>, ["~> 0.10.0"])
       s.add_development_dependency(%q<cucumber>, ["> 1.0.0"])
       s.add_development_dependency(%q<yard>, ["~> 0.6.0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.21"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.1.rc"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_development_dependency(%q<reek>, ["~> 1.2.8"])
       s.add_development_dependency(%q<roodi>, ["~> 2.1.0"])
@@ -557,16 +547,16 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<cucumber>, ["> 1.0.0"])
       s.add_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_dependency(%q<open4>, [">= 0"])
-      s.add_dependency(%q<rspec>, [">= 2.5.0"])
+      s.add_dependency(%q<rspec>, ["~> 2.5.0"])
       s.add_dependency(%q<rvm>, ["~> 1.8.0"])
       s.add_dependency(%q<vagrant>, ["= 0.8.7"])
       s.add_dependency(%q<rr>, ["~> 1.0.2"])
-      s.add_dependency(%q<rspec>, [">= 2.5.0"])
+      s.add_dependency(%q<rspec>, ["~> 2.5.0"])
       s.add_dependency(%q<chef>, ["~> 0.10.0"])
       s.add_dependency(%q<cucumber>, ["> 1.0.0"])
       s.add_dependency(%q<yard>, ["~> 0.6.0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.21"])
-      s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_dependency(%q<bundler>, ["~> 1.1.rc"])
+      s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_dependency(%q<rcov>, [">= 0"])
       s.add_dependency(%q<reek>, ["~> 1.2.8"])
       s.add_dependency(%q<roodi>, ["~> 2.1.0"])
@@ -579,16 +569,16 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<cucumber>, ["> 1.0.0"])
     s.add_dependency(%q<grit>, ["~> 2.4.1"])
     s.add_dependency(%q<open4>, [">= 0"])
-    s.add_dependency(%q<rspec>, [">= 2.5.0"])
+    s.add_dependency(%q<rspec>, ["~> 2.5.0"])
     s.add_dependency(%q<rvm>, ["~> 1.8.0"])
     s.add_dependency(%q<vagrant>, ["= 0.8.7"])
     s.add_dependency(%q<rr>, ["~> 1.0.2"])
-    s.add_dependency(%q<rspec>, [">= 2.5.0"])
+    s.add_dependency(%q<rspec>, ["~> 2.5.0"])
     s.add_dependency(%q<chef>, ["~> 0.10.0"])
     s.add_dependency(%q<cucumber>, ["> 1.0.0"])
     s.add_dependency(%q<yard>, ["~> 0.6.0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.21"])
-    s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+    s.add_dependency(%q<bundler>, ["~> 1.1.rc"])
+    s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
     s.add_dependency(%q<rcov>, [">= 0"])
     s.add_dependency(%q<reek>, ["~> 1.2.8"])
     s.add_dependency(%q<roodi>, ["~> 2.1.0"])
