@@ -9,6 +9,9 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'rspec'
+require 'cucumber'
+
+require 'rspec/expectations'
 #require 'cucumber'
 require 'stringio'
 require 'fakefs/safe'
@@ -19,11 +22,19 @@ require 'chef/mixins'
 require 'chef/knife/configure'
 require 'chef/knife/client_create'
 
-require 'cuken/api/aruba'
-require 'cuken/api/rvm'
-require 'cuken/api/chef'
-require 'cuken/api/chef/knife'
-require 'cuken/api/vagrant'
+require 'cuken/cmd'
+require 'cuken/file'
+require 'cuken/git'
+require 'cuken/rvm'
+require 'cuken/ssh'
+require 'cuken/chef'
+require 'cuken/vagrant'
+
+#require 'cuken/api/aruba'
+#require 'cuken/api/rvm'
+#require 'cuken/api/chef'
+#require 'cuken/api/chef/knife'
+#require 'cuken/api/vagrant'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
