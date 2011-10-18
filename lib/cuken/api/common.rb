@@ -1,6 +1,5 @@
 require 'cuken/api/aruba'
 World(Cuken::Api::Aruba::Api)
-
 module ::Cuken
   module Api
     module Common

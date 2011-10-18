@@ -1,4 +1,3 @@
-#
 World(::Cuken::Api::Aruba::Api)
 
 When /^I run `([^`]*)`$/ do |cmd|

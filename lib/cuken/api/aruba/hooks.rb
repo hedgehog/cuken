@@ -1,14 +1,4 @@
 
-unless defined?(::Before) && !Before.is_a?(Class)
-  puts "#{defined?(Before).inspect}"
-  puts "do we see this?"
-  puts require 'cucumber'
-  puts 'are we loaded?'
-  puts "#{defined?(Before).inspect}"
-  puts "do we see this?"
-  puts !Before.is_a?(Class)
-end
-
 Before('@disable-bundler') do
   unset_bundler_env_vars
 end
