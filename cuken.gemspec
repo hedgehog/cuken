@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "cuken"
-  s.version = "0.1.19"
+  s.version = "0.1.20"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hedgehog"]
-  s.date = "2011-10-18"
+  s.date = "2011-10-19"
   s.description = "Reusable Cucumber steps and API for post-convergence system integration descriptions"
   s.email = "hedgehogshiatus@gmail.com"
   s.extra_rdoc_files = [
