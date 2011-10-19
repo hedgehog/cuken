@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "cuken"
-  s.version = "0.1.20"
+  s.version = "0.1.21"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hedgehog"]
@@ -526,7 +526,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<cucumber>, ["> 1.0.0"])
       s.add_runtime_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_runtime_dependency(%q<open4>, [">= 0"])
-      s.add_runtime_dependency(%q<rspec>, ["> 2.5.0"])
+      s.add_runtime_dependency(%q<rspec>, [">= 0"])
       s.add_runtime_dependency(%q<rvm>, ["~> 1.8.0"])
       s.add_runtime_dependency(%q<vagrant>, ["= 0.8.7"])
       s.add_development_dependency(%q<rr>, ["~> 1.0.2"])
@@ -546,7 +546,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<cucumber>, ["> 1.0.0"])
       s.add_dependency(%q<grit>, ["~> 2.4.1"])
       s.add_dependency(%q<open4>, [">= 0"])
-      s.add_dependency(%q<rspec>, ["> 2.5.0"])
+      s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<rvm>, ["~> 1.8.0"])
       s.add_dependency(%q<vagrant>, ["= 0.8.7"])
       s.add_dependency(%q<rr>, ["~> 1.0.2"])
@@ -567,7 +567,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<cucumber>, ["> 1.0.0"])
     s.add_dependency(%q<grit>, ["~> 2.4.1"])
     s.add_dependency(%q<open4>, [">= 0"])
-    s.add_dependency(%q<rspec>, ["> 2.5.0"])
+    s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<rvm>, ["~> 1.8.0"])
     s.add_dependency(%q<vagrant>, ["= 0.8.7"])
     s.add_dependency(%q<rr>, ["~> 1.0.2"])
