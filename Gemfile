@@ -7,7 +7,7 @@ group :default do
   gem 'grit', "~>2.4.1"
 #  gem 'json', "1.5.2"
   gem 'open4'
-  gem 'rspec', '> 2.5.0'
+  gem 'rspec'
   gem 'rvm', '~>1.8.0' #, :path => '/usr/src/rvm'
   gem "vagrant", '0.8.7'
 end
