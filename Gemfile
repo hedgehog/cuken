@@ -8,8 +8,8 @@ group :default do
 #  gem 'json', "1.5.2"
   gem 'open4'
   gem 'rspec'
-  gem 'rvm', '~>1.8.0' #, :path => '/usr/src/rvm'
-  gem "vagrant", '0.8.7'
+  gem 'rvm', '~> 1.8.0' #, :path => '/usr/src/rvm'
+  gem "vagrant", '~> 0.8.7'
 end
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
@@ -23,6 +23,6 @@ group :development do
   gem 'rcov', ">= 0"
   gem 'reek', "~> 1.2.8"
   gem 'roodi', "~> 2.1.0"
-  gem 'fakefs', '~>0.3.1'
-  gem 'vagrant', '0.8.7'
+  gem 'fakefs', '~> 0.3.1'
+  gem 'vagrant', '~> 0.8.7'
 end

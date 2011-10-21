@@ -133,5 +133,5 @@ DEPENDENCIES
   rr (~> 1.0.2)
   rspec
   rvm (~> 1.8.0)
-  vagrant (= 0.8.7)
+  vagrant (~> 0.8.7)
   yard (~> 0.6.0)
