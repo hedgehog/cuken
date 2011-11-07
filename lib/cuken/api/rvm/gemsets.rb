@@ -4,7 +4,6 @@ module ::Cuken
       module Gemsets
 
         include ::Cuken::Api::Rvm::Common
-        #include ::Cuken::Api::Aruba::Api
 
         def check_gemset_activation(gemset, expect_active = true)
           if expect_active

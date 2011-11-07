@@ -14,25 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+World(::Cuken::Api::Rvm::Rubies)
 
-World(::Cuken::Api::Rvm::Gemsets)
-
-Given /^the Gemset "([^"]*)" is active$/ do |gemset|
-  check_gemset_activation(gemset, true)
+Given /^the Rubie "([^"]*)" is active$/ do |rubie|
+  check_rubie_activation(rubie, true)
 end
 
-Given /^the Gemset "([^"]*)" is used$/ do |gemset|
-  gemset_use(gemset)
+Given /^the Rubie "([^"]*)" is used$/ do |rubie|
+  rubie_use(rubie)
 end
 
-Given /^the Gemset "([^"]*)" is not active$/ do |gemset|
-  check_gemset_activation(gemset, true)
+Given /^the Rubie "([^"]*)" is not active$/ do |rubie|
+  check_rubie_activation(rubie, true)
 end
 
-Given /^the Gemset "([^"]*)" exists$/ do |gemset|
-  check_gemset_presence([gemset], true)
+Given /^the Rubie "([^"]*)" exists$/ do |rubie|
+  check_rubie_presence([rubie], true)
 end
 
-Given /^the Gemset "([^"]*)" does not exist$/ do |gemset|
-  check_gemset_presence([gemset], true)
+Given /^the Rubie "([^"]*)" does not exist$/ do |rubie|
+  check_rubie_presence([rubie], true)
 end
+

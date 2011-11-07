@@ -20,3 +20,4 @@ World(::Cuken::Api::Rvm)
 
 require 'cuken/cucumber/rvm/common'
 require 'cuken/cucumber/rvm/gemsets'
+require 'cuken/cucumber/rvm/rubies'

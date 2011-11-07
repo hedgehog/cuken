@@ -1,6 +1,7 @@
 #
 # These methods have to be verified as working with RVM API - many were broken as of 1.6.5
 #
+
 module ::Cuken
   module Api
     module Rvm
