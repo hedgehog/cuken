@@ -33,7 +33,7 @@ module ::Cuken
         end
 
         def environment(gemset, options={})
-          @environment = self.new(gemset, options)
+          @environment = self.new #TODO test that these args are not required when calling new (gemset, options)
           yield @environment if block_given?
           @environment
         end

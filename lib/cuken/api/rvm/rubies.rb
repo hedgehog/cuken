@@ -13,7 +13,7 @@ module ::Cuken
           end
         end
 
-        def rubie_use(rubie, rubie = 'ruby-1.9.2-p290', expect_active = true)
+        def rubie_use(rubie = 'ruby-1.9.2-p290', expect_active = true)
           RVM.use!("#{rubie}").inspect
           if expect_active
             rvm.current.environment_name.should match(rubie)

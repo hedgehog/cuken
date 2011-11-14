@@ -14,7 +14,7 @@ module ::Cuken
         end
 
         def gemset_use(gemset, rubie = 'ruby-1.9.2-p290', expect_active = true)
-          RVM.use!("#{gemset}").inspect
+          RVM.use!("#{rubie}@#{gemset}").inspect
           if expect_active
             rvm.current.environment_name.should match(gemset)
           else
