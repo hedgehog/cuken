@@ -11,6 +11,8 @@ module Cuken
       TIMEOUT_SEC = 1
       DEFAULT_HOST = 'localhost'
 
+      # Returns true if port is open on host
+      # Will wait at most TIMEOUT_SEC for a response
       def port_is_open?(port,host = DEFAULT_HOST)
         host ||= DEFAULT_HOST
         return false unless port.to_i.between?(0,MAX_PORT)
@@ -29,6 +31,7 @@ module Cuken
         return false
       end
 
+      #checks that all ports in 'ports' are open/closed on the supplied host
       def check_port_status(ports,open,host = DEFAULT_HOST)
         host ||= DEFAULT_HOST
         ports.each do |port|
