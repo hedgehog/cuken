@@ -7,11 +7,16 @@ module Cuken
 
       EXECUTOR_INDICES = {'u'=>2,'g'=>5,'o'=>8}
 
+      # Returns the binary file permissions
+      # for the supplied file as a string
       def get_bin_permissions(file,file_stats = nil)
         file_stats = ::File.stat(file) unless file_stats
         file_stats.mode.to_s(2)[-9..-1]
       end
 
+      # Returns a hash containing the executable permission bits
+      # for user, group and other on the supplied file.
+      # Optionally accepts a file stats object
       def get_hash_permissions(file,file_stats=nil)
         perms = get_bin_permissions(file,file_stats)
         perm_hash = {}
@@ -21,6 +26,9 @@ module Cuken
         perm_hash
       end
 
+      # Checks that the file is executable by the supplied 'executors'
+      # The executors should be a string containing only u, g, and o
+      # representing user, group, and other permissions, respectively
       def check_executable_by_executors(file,executors='u')
         executors.downcase!
         permissions = ::File.stat(file).mode.to_s(2)[-9..-1]
@@ -29,14 +37,17 @@ module Cuken
         end
       end
 
+      # returns true if the setuid bit is set on the file
       def check_setuid(file)
         ::File.stat(file).setuid?
       end
 
+      # returns true if the setgid bit is set on the file
       def check_setgid(file)
         ::File.stat(file).setgid?
       end
 
+      # checks that file is executable by user
       def check_executable_by_user(file,user)
         file_info = ::File.stat(file)
         perms = get_hash_permissions(file,file_info)
@@ -53,6 +64,8 @@ module Cuken
         false.should be_true
       end
 
+      # Accepts a list of hashes containing the attributes of executables
+      # and verifies those attributes
       def check_executables(executables)
         executables.each do |executable|
           if executable.keys.include?('setuid')
