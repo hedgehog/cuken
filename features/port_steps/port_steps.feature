@@ -7,7 +7,7 @@ Feature: Port steps
   Background:
     Given that "cuken/port" has been required
 
-  Scenario: File and directory existence
+  Scenario: Port status
     Then these steps are defined for "cuken/cucumber/port.rb":
       | step                                                   |
       |the port "([^"]*)" is open                              |
