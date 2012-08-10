@@ -1,1 +1,1 @@
-include_recipe "versions"
+include_recipe 'versions'
